@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:05:32 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 09:12:50 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 10:45:23 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int process_string_marks(char *not_processed_cmd)
 	int quote_nbr;
 	int oposite_quote_nbr;
 	char oposite;
-	
 	
 	i = 0;
 	quote_nbr = 0;

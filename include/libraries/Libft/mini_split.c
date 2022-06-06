@@ -6,12 +6,13 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:23:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 09:30:13 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 10:35:13 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 static char	**ft_free(char **p, size_t count)
 {
@@ -120,20 +121,26 @@ static char	**ft_fill_pointers(char const *s, char c, char **tab)
 			tab[i] = ft_fill_each_pointer(s, c);
 			if (!tab[i])
 				return (ft_free(tab, i));
-			if(*s && *s == 34 || *s == 39)
-			{
-				quote = *s;
-				if (s+1)				
-					s++;
-				while(*s && *s != quote)
-					s++;
-			}
+				/*
+			
+			*/
 			i++;
 			while (*s && *s != c)
+			{
+				if(*s && *s == 34 || *s == 39)
+				{
+					quote = *s;
+					if (s+1)				
+						s++;
+					while(*s && *s != quote)
+						s++;
+				}
 				s++;
+			}
 		}
 	}
 	tab[i] = NULL;
+	
 	return (tab);
 }
 

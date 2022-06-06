@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 10:30:23 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/06 11:09:50 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 	i = 0;
 	table->commands = (t_command *) malloc(sizeof(t_command) * cmd_count);
 	split = mini_split(str,'|');
-	u = 0;
 	while (split[i])
 	{
 		table->commands[i].command = mini_split(split[i],' ');
@@ -71,7 +70,7 @@ void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 		{
 			fprintf(stderr,"%s\n",table->commands[i].command[u]);
 			u++;
-		}
+	 	}
 		i++;
 	}
 }
