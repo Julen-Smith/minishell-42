@@ -8,6 +8,8 @@ SRC		=	src/minishell.c	\
 			src/parser/parser.c \
 			src/errors/error.c \
 			src/errors/string_errors.c \
+			src/redirections/redir.c \
+			src/utils/utils.c \
 
 
 INCLUDE =	include/minishell.h

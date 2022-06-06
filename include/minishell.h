@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 11:09:56 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/06 12:49:49 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ enum own_err
     ERR_UNKNOWN,
     ERR_INVALIDCHR,
     ERR_FINALPIPE,
-    ERR_COMMAND_404
+    ERR_COMMAND_404,
+    ERR_REDDIR
 };
 
 typedef struct s_process_manager
@@ -73,6 +74,9 @@ typedef struct s_command
     int dollar_i;
     int dollar_x;
     char **command;
+    int redircnt;
+    int *redirpos;
+    char *redirorder;
 } t_command;
 
 typedef struct s_command_table
@@ -90,6 +94,11 @@ void            generate_command_table(char *str, int cmd_count, t_command_table
 int             process_string_marks(char *not_processed_cmd);
 bool            ft_error_print(int errnumb);
 
+/* Redirections */
+bool            contains_redir(t_command *command);
+bool	        manage_redir_symbols(t_command *command);
+int             lexer(t_command_table *table, t_msh_var *msh);
+bool            _contains(char **command, char *str);
 /*
 bool            ft_error_print(int errnumb);
 void            duplicate_environ(char **env, t_msh_var *msh);
@@ -200,6 +209,9 @@ void            ft_print_own_environ(t_msh_var *msh);
 #define APD ">>"
 #define REDIPT "<"
 #define REDOPT ">"
+
+
+
 
 /* INVALIDS */
 #define SMCOLON ";"

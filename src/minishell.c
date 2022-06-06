@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 11:00:58 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/06 12:24:31 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 		{
 			if (strchr(table->commands[i].command[x], '$') && table->commands[i].command[x][0] != '\'')
 			{
-				printf("found it: %s\n", strchr(table->commands[i].command[x], '$'));
-				ft_dollar_expansion(&table->commands[i], msh, x, strchr(table->commands[i].command[x], '$'));
+				//printf("found it: %s\n", strchr(table->commands[i].command[x], '$'));
+				//ft_dollar_expansion(&table->commands[i], msh, x, strchr(table->commands[i].command[x], '$'));	
 			}
 			x++;
 		}
+		if(manage_redir_symbols(&table->commands[i]))
+			return (ERR_REDDIR);
 	}
 	return (1);
 }
@@ -76,8 +78,5 @@ int main(int argc, char *argv[], char *environ[])
 	(void) argv;
 	var.own_envp = ft_duplicate_environment(environ);
 	minishell(&var, &manager);
-	
-
-
-	return  (0);
+	return(0);
 }
