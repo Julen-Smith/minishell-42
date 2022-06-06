@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 12:49:49 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 13:51:31 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_command
     int dollar_i;
     int dollar_x;
     char **command;
+    bool redir_exist;
     int redircnt;
     int *redirpos;
     char *redirorder;

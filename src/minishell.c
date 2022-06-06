@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 13:09:16 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 13:13:13 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 		if(manage_redir_symbols(&table->commands[i]))
 			return (ERR_REDDIR);
 	}
-	printf("%s\n",table->commands[0].command[1]);
+	//printf("%s\n",table->commands[0].command[1]);
 	return (1);
 }
 

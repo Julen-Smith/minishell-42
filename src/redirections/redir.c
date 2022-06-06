@@ -6,16 +6,17 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 12:54:54 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 13:47:00 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool char_is_redir(char *command_i)
+bool char_is_redir(char command_i)
 {
-	if(command_i[0] == '<' || command_i[0] == '>')
+	if(command_i == '<' || command_i == '>')
 		return (true);
+	return (false);
 }
 
 void ft_fill_positions_to_command(t_command *command, int *position_stack)
@@ -23,11 +24,12 @@ void ft_fill_positions_to_command(t_command *command, int *position_stack)
 	int i;
 
 	i = 0;
-	command->redirorder = malloc (sizeof(int) * command->redircnt);
+	command->redirpos = malloc (sizeof(int) * command->redircnt);
+	printf("Recuento de reddir : %d\n",command->redircnt);
 	while(i != command->redircnt)
 	{
-		command->redirorder[i] = position_stack[i];
-		//printf("Las redirecciones estan en las posiciones %d\n", command->redirorder[i]);
+		command->redirpos[i] = position_stack[i];
+		printf("Las posiciones estan en %d\n",command->redirpos[i]);
 		i++;
 	}
 }
@@ -35,26 +37,24 @@ void ft_fill_positions_to_command(t_command *command, int *position_stack)
 bool count_check_redirs(t_command *command)
 {
 	int i;
-	int u;
 	int poslvl;
 	int positions[200];
 	
 	i = 0;
-	u = 0;
 	poslvl = 0;
 	while(command->command[i])
 	{
-		if (char_is_redir(command->command[i]))
-		{
-			u++;
-			printf("Las redirecciones estan en las posiciones %d\n",i);
-			positions[poslvl] = i;
-			poslvl++;	
-		}
+		if (command->command[i][0] != 39 && command->command[i][0] != 34)
+			if (char_is_redir(command->command[i][0]))
+			{
+				positions[poslvl] = i;
+				poslvl++;	
+			}
 		i++;
 	}
-	command->redircnt = u;
-	ft_fill_positions_to_command(command,positions);
+	command->redircnt = poslvl;
+	printf("Las posiciones estan en %d\n",command->redircnt);
+	ft_fill_positions_to_command(command, positions);
 	return (true);
 }
 
