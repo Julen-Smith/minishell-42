@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 14:11:06 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 16:15:26 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ char	*ft_dollar_value(t_command *command, t_msh_var *msh, int arr_n, int xref)
 	if (command->command[arr_n][i] == ' ' || command->command[arr_n][i] == '"' || command->command[arr_n][i] == '\'' || command->command[arr_n][i] == '$')
 	{
 		if (command->command[arr_n][i] == '$')
-		{
-			//sustituir $$ por NULL	pendiente
 			return (NULL);
-		}
 		else
 			find = ft_strdup("$");
 		return (find);
@@ -60,8 +57,13 @@ void	ft_dollar_expansion(t_command *command, t_msh_var *msh, int arr_n, int xref
 	value = ft_dollar_value(command, msh, arr_n, xref);
 	beg = ft_substr(command->command[arr_n], 0, xref);
 	xref++;
-	while (command->command[arr_n][xref] && (command->command[arr_n][xref] != ' '
-			&& command->command[arr_n][xref] != '$' && command->command[arr_n][xref] != '\''))
+	if (command->command[arr_n][xref] != '$')
+	{
+		while (command->command[arr_n][xref] && (command->command[arr_n][xref] != ' '
+				&& command->command[arr_n][xref] != '$' && command->command[arr_n][xref] != '\''))
+			xref++;
+	}
+	else
 		xref++;
 	if (xref < ft_strlen(command->command[arr_n]) || command->command[arr_n][xref - 1] == '"')
 	{
@@ -137,20 +139,27 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 		x = 0;
 		while (table->commands[i].command[x])
 		{
-			if (ft_strchr_pos(table->commands[i].command[x], '$') >= 0 && table->commands[i].command[x][0] != '\'' && !ft_single_dollar(&table->commands[i], x, ft_strchr_pos(table->commands[i].command[x], '$')))
+			if (ft_strchr_pos(table->commands[i].command[x], '$') >= 0 && table->commands[i].command[x][0] != '\''
+					&& !ft_single_dollar(&table->commands[i], x, ft_strchr_pos(table->commands[i].command[x], '$')))
 			{
 				ft_dollar_expansion(&table->commands[i], msh, x, ft_strchr_pos(table->commands[i].command[x], '$'));
 				x = 0;
 				continue ;
 			}
-			
 			x++;
 		}
-		
 		if(manage_redir_symbols(&table->commands[i]))
 			return (ERR_REDDIR);
 	}
-	//printf("%s\n",table->commands[0].command[1]);
+	//
+	i = -1;
+	while (++i < table->cmd_count)
+	{
+		x = -1;
+		while (table->commands[i].command[++x])
+			printf("%s\n",table->commands[i].command[x]); // checking all the commands
+	}
+	//
 	return (1);
 }
 

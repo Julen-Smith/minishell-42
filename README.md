@@ -10,3 +10,4 @@ Casos expansiones:
 	echo $
 	echo $USER$ -> aalvarez$
 	echo $USER$$HOME -> aalvarezHOME
+	echo "$USER$HOME$" -> crea bucle infinito, deberia hacer -> "aalvarez/Users/aalvarez$"
