@@ -6,43 +6,45 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:19:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/06 22:22:07 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/06 22:26:50 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	ft_new_com(t_dollars *dollars, t_command *com, int a_n, int xref)
+static void	ft_has_beg(t_dollars *dollars, t_command *cm, int an, int x)
 {
-	if (dollars->beg[0])
+	if (dollars->value)
 	{
-		if (dollars->value)
+		dollars->result = ft_strjoin(dollars->beg, dollars->value);
+		free(dollars->beg);
+		if (x < ft_strlen(cm->command[an])
+			|| cm->command[an][x - 1] == '"')
 		{
-			dollars->result = ft_strjoin(dollars->beg, dollars->value);
-			free(dollars->beg);
-			if (xref < ft_strlen(com->command[a_n])
-				|| com->command[a_n][xref - 1] == '"')
+			if (cm->command[an][x - 1] == '"')
+				dollars->beg = ft_strjoin(dollars->result, "\"");
+			else
 			{
-				if (com->command[a_n][xref - 1] == '"')
-					dollars->beg = ft_strjoin(dollars->result, "\"");
-				else
-				{
-					dollars->beg = ft_strjoin(dollars->result, dollars->final);
-					free(dollars->final);
-				}
-				free(dollars->result);
-				dollars->result = ft_strdup(dollars->beg);
-				free(dollars->beg);
+				dollars->beg = ft_strjoin(dollars->result, dollars->final);
+				free(dollars->final);
 			}
-		}
-		else if (xref < ft_strlen(com->command[a_n])
-			|| com->command[a_n][xref - 1] == '"')
-		{
-			dollars->result = ft_strjoin(dollars->beg, dollars->final);
-			free(dollars->final);
+			free(dollars->result);
+			dollars->result = ft_strdup(dollars->beg);
 			free(dollars->beg);
 		}
 	}
+	else if (x < ft_strlen(cm->command[an]) || cm->command[an][x - 1] == '"')
+	{
+		dollars->result = ft_strjoin(dollars->beg, dollars->final);
+		free(dollars->final);
+		free(dollars->beg);
+	}
+}
+
+static void	ft_new_com(t_dollars *dollars, t_command *com, int a_n, int xref)
+{
+	if (dollars->beg[0])
+		ft_has_beg(dollars, com, a_n, xref);
 	else
 	{
 		if (dollars->value)
