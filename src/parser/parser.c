@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 11:09:50 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/06 13:02:49 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 		u = 0;
 		while(table->commands[i].command[u])
 		{
-			fprintf(stderr,"%s\n",table->commands[i].command[u]);
+			//fprintf(stderr,"%s\n",table->commands[i].command[u]);
 			u++;
 	 	}
 		i++;
