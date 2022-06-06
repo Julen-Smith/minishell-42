@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+         #
+#    By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:12:22 by aalvarez          #+#    #+#              #
-#    Updated: 2022/06/06 08:45:29 by jsmith           ###   ########.fr        #
+#    Updated: 2022/06/06 11:14:36 by aalvarez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = ft_isalpha.c			\
 	  ft_num_to_binary.c	\
 	  ft_atoi.c				\
 	  ft_strchr.c			\
+	  ft_strchr_pos.c		\
 	  ft_strrchr.c			\
 	  ft_memset.c			\
 	  ft_bzero.c			\
