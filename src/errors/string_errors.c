@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   string_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:05:32 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 10:45:23 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 21:19:03 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 /* Falta acortarla por dios */
-int process_string_marks(char *not_processed_cmd)
+int	process_string_marks(char *not_processed_cmd)
 {	
-	int i;
-	char mark_type;
-	int quote_nbr;
-	int oposite_quote_nbr;
-	char oposite;
-	
+	int		i;
+	char	mark_type;
+	int		quote_nbr;
+	int		oposite_quote_nbr;
+	char	oposite;
+	int		length;
+
 	i = 0;
 	quote_nbr = 0;
 	oposite_quote_nbr = 0;
@@ -29,26 +30,26 @@ int process_string_marks(char *not_processed_cmd)
 		if (not_processed_cmd[i] == 39)
 		{
 			mark_type = 39;
-			break;
+			break ;
 		}
 		if (not_processed_cmd[i] == 34)
 		{
 			mark_type = 34;
-			break;
+			break ;
 		}
 		i++;
 	}
 	oposite = 39;
 	if (mark_type == 39)
 		oposite = 34;
-	int length = ft_strlen(not_processed_cmd);
-	while(i != length)
+	length = ft_strlen(not_processed_cmd);
+	while (i != length)
 	{	
 		if (not_processed_cmd[i] == mark_type)
 		{	
 			quote_nbr++;
 			i++;
-			while(i != length && not_processed_cmd[i] != mark_type)
+			while (i != length && not_processed_cmd[i] != mark_type)
 				i++;
 			if (i == length && not_processed_cmd[i] != mark_type)
 				return (true);
@@ -59,7 +60,7 @@ int process_string_marks(char *not_processed_cmd)
 		{
 			oposite_quote_nbr++;
 			i++;
-			while(i != length && not_processed_cmd[i] != oposite)
+			while (i != length && not_processed_cmd[i] != oposite)
 				i++;
 			if (i == length && not_processed_cmd[i] != oposite)
 				return (true);
@@ -68,8 +69,7 @@ int process_string_marks(char *not_processed_cmd)
 		}
 		i++;
 	}
-	if(quote_nbr % 2 != 0 || oposite_quote_nbr % 2 != 0)
+	if (quote_nbr % 2 != 0 || oposite_quote_nbr % 2 != 0)
 		return (true);
 	return (false);
-	
 }

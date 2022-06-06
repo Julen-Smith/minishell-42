@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:23:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 10:35:13 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 21:00:57 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	**ft_free(char **p, size_t count)
 size_t	ft_count_size(const char	*s, char c)
 {
 	size_t	i;
-	char quote;
+	char	quote;
 
 	i = 0;
 	while (*s)
@@ -44,14 +44,14 @@ size_t	ft_count_size(const char	*s, char c)
 			s++;
 		if (*s && *s != c)
 		{
-			if(*s && *s == 34 || *s == 39)
+			if (*s && *s == 34 || *s == 39)
 			{
 				quote = *s;
-				if (s+1)				
+				if (s + 1)
 					s++;
-				while(*s && *s != quote)
+				while (*s && *s != quote)
 					s++;
-				if (s+1)
+				if (s + 1)
 				s++;
 			}	
 			i++;
@@ -66,7 +66,7 @@ static char	*ft_fill_each_pointer(char const *s, char c)
 {
 	char	*pnt;
 	int		i;
-	char 	quote;
+	char	quote;
 
 	i = 0;
 	while (s[i] && s[i] != c)
@@ -76,7 +76,7 @@ static char	*ft_fill_each_pointer(char const *s, char c)
 			quote = s[i];
 			if (s[i + 1])
 				i++;
-			while(s[i] && s[i] != quote)
+			while (s[i] && s[i] != quote)
 				i++;
 		}
 		i++;
@@ -91,9 +91,9 @@ static char	*ft_fill_each_pointer(char const *s, char c)
 		{
 			pnt[i] = s[i];
 			quote = s[i];
-			if (s[i +1])
+			if (s[i + 1])
 				i++;
-			while(s[i] && s[i] != quote)
+			while (s[i] && s[i] != quote)
 			{
 				pnt[i] = s[i];
 				i++;
@@ -108,8 +108,8 @@ static char	*ft_fill_each_pointer(char const *s, char c)
 
 static char	**ft_fill_pointers(char const *s, char c, char **tab)
 {
-	int	i;
-	char quote;
+	int		i;
+	char	quote;
 
 	i = 0;
 	while (*s)
@@ -121,18 +121,15 @@ static char	**ft_fill_pointers(char const *s, char c, char **tab)
 			tab[i] = ft_fill_each_pointer(s, c);
 			if (!tab[i])
 				return (ft_free(tab, i));
-				/*
-			
-			*/
 			i++;
 			while (*s && *s != c)
 			{
-				if(*s && *s == 34 || *s == 39)
+				if (*s && *s == 34 || *s == 39)
 				{
 					quote = *s;
-					if (s+1)				
+					if (s + 1)
 						s++;
-					while(*s && *s != quote)
+					while (*s && *s != quote)
 						s++;
 				}
 				s++;
@@ -140,7 +137,6 @@ static char	**ft_fill_pointers(char const *s, char c, char **tab)
 		}
 	}
 	tab[i] = NULL;
-	
 	return (tab);
 }
 
@@ -157,4 +153,3 @@ char	**mini_split(char const *s, char c)
 	tab = ft_fill_pointers(s, c, tab);
 	return (tab);
 }
-

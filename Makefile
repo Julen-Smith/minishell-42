@@ -10,6 +10,7 @@ SRC		=	src/minishell.c	\
 			src/errors/string_errors.c \
 			src/redirections/redir.c \
 			src/utils/utils.c \
+			src/dollars/dollars.c
 
 
 INCLUDE =	include/minishell.h

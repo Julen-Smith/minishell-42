@@ -3,56 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:36:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 09:11:04 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 21:03:19 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool ft_error_print(int errnumb)
+bool	ft_error_print(int errnumb)
 {
 	if (errnumb == ERR_NOT_WANNA_HANDLE)
 	{
-		fprintf(stderr,"ERR : NOTWANNAHANDLE\n");
+		fprintf(stderr, "ERR : NOTWANNAHANDLE\n");
 		return (true);
 	}
 	else if (errnumb == ERR_SIGSMTHG)
 	{
-		fprintf(stderr,"ERR : SIGSMTHG\n");
+		fprintf(stderr, "ERR : SIGSMTHG\n");
 		return (true);
 	}
 	else if (errnumb == ERR_UNDEFINED)
 	{
-		fprintf(stderr,"ERR : UNDEFINED\n");
+		fprintf(stderr, "ERR : UNDEFINED\n");
 		return (true);
 	}	
 	else if (errnumb == ERR_UNKNOWN)
 	{
-		fprintf(stderr,"ERR : UKNOWN\n");
+		fprintf(stderr, "ERR : UKNOWN\n");
 		return (true);
 	}
 	else if (errnumb == ERR_QUOTATION)
 	{
-		fprintf(stderr,"ERR : QUOTATION\n");
+		fprintf(stderr, "ERR : QUOTATION\n");
 		return (true);
 	}
 	else if (errnumb == ERR_INVALIDCHR)
 	{
-		fprintf(stderr,"ERR : INVALIDCHR\n");
+		fprintf(stderr, "ERR : INVALIDCHR\n");
 		return (true);
 	}
 	else if (errnumb == ERR_COMMAND_404)
 	{
-		fprintf(stderr,"ERR : Command not found\n");
+		fprintf(stderr, "ERR : Command not found\n");
 		return (true);
 	}
-	else if(errnumb == ERR_FINALPIPE)
+	else if (errnumb == ERR_FINALPIPE)
 	{
-		fprintf(stderr,"ERR : FINAL PIPE\n");
-		return(true);
+		fprintf(stderr, "ERR : FINAL PIPE\n");
+		return (true);
 	}
 	return (false);
 }
