@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 10:08:23 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 10:24:56 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,21 @@ int ft_count_pipes(char *pnt)
 void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 {
 	int i;
+	int u;
 	char **split;
 	
 	i = 0;
 	table->commands = (t_command *) malloc(sizeof(t_command) * cmd_count);
 	split = mini_split(str,'|');
-
-	int u;
-	u = 0;
 	while (split[i])
 	{
-		//table->commands[i].command = mini_split(split[i],' ');
-		//u = 0;
-		//while(table->commands[i] //.command[u])
-		//{
+		table->commands[i].command = mini_split(split[i],' ');
+		u = 0;
+		while(table->commands[i].command[u])
+		{
 			fprintf(stderr,"%s\n",table->commands[i].command[u]);
 			u++;
-		//}
+	 	}
 		i++;
 	}
 }

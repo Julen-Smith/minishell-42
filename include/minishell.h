@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 09:20:01 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 10:13:10 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include    <readline/readline.h>
 # include    "libraries/Libft/libft.h"
 # include    "libraries/GNL/get_next_line.h"
-
 
 struct s_command;
 
@@ -89,7 +88,6 @@ int             parser(char *str, t_command_table *table);
 void            generate_command_table(char *str, int cmd_count, t_command_table *table);
 int             process_string_marks(char *not_processed_cmd);
 bool            ft_error_print(int errnumb);
-
 
 /*
 bool            ft_error_print(int errnumb);
