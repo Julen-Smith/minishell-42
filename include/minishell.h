@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 21:28:45 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/06 22:05:28 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,21 @@ typedef struct s_msh_var
 typedef struct s_command
 {
 	//char *binary; //binary array for error checking, ex: "ls " should not execute
-	int		dollar_i;
-	int		dollar_x;
 	char	**command;
 	bool	redir_exist;
 	int		redircnt;
 	int		*redirpos;
 	char	*redirorder;
 }	t_command;
+
+//struct only used for dollar expansion
+typedef struct s_dollars
+{
+	char	*beg;
+	char	*final;
+	char	*value;
+	char	*result;
+}	t_dollars;
 
 typedef struct s_command_table
 {
@@ -101,8 +108,9 @@ bool	manage_redir_symbols(t_command *command);
 int		lexer(t_command_table *table, t_msh_var *msh);
 bool	_contains(char **command, char *str);
 
-int	ft_single_dollar(t_command *command, int arr_n, int xref);
+int		ft_single_dollar(t_command *command, int arr_n, int xref);
 void	ft_dollar_expansion(t_command *command, t_msh_var *msh, int arr_n, int xref);
+char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
 /*
 bool            ft_error_print(int errnumb);
 void            duplicate_environ(char **env, t_msh_var *msh);
