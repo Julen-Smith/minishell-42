@@ -2,7 +2,7 @@ SHELL = /bin/sh
 NAME = minishell
 CC		=	gcc
 RM		=	rm -rf
-FLAGS	=	#-Wall -Wextra -Werror -g -g3 -fsanitize=address
+FLAGS	=	-g3 -fsanitize=address #-Wall -Wextra -Werror -g
 SRC		=	src/minishell.c	\
 			src/environment/environment.c \
 			src/parser/parser.c \
@@ -11,7 +11,7 @@ SRC		=	src/minishell.c	\
 
 
 INCLUDE =	include/minishell.h
-LIB		=	include/libraries/libft/libft.a
+LIB		=	include/libraries/Libft/libft.a
 
 PWD = ~/.brew/opt/readline
 
@@ -26,12 +26,12 @@ all: $(SRC)
 	@ echo "compilation OK"
 
 clean:
-	@$(RM) libft/*.o
+	@$(RM) include/libraries/Libft/*.o
 	@$(RM) *.o
 	@ echo "clean done"
 
 fclean: clean
-	@$(MAKE) fclean -C libft/
+	@$(MAKE) fclean -C include/libraries/Libft/
 	@$(RM) minishell.dSYM
 	@$(RM) $(NAME)
 	@ echo "fclean done"

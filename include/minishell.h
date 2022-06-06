@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 09:20:01 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 10:57:33 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ typedef struct s_msh_var
 
 typedef struct s_command
 {
+    //char *binary; //binary array for error checking, ex: "ls " should not execute
+    int dollar_i;
+    int dollar_x;
     char **command;
-
-    
 } t_command;
 
 typedef struct s_command_table
