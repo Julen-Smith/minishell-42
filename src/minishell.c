@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 13:13:13 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 14:11:06 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ char	*ft_dollar_value(t_command *command, t_msh_var *msh, int arr_n, int xref)
 	char	*tmp;
 
 	i = xref + 1;
+	if (command->command[arr_n][i] == ' ' || command->command[arr_n][i] == '"' || command->command[arr_n][i] == '\'' || command->command[arr_n][i] == '$')
+	{
+		if (command->command[arr_n][i] == '$')
+		{
+			//sustituir $$ por NULL	pendiente
+			return (NULL);
+		}
+		else
+			find = ft_strdup("$");
+		return (find);
+	}
 	while (command->command[arr_n][i] && (command->command[arr_n][i] != ' ' && command->command[arr_n][i] != '$' && command->command[arr_n][i] != '"' && command->command[arr_n][i] != '\''))
 		i++;
 	tmp = ft_substr(command->command[arr_n], (xref + 1), (i - (xref + 1)));
@@ -49,7 +60,8 @@ void	ft_dollar_expansion(t_command *command, t_msh_var *msh, int arr_n, int xref
 	value = ft_dollar_value(command, msh, arr_n, xref);
 	beg = ft_substr(command->command[arr_n], 0, xref);
 	xref++;
-	while (command->command[arr_n][xref] && (command->command[arr_n][xref] != ' ' && command->command[arr_n][xref] != '$' && command->command[arr_n][xref] != '\''))
+	while (command->command[arr_n][xref] && (command->command[arr_n][xref] != ' '
+			&& command->command[arr_n][xref] != '$' && command->command[arr_n][xref] != '\''))
 		xref++;
 	if (xref < ft_strlen(command->command[arr_n]) || command->command[arr_n][xref - 1] == '"')
 	{
@@ -75,27 +87,42 @@ void	ft_dollar_expansion(t_command *command, t_msh_var *msh, int arr_n, int xref
 				}
 				free(result);
 				result = ft_strdup(beg);
+				free(beg);
 			}
 		}
 		else if (xref < ft_strlen(command->command[arr_n]) || command->command[arr_n][xref - 1] == '"')
 		{
 			result = ft_strjoin(beg, final);
 			free(final);
+			free(beg);
 		}
-		free(command->command[arr_n]);
 	}
 	else
 	{
 		if (value)
-			result = ft_strdup(value);
+		{
+			free(beg);
+			beg = ft_strdup(value);
+			if (xref < ft_strlen(command->command[arr_n]))
+				result = ft_strjoin(beg, final);
+			else
+				result = ft_strdup(beg);
+		}
 		else
 			result = ft_strdup("");
 	}
+	free(command->command[arr_n]);
 	command->command[arr_n] = ft_strdup(result);
-	
 	free(value);
-	free(beg);
 	free(result);
+}
+
+int	ft_single_dollar(t_command *command, int arr_n, int xref)
+{
+	if (!command->command[arr_n][xref + 1] && command->command[arr_n][xref + 1] != '\''
+			&& command->command[arr_n][xref + 1] != '"' && command->command[arr_n][xref + 1] != ' ')
+		return (1);
+	return (0);
 }
 
 int	lexer(t_command_table *table, t_msh_var *msh)
@@ -110,7 +137,7 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 		x = 0;
 		while (table->commands[i].command[x])
 		{
-			if (ft_strchr_pos(table->commands[i].command[x], '$') >= 0 && table->commands[i].command[x][0] != '\'')
+			if (ft_strchr_pos(table->commands[i].command[x], '$') >= 0 && table->commands[i].command[x][0] != '\'' && !ft_single_dollar(&table->commands[i], x, ft_strchr_pos(table->commands[i].command[x], '$')))
 			{
 				ft_dollar_expansion(&table->commands[i], msh, x, ft_strchr_pos(table->commands[i].command[x], '$'));
 				x = 0;

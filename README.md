@@ -8,7 +8,5 @@ Casos expansiones:
 	echo $USER$HOME -> Imprime ambas con ⎷
 	echo "$USER$HOME" -> IDEM ⎷
 	echo $
-	echo $USER$ -> aalvarez$ 
-	$?
-Casos redirecciones : 
-	
+	echo $USER$ -> aalvarez$
+	echo $USER$$HOME -> aalvarezHOME
