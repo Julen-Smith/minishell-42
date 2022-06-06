@@ -9,3 +9,4 @@ Casos :
 	echo "$USER$HOME" -> IDEM
 	echo $
 	echo $USER$ -> aalvarez$
+	echo $USER$$HOME -> aalvarezHOME
