@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2022/01/19 14:09:51 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 21:07:41 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,21 @@ char	*ft_next(char *buffer)
 	char	*line;
 
 	i = 0;
-	// find len of first line
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	// if eol == \0 return NULL
 	if (!buffer[i])
 	{
 		free(buffer);
 		return (NULL);
 	}
-	// len of file - len of firstline + 1
 	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
-	// line == buffer
 	while (buffer[i])
 		line[j++] = buffer[i++];
 	free(buffer);
 	return (line);
 }
-
 
 char	*ft_line(char *buffer)
 {
@@ -58,7 +53,7 @@ char	*ft_line(char *buffer)
 	if (!buffer[i])
 		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
-		i++;	
+		i++;
 	line = ft_calloc(i + 2, sizeof(char));
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
@@ -88,11 +83,8 @@ char	*read_file(int fd, char *res)
 			free(buffer);
 			return (NULL);
 		}
-		
 		buffer[byte_read] = 0;
-	
 		res = ft_free(res, buffer);
-		
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}

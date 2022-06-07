@@ -3,13 +3,15 @@ NAME = minishell
 CC		=	gcc
 RM		=	rm -rf
 FLAGS	=	-g3 -fsanitize=address #-Wall -Wextra -Werror -g
-SRC		=	src/minishell.c	\
-			src/environment/environment.c \
-			src/parser/parser.c \
-			src/errors/error.c \
-			src/errors/string_errors.c \
-			src/redirections/redir.c \
-			src/utils/utils.c \
+SRC		=	src/minishell.c					\
+			src/environment/environment.c	\
+			src/parser/parser.c				\
+			src/errors/error.c				\
+			src/errors/string_errors.c		\
+			src/redirections/redir.c		\
+			src/utils/utils.c				\
+			src/dollars/dollars.c			\
+			src/dollars/dollar_value.c
 
 
 INCLUDE =	include/minishell.h

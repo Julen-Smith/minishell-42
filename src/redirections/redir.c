@@ -6,22 +6,22 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 14:43:56 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/07 11:42:28 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool char_is_redir(char command_i)
+bool	char_is_redir(char command_i)
 {
-	if(command_i == '<' || command_i == '>')
+	if (command_i == '<' || command_i == '>')
 		return (true);
 	return (false);
 }
 
-void ft_fill_positions_to_command(t_command *command, int *position_stack)
+void	ft_fill_positions_to_command(t_command *command, int *position_stack)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	command->redirpos = malloc (sizeof(int) * command->redircnt);
@@ -77,20 +77,22 @@ bool check_and_manage_order(t_command *command)
 
 bool count_check_redirs(t_command *command)
 {
-	int i;
-	int poslvl;
-	int positions[200];
-	
+	int	i;
+	int	poslvl;
+	int	positions[200];
+
 	i = 0;
 	poslvl = 0;
-	while(command->command[i])
+	while (command->command[i])
 	{
 		if (command->command[i][0] != 39 && command->command[i][0] != 34)
+		{
 			if (char_is_redir(command->command[i][0]))
 			{
 				positions[poslvl] = i;
-				poslvl++;	
+				poslvl++;
 			}
+		}
 		i++;
 	}
 	command->redircnt = poslvl;
@@ -100,15 +102,15 @@ bool count_check_redirs(t_command *command)
 	return (true);
 }
 
-bool contains_redir(t_command *command)
+bool	contains_redir(t_command *command)
 {
-	if (_contains(command->command,HDC))
+	if (_contains(command->command, HDC))
 		return (1);
-	if (_contains(command->command,APD))
+	if (_contains(command->command, APD))
 		return (2);
-	if (_contains(command->command,REDIPT))
+	if (_contains(command->command, REDIPT))
 		return (3);
-	if	(_contains(command->command,REDOPT))
+	if (_contains(command->command, REDOPT))
 		return (4);
 	return (0);
 }
