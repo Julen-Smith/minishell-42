@@ -6,30 +6,38 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 11:42:28 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/07 13:39:06 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	char_is_redir(char command_i)
+bool gather_redir_fds(t_command *command)
 {
-	if (command_i == '<' || command_i == '>')
-		return (true);
-	return (false);
-}
-
-void	ft_fill_positions_to_command(t_command *command, int *position_stack)
-{
-	int	i;
+	int i;
+	int length;
+	bool check;
+	int fd_q; //fd quantity
 
 	i = 0;
-	command->redirpos = malloc (sizeof(int) * command->redircnt);
+	check = false;
+	fd_q = command->redircnt;
+	//Si la primera redirección esta en la posicion 1 el 0 será un binario
+	command->fd_collection = malloc(sizeof(char *) * fd_q);
+	length = 0;
 	while(i != command->redircnt)
 	{
-		command->redirpos[i] = position_stack[i];
+		if (i == 0)
+		{
+			command->fd_collection[i] = malloc (sizeof(char) * (ft_strlen(command->command[command->redirpos[i] - 1] +1)));
+			command->fd_collection[i] = ft_strdup(command->command[command->redirpos[i] - 1]);
+		
+		}
+		command->fd_collection[i] = malloc (sizeof(char) * (ft_strlen(command->command[command->redirpos[i] + 1] +1)));
+		command->fd_collection[i] = ft_strdup(command->command [command->redirpos[i] + 1]);
 		i++;
 	}
+	return(true);	
 }
 
 bool check_and_manage_order(t_command *command)
@@ -51,7 +59,10 @@ bool check_and_manage_order(t_command *command)
 	while(i != command->redircnt)
 	{
 		if(ft_strlen(command->command[command->redirpos[i]]) > 2)
-			return (false);
+		{		
+			printf("Redireccion inválida\n");
+			return (true);
+		}
 		else
 		{
 			if(_str_contains(command->command[command->redirpos[i]],HDC))
@@ -66,13 +77,20 @@ bool check_and_manage_order(t_command *command)
 		i++;
 	}
 	//PRUEBAS
+	/*
 	i = 0;
 	while(command->redirorder[i])
 	{
 		printf("Estos son el orden de redirecciones %s\n",command->redirorder[i]);
 		i++;
 	}
-	return (true);
+	*/
+
+	//
+	//			Funcion comprobación del binario.
+	//
+	gather_redir_fds(command);
+	return (false);
 }
 
 bool count_check_redirs(t_command *command)
@@ -98,31 +116,8 @@ bool count_check_redirs(t_command *command)
 	command->redircnt = poslvl;
 	ft_fill_positions_to_command(command, positions);
 	if (check_and_manage_order(command))
-		return (false);
-	return (true);
-}
-
-bool	contains_redir(t_command *command)
-{
-	if (_contains(command->command, HDC))
-		return (1);
-	if (_contains(command->command, APD))
-		return (2);
-	if (_contains(command->command, REDIPT))
-		return (3);
-	if (_contains(command->command, REDOPT))
-		return (4);
-	return (0);
-}
-
-bool	manage_redir_symbols(t_command *command)
-{
-	if (contains_redir(command))
-	{
-		if (count_check_redirs(command))
-			return (false);
-	//	fprintf(stderr,"Manage reddir symbols");
-		return (true);	
-	}
+		return (true);
 	return (false);
 }
+
+

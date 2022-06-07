@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 13:16:13 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/07 13:45:20 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include    <string.h>
-# include    <dirent.h>
-# include    <unistd.h>
-# include    <stdbool.h>
-# include    <sys/uio.h>
-# include    <sys/types.h>
-# include    <readline/history.h>
-# include    <readline/readline.h>
-# include    "libraries/Libft/libft.h"
-# include    "libraries/GNL/get_next_line.h"
+# include <string.h>
+# include <dirent.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <sys/uio.h>
+# include <sys/types.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include "libraries/Libft/libft.h"
+# include "libraries/GNL/get_next_line.h"
 
 struct	s_command;
 
@@ -76,6 +76,7 @@ typedef struct s_command
     int redircnt;
     int *redirpos;
     char **redirorder;
+	char **fd_collection;
 }	t_command;
 
 //struct only used for dollar expansion
@@ -102,12 +103,17 @@ void	generate_command_table(char *str, int cmd_count,
 int		process_string_marks(char *not_processed_cmd);
 bool	ft_error_print(int errnumb);
 
-/* Redirections */
+/*  Redirections */
 bool            contains_redir(t_command *command);
 bool	        manage_redir_symbols(t_command *command);
 int             lexer(t_command_table *table, t_msh_var *msh);
 bool            _contains(char **command, char *str);
 bool            _str_contains(char *command, char *str);
+bool			char_is_redir(char command_i);
+void			ft_fill_positions_to_command(t_command *command, int *position_stack);
+bool			count_check_redirs(t_command *command);
+
+/*   Expansions    */
 int		        ft_single_dollar(t_command *command, int arr_n, int xref);
 void	        ft_dollar_expansion(t_command *command, t_msh_var *msh, int arr_n, int xref);
 char	        *ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
