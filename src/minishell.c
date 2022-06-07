@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 12:45:09 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/07 13:31:03 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,60 +52,30 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	return (1);
 }
 
-void	ft_exec_echo(t_command *command, int start, int flag)
+void	ft_cd(t_command *command)
 {
-	int	x;
-
-	while (command->command[++start])
-	{
-		x = -1;
-		while (command->command[start][++x])
-			write(1, &command->command[start][x], 1);
-		if (command->command[start + 1])
-			write(1, " ", 1);
-	}
-	if (flag == 1)
-		write(1, "\n", 1);
+	
 }
 
-void	ft_echo(t_command *command)
-{
-	int	i;
-
-	i = 1;
-	if (!ft_strncmp(command->command[1], "-n", 2))
-	{
-		while (command->command[1][++i])
-		{
-			if (command->command[1][i] != 'n')
-			{
-				ft_exec_echo(command, 0, 1);
-				return ;
-			}
-		}
-	}
-	ft_exec_echo(command, 1, 0);
-}
-
-void	ft_parent_builtin(t_command *command)
+void	ft_parent_builtin(t_command *command, t_msh_var *msh) // commands are lacking exit status
 {
 	if (!ft_strncmp(command->command[0], "echo", 4))
 		ft_echo(command);
-	/**else if (!ft_strncmp(command->command[0], "cd", 2))
-		ft_cd();
+	else if (!ft_strncmp(command->command[0], "cd", 2))
+		ft_cd(command);
 	else if (!ft_strncmp(command->command[0], "pwd", 3))
-		ft_pwd();
-	else if (!ft_strncmp(command->command[0], "export", 6))
+		ft_pwd(msh);
+	/*else if (!ft_strncmp(command->command[0], "export", 6))
 		ft_export();
 	else if (!ft_strncmp(command->command[0], "unset", 5))
-		ft_unset();
+		ft_unset();*/
 	else if (!ft_strncmp(command->command[0], "env", 3))
-		ft_env();
+		ft_env(msh);
 	else if (!ft_strncmp(command->command[0], "exit", 4))
-		ft_exit();*/
+		ft_exit();
 }
 
-void	ft_check_commands(t_command_table *table)
+void	ft_check_commands(t_command_table *table, t_msh_var *msh)
 {
 	int	i;
 	int	x;
@@ -116,7 +86,7 @@ void	ft_check_commands(t_command_table *table)
 	while (++i < table->cmd_count)
 	{
 		//at the moment it only executes parent builtins
-		ft_parent_builtin(&table->commands[i]);
+		ft_parent_builtin(&table->commands[i], msh);
 	}
 }
 
@@ -136,7 +106,7 @@ void	minishell(t_msh_var *msh, __attribute__((unused))t_process_manager *manager
 			if (!ft_error_print(parser(str, &table)))
 			{
 				if (!ft_error_print(lexer(&table, msh)))
-					ft_check_commands(&table);
+					ft_check_commands(&table, msh);
 					//fprintf(stderr, "Ejecuto lexer\n");
 			}
 		}
@@ -144,7 +114,7 @@ void	minishell(t_msh_var *msh, __attribute__((unused))t_process_manager *manager
 	}
 }
 
-int	main(int argc, char *argv[], char *environ[])
+int	main(int argc, char *argv[], char **environ)
 {
 	t_msh_var			var;
 	t_process_manager	manager;

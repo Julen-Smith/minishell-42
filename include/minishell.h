@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 11:54:13 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/07 13:16:13 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,13 @@ bool            _str_contains(char *command, char *str);
 int		        ft_single_dollar(t_command *command, int arr_n, int xref);
 void	        ft_dollar_expansion(t_command *command, t_msh_var *msh, int arr_n, int xref);
 char	        *ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
+
+/* builtins */
+void			ft_echo(t_command *command);
+void			ft_pwd(t_msh_var *msh);
+void			ft_env(t_msh_var *msh);
+void			ft_exit(void);
+
 /*
 bool            ft_error_print(int errnumb);
 void            duplicate_environ(char **env, t_msh_var *msh);
