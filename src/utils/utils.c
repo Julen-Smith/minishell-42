@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:50:08 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 11:53:25 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 14:28:22 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ bool _contains(char **command, char *str)
 				e = 0;
 			u++;	
 		}		
+		i++;
+	}
+	return (false);
+}
+
+bool _str_contains(char *command, char *str)
+{
+	int i;
+	int u;
+	int maxlength;
+
+	i = 0;
+	u = 0;
+	maxlength = ft_strlen(str);
+	while(command[i])
+	{
+		if (command[i] == str[u])
+		{
+			u++;
+			if (u == maxlength)
+				return (true);
+		}
+		else
+			u = 0;	
 		i++;
 	}
 	return (false);

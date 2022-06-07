@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 13:51:31 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 14:33:15 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_command
     bool redir_exist;
     int redircnt;
     int *redirpos;
-    char *redirorder;
+    char **redirorder;
 } t_command;
 
 typedef struct s_command_table
@@ -100,6 +100,7 @@ bool            contains_redir(t_command *command);
 bool	        manage_redir_symbols(t_command *command);
 int             lexer(t_command_table *table, t_msh_var *msh);
 bool            _contains(char **command, char *str);
+bool            _str_contains(char *command, char *str);
 /*
 bool            ft_error_print(int errnumb);
 void            duplicate_environ(char **env, t_msh_var *msh);

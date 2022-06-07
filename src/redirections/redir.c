@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 13:47:00 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/06 14:43:56 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,54 @@ void ft_fill_positions_to_command(t_command *command, int *position_stack)
 
 	i = 0;
 	command->redirpos = malloc (sizeof(int) * command->redircnt);
-	printf("Recuento de reddir : %d\n",command->redircnt);
 	while(i != command->redircnt)
 	{
 		command->redirpos[i] = position_stack[i];
-		printf("Las posiciones estan en %d\n",command->redirpos[i]);
 		i++;
 	}
+}
+
+bool check_and_manage_order(t_command *command)
+{
+	int i;
+	int u;
+
+	i = 0;
+	u = 0;
+	command->redirorder = malloc (sizeof (char *) * (command->redircnt + 1));
+	command->redirorder[command->redircnt] = NULL;
+	while(i != command->redircnt)
+	{
+		command->redirorder[i] =  malloc (sizeof(char) * (2 + 1));
+		command->redirorder[i][2] = '\0';
+		i++;
+	}
+	i = 0;
+	while(i != command->redircnt)
+	{
+		if(ft_strlen(command->command[command->redirpos[i]]) > 2)
+			return (false);
+		else
+		{
+			if(_str_contains(command->command[command->redirpos[i]],HDC))
+				command->redirorder[i] = ft_strdup("<<");       
+			else if (_str_contains(command->command[command->redirpos[i]],APD))
+				command->redirorder[i] = ft_strdup(">>");
+			else if (command->command[command->redirpos[i]][0] == '<')
+				command->redirorder[i] = ft_strdup("<");
+			else if (command->command[command->redirpos[i]][0] == '>')
+				command->redirorder[i] = ft_strdup(">");
+		}	
+		i++;
+	}
+	//PRUEBAS
+	i = 0;
+	while(command->redirorder[i])
+	{
+		printf("Estos son el orden de redirecciones %s\n",command->redirorder[i]);
+		i++;
+	}
+	return (true);
 }
 
 bool count_check_redirs(t_command *command)
@@ -53,8 +94,9 @@ bool count_check_redirs(t_command *command)
 		i++;
 	}
 	command->redircnt = poslvl;
-	printf("Las posiciones estan en %d\n",command->redircnt);
 	ft_fill_positions_to_command(command, positions);
+	if (check_and_manage_order(command))
+		return (false);
 	return (true);
 }
 
@@ -77,7 +119,7 @@ bool	manage_redir_symbols(t_command *command)
 	{
 		if (count_check_redirs(command))
 			return (false);
-		fprintf(stderr,"Manage reddir symbols");
+	//	fprintf(stderr,"Manage reddir symbols");
 		return (true);	
 	}
 	return (false);
