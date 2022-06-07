@@ -11,8 +11,8 @@ SRC		=	src/minishell.c					\
 			src/redirections/redir.c		\
 			src/utils/utils.c				\
 			src/dollars/dollars.c			\
-			src/dollars/dollar_value.c
-
+			src/dollars/dollar_value.c		\
+			src/redirections/redir_utils.c	\
 
 INCLUDE =	include/minishell.h
 LIB		=	include/libraries/Libft/libft.a

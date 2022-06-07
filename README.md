@@ -10,3 +10,7 @@ Casos expansiones:
 	echo $ ⎷
 	echo $USER$ -> aalvarez$ ⎷
 	echo $USER$$HOME -> aalvarezHOME 
+
+Necesidades:
+	- Funcion comprobación del binario bool isBinary(); Path + directorio actual
+	-Comprobar que el último caracter de cualquier string no sea una redirección de cualquier tipo.
