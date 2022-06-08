@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 13:45:20 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:51:05 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void			ft_echo(t_command *command);
 void			ft_pwd(t_msh_var *msh);
 void			ft_env(t_msh_var *msh);
 void			ft_exit(void);
+void			ft_cd(t_command *command, t_msh_var *msh);
+int				ft_parent_builtin(t_command *command, t_msh_var *msh); // commands are lacking exit status
 
 /*
 bool            ft_error_print(int errnumb);

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 08:34:55 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/06 20:56:56 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:45:55 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ char	**ft_doublestrdup(char **str)
 	while (str[++i])
 		result[i] = ft_strdup(str[i]);
 	result[i] = 0;
-	ft_doublefree(str);
 	return (result);
 }
