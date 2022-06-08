@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 13:49:29 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:53:22 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	//
 	return (1);
 }
-
-
 
 void	ft_check_commands(t_command_table *table, t_msh_var *msh)
 {
