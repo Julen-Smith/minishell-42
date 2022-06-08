@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:36:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 21:03:19 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:23:17 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ bool	ft_error_print(int errnumb)
 	else if (errnumb == ERR_FINALPIPE)
 	{
 		fprintf(stderr, "ERR : FINAL PIPE\n");
+		return (true);
+	}
+	else if (errnumb == ERR_REDDIR)
+	{
+		fprintf(stderr, "ERR : REDDIRECTION ERROR\n");
 		return (true);
 	}
 	return (false);

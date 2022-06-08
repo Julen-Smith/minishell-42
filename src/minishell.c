@@ -6,12 +6,13 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 12:12:13 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/08 13:34:54 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include <stdio.h>
+
 
 int	lexer(t_command_table *table, t_msh_var *msh)
 {
@@ -35,6 +36,7 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 				x = 0;
 				continue ;
 			}
+			
 			x++;
 		}
 		if (manage_redir_symbols(&table->commands[i]))
@@ -63,7 +65,6 @@ void	minishell(t_msh_var *msh, __attribute__((unused))t_process_manager *manager
 		str = readline(MSH);
 		if (ft_strlen(str) > 0)
 		{
-			//UNSET PATH COMPROBAR
 			add_history(str);
 			if (!ft_error_print(parser(str, &table)))
 			{

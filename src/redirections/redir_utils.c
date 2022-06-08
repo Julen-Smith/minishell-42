@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:21:14 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 12:22:52 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/08 13:48:07 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,23 @@ bool	contains_redir(t_command *command)
 	return (0);
 }
 
+bool check_last_token_is_redir(char **command)
+{
+	int i;
+
+	i = 0;
+	while (command[i])
+		i++;
+	if (char_is_redir(command[i - 1][0]))
+		return (true);
+	return (false);
+}
 bool	manage_redir_symbols(t_command *command)
 {
 	if (contains_redir(command))
 	{
+		if (check_last_token_is_redir(command->command))
+			return (true);
 		if (count_check_redirs(command))
 			return (true);
 	//	fprintf(stderr,"Manage reddir symbols");
