@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 13:44:55 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:42:08 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,82 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	return (1);
 }
 
-void	ft_cd(t_command *command)
+static void	ft_getoldpwd(t_msh_var *msh, char *pwd)
 {
-	
+	int		i;
+	int		x;
+	char	**tmp;
+
+	i = -1;
+	while (msh->own_envp[++i])
+	{
+		if (!ft_strncmp(msh->own_envp[i], "OLDPWD=", 7))
+		{
+			free(msh->own_envp[i]);
+			msh->own_envp[i] = ft_strjoin("OLDPWD=", pwd);
+			return ;
+		}
+	}
+	tmp = ft_doublestrdup(msh->own_envp);
+	ft_doublefree(msh->own_envp);
+	msh->own_envp = (char **)malloc(sizeof(char *) * (ft_doublestrlen(tmp) + 2));
+	i = -1;
+	x = 0;
+	while (tmp[++i])
+	{
+		msh->own_envp[x++] = ft_strdup(tmp[i]);
+		if (!ft_strncmp(tmp[i], "PWD=", 4))
+			msh->own_envp[++x] = ft_strjoin("OLDPWD=", pwd);
+	}
+	msh->own_envp[x] = 0;
+	ft_doublefree(tmp);
 }
 
-void	ft_parent_builtin(t_command *command, t_msh_var *msh) // commands are lacking exit status
+void	ft_cd(t_command *command, t_msh_var *msh)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	if (!command->command[1])
+	{
+		ft_getoldpwd(msh, pwd);
+		chdir("/");
+		//ft_getnewpwd(msh, pwd);
+	}
+}
+
+int	ft_parent_builtin(t_command *command, t_msh_var *msh) // commands are lacking exit status
 {
 	if (!ft_strncmp(command->command[0], "echo", 4))
+	{
 		ft_echo(command);
+		return (0);
+	}
 	else if (!ft_strncmp(command->command[0], "cd", 2))
-		ft_cd(command);
+	{
+		ft_cd(command, msh);
+		return (0);
+	}
 	else if (!ft_strncmp(command->command[0], "pwd", 3))
+	{
 		ft_pwd(msh);
+		return (0);
+	}
 	/*else if (!ft_strncmp(command->command[0], "export", 6))
 		ft_export();
 	else if (!ft_strncmp(command->command[0], "unset", 5))
 		ft_unset();*/
 	else if (!ft_strncmp(command->command[0], "env", 3))
+	{
 		ft_env(msh);
+		return (0);
+	}
 	else if (!ft_strncmp(command->command[0], "exit", 4))
+	{
 		ft_exit();
+		return (0);
+	}
+	return (1);
 }
 
 void	ft_check_commands(t_command_table *table, t_msh_var *msh)
@@ -85,8 +140,10 @@ void	ft_check_commands(t_command_table *table, t_msh_var *msh)
 	i = -1;
 	while (++i < table->cmd_count)
 	{
+		if (ft_parent_builtin(&table->commands[i], msh))
+			printf("is child builtin\n");
+			//ft_execute();
 		//at the moment it only executes parent builtins
-		ft_parent_builtin(&table->commands[i], msh);
 	}
 }
 
