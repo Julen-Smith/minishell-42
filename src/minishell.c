@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 16:01:14 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/08 21:59:15 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include <stdio.h>
-
 
 int	lexer(t_command_table *table, t_msh_var *msh)
 {
@@ -36,7 +35,6 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 				x = 0;
 				continue ;
 			}
-			
 			x++;
 		}
 		if (manage_redir_symbols(&table->commands[i]))
@@ -48,7 +46,7 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	{
 		x = -1;
 		while (table->commands[i].command[++x])
-			printf("%s\n",table->commands[i].command[x]); // checking all the commands
+			printf("%s\n", table->commands[i].command[x]); // checking all the commands
 	}
 	//
 	return (1);
@@ -57,7 +55,6 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 void	ft_check_commands(t_command_table *table, t_msh_var *msh)
 {
 	int	i;
-	int	x;
 	int	status;
 
 	status = 0;

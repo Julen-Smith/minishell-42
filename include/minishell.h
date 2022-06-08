@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 16:00:46 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/08 21:45:05 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,16 @@ typedef struct s_msh_var
 	char	*shellname;
 }	t_msh_var;
 
+/*char *binary; //binary array for error checking
+, ex: "ls " should not execute to s_command*/
 typedef struct s_command
 {
-    //char *binary; //binary array for error checking, ex: "ls " should not execute
-    char **command;
-    bool redir_exist;
-    int redircnt;
-    int *redirpos;
-    char **redirorder;
-	char **fd_collection;
+	char	**command;
+	bool	redir_exist;
+	int		redircnt;
+	int		*redirpos;
+	char	**redirorder;
+	char	**fd_collection;
 }	t_command;
 
 //struct only used for dollar expansion
@@ -104,67 +105,44 @@ int		process_string_marks(char *not_processed_cmd);
 bool	ft_error_print(int errnumb);
 
 /*  Redirections */
-bool            contains_redir(t_command *command);
-bool	        manage_redir_symbols(t_command *command);
-int             lexer(t_command_table *table, t_msh_var *msh);
-bool            _contains(char **command, char *str);
-bool            _str_contains(char *command, char *str);
-bool			char_is_redir(char command_i);
-void			ft_fill_positions_to_command(t_command *command, int *position_stack);
-bool			count_check_redirs(t_command *command);
+bool	contains_redir(t_command *command);
+bool	manage_redir_symbols(t_command *command);
+int		lexer(t_command_table *table, t_msh_var *msh);
+bool	_contains(char **command, char *str);
+bool	_str_contains(char *command, char *str);
+bool	char_is_redir(char command_i);
+void	ft_fill_positions_to_command(t_command *command, int *position_stack);
+bool	count_check_redirs(t_command *command);
 
 /*   Expansions    */
-int		        ft_single_dollar(t_command *command, int arr_n, int xref);
-void	        ft_dollar_expansion(t_command *command, t_msh_var *msh, int arr_n, int xref);
-char	        *ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
+int		ft_single_dollar(t_command *command, int arr_n, int xref);
+void	ft_dollar_expansion(t_command *command,
+			t_msh_var *msh, int arr_n, int xref);
+char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
 
 /* builtins */
-void			ft_echo(t_command *command);
-void			ft_pwd(t_msh_var *msh);
-void			ft_env(t_msh_var *msh);
-void			ft_exit(void);
-void			ft_cd(t_command *command, t_msh_var *msh);
-int				ft_parent_builtin(t_command *command, t_msh_var *msh); // commands are lacking exit status
-
+void	ft_echo(t_command *command);
+void	ft_pwd(void);
+void	ft_env(t_msh_var *msh);
+void	ft_exit(void);
+void	ft_cd(t_command *command, t_msh_var *msh);
+int		ft_parent_builtin(t_command *command, t_msh_var *msh);
+// commands are lacking exit status
 /*
 bool            ft_error_print(int errnumb);
 void            duplicate_environ(char **env, t_msh_var *msh);
 
 void            store_father_pid(t_process_manager *p_manager, t_msh_var *msh);
-void            init_msh(t_msh_var *msh, char **env, t_process_manager *p_manager);
+void            init_msh(t_msh_var *msh,
+					char **env, t_process_manager *p_manager);
 int             process_string_marks(char *not_processed_cmd);
-void            generate_command_table(char *str, int cmd_count, t_command_table *table);
+void            generate_command_table(char *str,
+					int cmd_count, t_command_table *table);
 int             ft_count_pipes(char *pnt);
 int             parser(char *str, t_command_table *table);
 bool            _contains(char *simple_command, char *str);
 void            ft_print_own_environ(t_msh_var *msh);
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 
 			-------------LITERALS -------------
 */
@@ -209,9 +187,6 @@ void            ft_print_own_environ(t_msh_var *msh);
 # define APD ">>"
 # define REDIPT "<"
 # define REDOPT ">"
-
-
-
 
 /* INVALIDS */
 # define SMCOLON ";"

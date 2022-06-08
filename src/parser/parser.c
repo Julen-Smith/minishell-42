@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 21:17:37 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 21:35:06 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 int	parser(char *str, t_command_table *table)
 {
 	int		cmd_nbr;
-	char	**split;
 
 	if (last_chr_not_pipe(str))
 		return (ERR_FINALPIPE);
