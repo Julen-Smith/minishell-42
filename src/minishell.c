@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 13:34:54 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/08 16:01:14 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,23 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	return (1);
 }
 
+void	ft_check_commands(t_command_table *table, t_msh_var *msh)
+{
+	int	i;
+	int	x;
+	int	status;
+
+	status = 0;
+	i = -1;
+	while (++i < table->cmd_count)
+	{
+		if (ft_parent_builtin(&table->commands[i], msh))
+			printf("is child builtin\n");
+			//ft_execute();
+		//at the moment it only executes parent builtins
+	}
+}
+
 // __attribute__((__unused))t_process_manager *manager
 void	minishell(t_msh_var *msh, __attribute__((unused))t_process_manager *manager)
 {	
@@ -69,14 +86,15 @@ void	minishell(t_msh_var *msh, __attribute__((unused))t_process_manager *manager
 			if (!ft_error_print(parser(str, &table)))
 			{
 				if (!ft_error_print(lexer(&table, msh)))
-					fprintf(stderr, "Ejecuto lexer\n");
+					ft_check_commands(&table, msh);
+					//fprintf(stderr, "Ejecuto lexer\n");
 			}
 		}
 		free(str);
 	}
 }
 
-int	main(int argc, char *argv[], char *environ[])
+int	main(int argc, char *argv[], char **environ)
 {
 	t_msh_var			var;
 	t_process_manager	manager;

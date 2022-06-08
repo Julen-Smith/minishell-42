@@ -12,7 +12,14 @@ SRC		=	src/minishell.c					\
 			src/utils/utils.c				\
 			src/dollars/dollars.c			\
 			src/dollars/dollar_value.c		\
-			src/redirections/redir_utils.c	\
+			src/builtins/echo.c				\
+			src/builtins/cd.c				\
+			src/builtins/pwd.c				\
+			src/builtins/env.c				\
+			src/builtins/exit.c				\
+			src/builtins/check_builtins/check_builtins.c				\
+			src/redirections/redir_utils.c
+
 
 INCLUDE =	include/minishell.h
 LIB		=	include/libraries/Libft/libft.a

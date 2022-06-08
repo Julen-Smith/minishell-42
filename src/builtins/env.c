@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_doublestrdup.c                                  :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 08:34:55 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/08 13:45:55 by aalvarez         ###   ########.fr       */
+/*   Created: 2022/06/07 13:06:20 by aalvarez          #+#    #+#             */
+/*   Updated: 2022/06/07 13:22:56 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "../../include/minishell.h"
 
-char	**ft_doublestrdup(char **str)
+void	ft_env(t_msh_var *msh)
 {
-	char	**result;
-	int		i;
+	int	i;
 
 	i = -1;
-	result = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str) + 1));
-	if (!result)
-		return (NULL);
-	while (str[++i])
-		result[i] = ft_strdup(str[i]);
-	result[i] = 0;
-	return (result);
+	while (msh->own_envp[++i])
+		printf("%s\n", msh->own_envp[i]);
 }

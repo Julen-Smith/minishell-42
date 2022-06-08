@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_doublestrdup.c                                  :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 08:34:55 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/08 13:45:55 by aalvarez         ###   ########.fr       */
+/*   Created: 2022/06/07 13:16:32 by aalvarez          #+#    #+#             */
+/*   Updated: 2022/06/08 11:56:59 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "../../include/minishell.h"
 
-char	**ft_doublestrdup(char **str)
+void	ft_pwd(t_msh_var *msh)
 {
-	char	**result;
 	int		i;
+	char	*pwd;
 
-	i = -1;
-	result = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str) + 1));
-	if (!result)
-		return (NULL);
-	while (str[++i])
-		result[i] = ft_strdup(str[i]);
-	result[i] = 0;
-	return (result);
+	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
+	free(pwd);
 }

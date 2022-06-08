@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 13:22:11 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/08 16:00:46 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ typedef struct s_msh_var
 typedef struct s_command
 {
     //char *binary; //binary array for error checking, ex: "ls " should not execute
-    int dollar_i;
-    int dollar_x;
     char **command;
     bool redir_exist;
     int redircnt;
@@ -120,7 +118,13 @@ int		        ft_single_dollar(t_command *command, int arr_n, int xref);
 void	        ft_dollar_expansion(t_command *command, t_msh_var *msh, int arr_n, int xref);
 char	        *ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
 
-
+/* builtins */
+void			ft_echo(t_command *command);
+void			ft_pwd(t_msh_var *msh);
+void			ft_env(t_msh_var *msh);
+void			ft_exit(void);
+void			ft_cd(t_command *command, t_msh_var *msh);
+int				ft_parent_builtin(t_command *command, t_msh_var *msh); // commands are lacking exit status
 
 /*
 bool            ft_error_print(int errnumb);
