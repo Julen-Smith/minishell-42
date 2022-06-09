@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 09:23:50 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 11:45:55 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_command
     char **redirorder;
 	char **fd_collection;
 	char *bin_path;
+	char **path;
 }	t_command;
 
 //struct only used for dollar expansion
@@ -110,8 +111,6 @@ bool	ft_error_print(int errnumb);
 bool	contains_redir(t_command *command);
 bool	manage_redir_symbols(t_command *command);
 int		lexer(t_command_table *table, t_msh_var *msh);
-bool	_contains(char **command, char *str);
-bool	_str_contains(char *command, char *str);
 bool	char_is_redir(char command_i);
 void	ft_fill_positions_to_command(t_command *command, int *position_stack);
 bool	count_check_redirs(t_command *command);
@@ -132,8 +131,14 @@ int				ft_parent_builtin(t_command *command, t_msh_var *msh); // commands are la
 
 /* Execution */
 bool return_binary_path(const char *bin_path, char *binary_check);
-char *reach_bin_path(char **command, t_msh_var *msh);
+char *reach_bin_path(t_command *command, t_msh_var *msh);
 void *execute(t_command_table *table, t_msh_var * msh);
+
+
+/* String utils */
+bool	_contains(char **command, char *str);
+bool	_str_contains(char *command, char *str);
+bool	_str_exactly_contains(char *command, char *str);
 
 /*
 bool            ft_error_print(int errnumb);

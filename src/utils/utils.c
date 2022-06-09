@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:50:08 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 21:49:07 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 10:55:37 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,32 @@ bool	_str_contains(char *command, char *str)
 		{
 			u++;
 			if (u == maxlength)
+				return (true);
+		}
+		else
+			u = 0;
+		i++;
+	}
+	return (false);
+}
+
+bool	_str_exactly_contains(char *command, char *str)
+{
+	int	i;
+	int	u;
+	int	maxlength;
+	int mlength;
+
+	i = 0;
+	u = 0;
+	maxlength = ft_strlen(str);
+	mlength = ft_strlen(command);
+	while (command[i])
+	{
+		if (command[i] == str[u])
+		{
+			u++;
+			if (u == maxlength && mlength == maxlength)
 				return (true);
 		}
 		else

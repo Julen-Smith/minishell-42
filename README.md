@@ -12,8 +12,10 @@ Casos expansiones:
 	echo $USER$$HOME -> aalvarezHOME 
 
 Necesidades:
-	- Funcion comprobación del binario bool isBinary(); Path + directorio actual
-	-Comprobar que el último caracter de cualquier string no sea una redirección de cualquier tipo.
+	-Funcion comprobación del binario bool isBinary(); Path + directorio actual
 	-Expansion de binarios
-	-trimmear las comillas dobles y comillas simples en binarios y strings (usar deletecharacter, se eliminan las mismas comillas con las que se abre el string)
 	-Eliminar el OLDPWD al inicio del programa
+	
+		Exec -
+			Falta comprobar la ejecución con ruta absoluta
+			Falta comprobar el pwd para ejecutar los ejecutables actuales.

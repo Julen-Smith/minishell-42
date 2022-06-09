@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 09:28:54 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 11:46:28 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,9 @@ bool	ft_check_commands(t_command_table *table, t_msh_var *msh)
 	status = 0;
 	i = -1;
 	while (++i < table->cmd_count)
-	{
-		if (!ft_parent_builtin(&table->commands[i], msh))
+		if(!ft_parent_builtin(&table->commands[i], msh))
 			return (true);
-		//ft_execute();
-		//at the moment it only executes parent builtins
-	}
-	return (false);
+	return(false);
 }
 
 // __attribute__((__unused))t_process_manager *manager
@@ -84,7 +80,7 @@ void	minishell(t_msh_var *msh, __attribute__((unused))t_process_manager *manager
 			if (!ft_error_print(parser(str, &table)))
 				if (!ft_error_print(lexer(&table, msh)))
 					if (!ft_check_commands(&table, msh))
-						execute(&table,msh);
+						execute(&table, msh);
 		}
 		free(str);
 	}
