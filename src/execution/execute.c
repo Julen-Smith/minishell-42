@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 10:57:36 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 11:06:42 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,16 @@ void *execute(t_command_table *table, t_msh_var * msh)
 		pipe(pe);
 		pid = fork();
 		if (pid == 0)
-		{
-			printf("%s\n",table->commands[i].bin_path);
+		{	
+			//if (i == 0)
+				//dup2();
 			
+			//else if (i == table->cmd_count)
+				
+
 			execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",
 			table->commands[i].command[0])),
 			table->commands[i].command, msh->own_envp);
-			
 			perror("Error");
 		}
 		else

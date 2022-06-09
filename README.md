@@ -12,6 +12,10 @@ Casos expansiones:
 	echo $USER$$HOME -> aalvarezHOME 
 
 Necesidades:
-	- Funcion comprobación del binario bool isBinary(); Path + directorio actual
+	-Funcion comprobación del binario bool isBinary(); Path + directorio actual
 	-Expansion de binarios
 	-Eliminar el OLDPWD al inicio del programa
+	
+		Exec -
+			Falta comprobar la ejecución con ruta absoluta
+			Falta comprobar el pwd para ejecutar los ejecutables actuales.
