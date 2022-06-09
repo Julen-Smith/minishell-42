@@ -18,7 +18,8 @@ SRC		=	src/minishell.c					\
 			src/builtins/env.c				\
 			src/builtins/exit.c				\
 			src/builtins/check_builtins/check_builtins.c				\
-			src/redirections/redir_utils.c
+			src/redirections/redir_utils.c                              \
+			src/execution/execute.c
 
 
 INCLUDE =	include/minishell.h

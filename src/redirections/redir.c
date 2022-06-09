@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/07 13:39:06 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 07:08:20 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,6 @@ bool check_and_manage_order(t_command *command)
 		}	
 		i++;
 	}
-	//PRUEBAS
-	/*
-	i = 0;
-	while(command->redirorder[i])
-	{
-		printf("Estos son el orden de redirecciones %s\n",command->redirorder[i]);
-		i++;
-	}
-	*/
-
-	//
-	//			Funcion comprobación del binario.
-	//
 	gather_redir_fds(command);
 	return (false);
 }

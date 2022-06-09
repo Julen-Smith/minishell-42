@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 16:00:46 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 08:04:04 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_command
     int *redirpos;
     char **redirorder;
 	char **fd_collection;
+	char *bin_path;
 }	t_command;
 
 //struct only used for dollar expansion
@@ -125,6 +126,11 @@ void			ft_env(t_msh_var *msh);
 void			ft_exit(void);
 void			ft_cd(t_command *command, t_msh_var *msh);
 int				ft_parent_builtin(t_command *command, t_msh_var *msh); // commands are lacking exit status
+
+/* Execution */
+bool return_binary_path(const char *bin_path, char *binary_check);
+char *reach_bin_path(char **command, t_msh_var *msh);
+void *execute(t_command_table *table, t_msh_var * msh);
 
 /*
 bool            ft_error_print(int errnumb);
