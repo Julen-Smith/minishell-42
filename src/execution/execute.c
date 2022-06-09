@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 19:05:28 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 19:35:53 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,26 @@ void dup_son_choose(int i,t_command_table *table)
 		dup2(table->pi[1],1);
 		close(table->pi[0]);
 	}	
-	else if (i == table->cmd_count - 1)
+	else if (i == table->cmd_count -1)
 	{
 		dup2(table->pi[0],0);
 		close(table->pi[1]);
+		//close(table->pi[0]);
 	}
 	else
 	{
 		dup2(table->unipipe,table->pi[0]);
-		close(table->pi[1]);
-		close(table->unipipe);
-		pipe(table->pi);
-		dup2(table->pi[1],table->unipipe);
+		close(table->pi[1]);	
+	//	printf("Unipipe %d\n",table->unipipe);
+		//printf("Unipipe %d\n",table->pi[1]);
 	}
+}
+
+void father_fd_closes(t_command_table *table)
+{	
+		close(table->pi[1]);
+		dup2(table->unipipe,table->pi[0]);
+		pipe(table->pi);
 }
 
 void *execute(t_command_table *table, t_msh_var * msh)
@@ -74,8 +81,8 @@ void *execute(t_command_table *table, t_msh_var * msh)
 	i = 0;
 	if (gather_bin_path(table,msh))
 		return (NULL);
-	pipe(table->pi);
 	//printf("Numero de comandos %d\n",table->cmd_count);
+	pipe(table->pi);
 	while (i != table->cmd_count)
 	{
 		pid = fork();
@@ -90,8 +97,19 @@ void *execute(t_command_table *table, t_msh_var * msh)
 		}
 		else
 		{
-			close(table->pi[1]);
 			wait(0);
+			father_fd_closes(table);
+			/*
+			if (i != 0 && i != table->cmd_count - 1)
+			{
+				close(table->pi[0]);
+				close(table->pi[1]);
+				pipe(table->pi);
+				dup2(table->pi[1],table->unipipe);
+				close(table->unipipe);		
+			}
+			*/
+				
 		}
 		
 		i++;
