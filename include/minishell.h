@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 20:50:17 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 20:57:22 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int		ft_single_dollar(t_command *command, int arr_n, int xref);
 void	ft_dollar_expansion(t_command *command,
 			t_msh_var *msh, int arr_n, int xref);
 char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
+bool	ft_check_char(t_command *com, int a_n, int i, char *refs);
 
 /* builtins */
 void			ft_echo(t_command *command);
