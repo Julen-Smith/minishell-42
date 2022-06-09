@@ -14,6 +14,7 @@ SRC		=	src/minishell.c									\
 			src/dollars/dollar_value.c						\
 			src/builtins/echo.c								\
 			src/builtins/cd.c								\
+			src/builtins/unset.c							\
 			src/builtins/export.c							\
 			src/builtins/export_utils.c						\
 			src/builtins/pwd.c								\
