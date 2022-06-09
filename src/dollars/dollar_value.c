@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:54:39 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/06 21:57:24 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 20:53:17 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ static char	*ft_check_value(t_msh_var *msh, char *find, char *tmp)
 	return (NULL);
 }
 
+static bool	ft_check_char(t_command *com, int a_n, int i, char *refs)
+{
+	int	x;
+
+	x = -1;
+	while (refs[++x])
+	{
+		if (com->command[a_n][i] == refs[x])
+			return (true);
+	}
+	return (false);
+}
+
 char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref)
 {
 	int		i;
@@ -38,18 +51,17 @@ char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref)
 	char	*tmp;
 
 	i = xref + 1;
-	if (com->command[a_n][i] == ' ' || com->command[a_n][i] == '"'
-			|| com->command[a_n][i] == '\'' || com->command[a_n][i] == '$')
+	if (ft_check_char(com, a_n, i, " \"\'$?"))
 	{
-		if (com->command[a_n][i] == '$')
+		if (com->command[a_n][i] == '?')
+			find = ft_strdup(ft_itoa(exit_status));
+		else if (com->command[a_n][i] == '$')
 			return (NULL);
 		else
 			find = ft_strdup("$");
 		return (find);
 	}
-	while (com->command[a_n][i] && (com->command[a_n][i] != ' '
-			&& com->command[a_n][i] != '$' && com->command[a_n][i] != '"'
-				&& com->command[a_n][i] != '\''))
+	while (com->command[a_n][i] && !ft_check_char(com, a_n, i, " \"\'$?"))
 		i++;
 	tmp = ft_substr(com->command[a_n], (xref + 1), (i - (xref + 1)));
 	find = ft_strjoin(tmp, "=");
@@ -59,9 +71,7 @@ char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref)
 
 int	ft_single_dollar(t_command *com, int a_n, int x)
 {
-	if (!com->command[a_n][x + 1] && com->command[a_n][x + 1] != '\''
-			&& com->command[a_n][x + 1] != '"'
-				&& com->command[a_n][x + 1] != ' ')
+	if (!com->command[a_n][x + 1] && !ft_check_char(com, a_n, x + 1, " \"\'"))
 		return (1);
 	return (0);
 }

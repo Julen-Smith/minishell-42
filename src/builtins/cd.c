@@ -107,10 +107,12 @@ void	ft_cd(t_command *command, t_msh_var *msh)
 		if (!opendir(command->command[1]))
 		{
 			printf("cd: %s: No such file or directory\n", command->command[1]);
+			exit_status = 1;
 			return ;
 		}
 		ft_getoldpwd(msh);
 		chdir(command->command[1]);
 		ft_getnewpwd(msh);
 	}
+	exit_status = 0;
 }

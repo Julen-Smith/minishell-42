@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:50:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 17:07:10 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 20:51:31 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void	ft_export_check(t_command *command, t_msh_var *msh)
 		while (msh->own_envp[++i])
 			printf("declare -x %s\n", msh->own_envp[i]);
 	}
+	exit_status = 0;
 }

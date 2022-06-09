@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 11:46:28 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 20:27:58 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	main(int argc, char *argv[], char **environ)
 	(void) argc;
 	(void) argv;
 	var.own_envp = ft_duplicate_environment(environ);
+	exit_status = 0;
 	minishell(&var, &manager);
 	return (0);
 }
