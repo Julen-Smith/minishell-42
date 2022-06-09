@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:47:14 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 17:46:04 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 20:58:13 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	ft_exec_echo(t_command *command, int start)
 				write(1, " ", 1);
 		}
 	}
+	exit_status = 0;
 }
 
 void	ft_echo(t_command *command)

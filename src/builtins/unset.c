@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:21:27 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 17:21:53 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 20:52:13 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void	ft_check_unset(t_command *command, t_msh_var *msh)
 				ft_unset(command->command[i], msh);
 		}
 	}
+	exit_status = 0;
 }

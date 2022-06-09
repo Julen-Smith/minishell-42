@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:50:10 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 18:02:57 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 20:58:06 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int	ft_parent_builtin(t_command *command, t_msh_var *msh)
 	}
 	else if (!ft_strncmp(command->command[0], "env", ft_strlen(command->command[0])))
 	{
-		ft_env(msh);
+		ft_env(msh, command);
 		return (0);
 	}
 	else if (!ft_strncmp(command->command[0], "exit", ft_strlen(command->command[0])))
 	{
-		ft_exit();
+		ft_exit(command);
 		return (0);
 	}
 	return (1);

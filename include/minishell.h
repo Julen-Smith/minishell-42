@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 18:48:04 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 20:58:19 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <readline/readline.h>
 # include "libraries/Libft/libft.h"
 # include "libraries/GNL/get_next_line.h"
+
+int	exit_status;
 
 struct	s_command;
 
@@ -123,12 +125,13 @@ int		ft_single_dollar(t_command *command, int arr_n, int xref);
 void	ft_dollar_expansion(t_command *command,
 			t_msh_var *msh, int arr_n, int xref);
 char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
+bool	ft_check_char(t_command *com, int a_n, int i, char *refs);
 
 /* builtins */
 void			ft_echo(t_command *command);
 void			ft_pwd(void);
-void			ft_env(t_msh_var *msh);
-void			ft_exit(void);
+void			ft_env(t_msh_var *msh, t_command *command);
+void			ft_exit(t_command *command);
 void			ft_cd(t_command *command, t_msh_var *msh);
 void			ft_check_unset(t_command *command, t_msh_var *msh);
 void			ft_export_check(t_command *command, t_msh_var *msh);
