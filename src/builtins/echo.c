@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:47:14 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/08 21:57:08 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 12:06:35 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_exec_echo(t_command *command, int start, int flag)
 {
 	int	x;
 
-	while (command->command[++start])
+	while (command->command[start] && command->command[++start])
 	{
 		x = -1;
 		while (command->command[start][++x])
@@ -33,7 +33,7 @@ void	ft_echo(t_command *command)
 	int	i;
 
 	i = 1;
-	if (!ft_strncmp(command->command[1], "-n", 2))
+	if (command->command[1] && !ft_strncmp(command->command[1], "-n", 2))
 	{
 		while (command->command[1][++i])
 		{

@@ -18,9 +18,9 @@ SRC		=	src/minishell.c					\
 			src/builtins/env.c				\
 			src/builtins/exit.c				\
 			src/builtins/check_builtins/check_builtins.c				\
-			src/redirections/redir_utils.c                              \
-			src/execution/execute.c
-
+			src/redirections/redir_utils.c                        		\
+			src/execution/execute.c										\
+			src/execution/binary_manage.c 
 
 INCLUDE =	include/minishell.h
 LIB		=	include/libraries/Libft/libft.a
