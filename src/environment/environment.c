@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 10:17:15 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/06 21:02:19 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 09:30:17 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ char	**ft_duplicate_environment(char **str)
 	int		i;
 
 	i = -1;
-	result = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str) + 1));
+	result = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str)));
 	if (!result)
 		return (NULL);
 	while (str[++i])
+	{
+		if (!ft_strncmp(str[i], "OLDPWD=", 7))
+			str++;
 		result[i] = ft_strdup(str[i]);
+	}
 	result[i] = 0;
 	return (result);
 }

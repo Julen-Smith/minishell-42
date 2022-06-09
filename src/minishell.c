@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 08:25:10 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 09:28:54 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	return (1);
 }
 
-void	ft_check_commands(t_command_table *table, t_msh_var *msh)
+bool	ft_check_commands(t_command_table *table, t_msh_var *msh)
 {
 	int	i;
 	int	status;
@@ -61,10 +61,12 @@ void	ft_check_commands(t_command_table *table, t_msh_var *msh)
 	i = -1;
 	while (++i < table->cmd_count)
 	{
-		ft_parent_builtin(&table->commands[i], msh);	
+		if (!ft_parent_builtin(&table->commands[i], msh))
+			return (true);
 		//ft_execute();
 		//at the moment it only executes parent builtins
 	}
+	return (false);
 }
 
 // __attribute__((__unused))t_process_manager *manager
@@ -80,13 +82,9 @@ void	minishell(t_msh_var *msh, __attribute__((unused))t_process_manager *manager
 		{
 			add_history(str);
 			if (!ft_error_print(parser(str, &table)))
-			{
 				if (!ft_error_print(lexer(&table, msh)))
-				{
-					ft_check_commands(&table, msh);
-					execute(&table,msh);
-				}	
-			}
+					if (!ft_check_commands(&table, msh))
+						execute(&table,msh);
 		}
 		free(str);
 	}

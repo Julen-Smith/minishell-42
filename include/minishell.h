@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 08:23:26 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 09:23:50 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
 
 /* builtins */
 void			ft_echo(t_command *command);
-void			ft_pwd(t_msh_var *msh);
+void			ft_pwd(void);
 void			ft_env(t_msh_var *msh);
 void			ft_exit(void);
 void			ft_cd(t_command *command, t_msh_var *msh);

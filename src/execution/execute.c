@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 08:21:02 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 09:24:53 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool return_binary_path(const char *bin_path, char *binary_check)
 }
 
 
-char *reach_bin_path(char **command, t_msh_var *msh)
+char *reach_bin_path(char **command, __attribute__((unused)) t_msh_var *msh)
 {
 	if (return_binary_path(BIN,command[0]))
 		return ((char *)BIN);
