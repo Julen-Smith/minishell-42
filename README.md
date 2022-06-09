@@ -13,7 +13,5 @@ Casos expansiones:
 
 Necesidades:
 	- Funcion comprobación del binario bool isBinary(); Path + directorio actual
-	-Comprobar que el último caracter de cualquier string no sea una redirección de cualquier tipo.
 	-Expansion de binarios
-	-trimmear las comillas dobles y comillas simples en binarios y strings (usar deletecharacter, se eliminan las mismas comillas con las que se abre el string)
 	-Eliminar el OLDPWD al inicio del programa
