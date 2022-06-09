@@ -3,27 +3,27 @@ NAME = minishell
 CC		=	gcc
 RM		=	rm -rf
 FLAGS	=	-g3 -fsanitize=address -Wall -Wextra -Werror -g
-SRC		=	src/minishell.c									\
-			src/environment/environment.c					\
-			src/parser/parser.c								\
-			src/errors/error.c								\
-			src/errors/string_errors.c						\
-			src/redirections/redir.c						\
-			src/utils/utils.c								\
-			src/dollars/dollars.c							\
-			src/dollars/dollar_value.c						\
-			src/builtins/echo.c								\
-			src/builtins/cd.c								\
-			src/builtins/unset.c							\
-			src/builtins/export.c							\
-			src/builtins/export_utils.c						\
-			src/builtins/pwd.c								\
-			src/builtins/env.c								\
-			src/builtins/exit.c								\
-			src/builtins/check_builtins/check_builtins.c	\
-			src/redirections/redir_utils.c					\
-			src/execution/execute.c
-
+SRC		=	src/minishell.c					\
+			src/environment/environment.c	\
+			src/parser/parser.c				\
+			src/errors/error.c				\
+			src/errors/string_errors.c		\
+			src/redirections/redir.c		\
+			src/utils/utils.c				\
+			src/dollars/dollars.c			\
+			src/dollars/dollar_value.c		\
+			src/builtins/unset.c			\
+			src/builtins/export.c			\
+			src/builtins/export_utils.c     \
+			src/builtins/echo.c				\
+			src/builtins/cd.c				\
+			src/builtins/pwd.c				\
+			src/builtins/env.c				\
+			src/builtins/exit.c				\
+			src/builtins/check_builtins/check_builtins.c				\
+			src/redirections/redir_utils.c                        		\
+			src/execution/execute.c										\
+			src/execution/binary_manage.c 
 
 INCLUDE =	include/minishell.h
 LIB		=	include/libraries/Libft/libft.a

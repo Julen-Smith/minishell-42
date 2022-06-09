@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 20:57:22 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/09 20:58:19 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ typedef struct s_dollars
 
 typedef struct s_command_table
 {
+	int			*pi;
+	int			*pe;
+	int 		unipipe;
 	int			cmd_count;
 	t_command	*commands;
 }	t_command_table;
@@ -146,6 +149,12 @@ void *execute(t_command_table *table, t_msh_var * msh);
 bool	_contains(char **command, char *str);
 bool	_str_contains(char *command, char *str);
 bool	_str_exactly_contains(char *command, char *str);
+
+/* Binary manage */
+char *reach_bin_path(t_command *command, t_msh_var *msh);
+char **get_actual_path(t_msh_var *msh);
+bool return_binary_path(const char *bin_path, char *binary_check);
+bool gather_bin_path(t_command_table *table, t_msh_var * msh);
 
 /*
 bool            ft_error_print(int errnumb);
