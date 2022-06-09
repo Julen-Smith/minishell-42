@@ -6,15 +6,14 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:16:32 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/08 11:56:59 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 21:56:43 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_pwd(t_msh_var *msh)
+void	ft_pwd(void)
 {
-	int		i;
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);

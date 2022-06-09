@@ -6,13 +6,13 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:50:10 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/08 13:50:33 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 21:56:16 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int	ft_parent_builtin(t_command *command, t_msh_var *msh) // commands are lacking exit status
+int	ft_parent_builtin(t_command *command, t_msh_var *msh)
 {
 	if (!ft_strncmp(command->command[0], "echo", 4))
 	{
@@ -26,7 +26,7 @@ int	ft_parent_builtin(t_command *command, t_msh_var *msh) // commands are lackin
 	}
 	else if (!ft_strncmp(command->command[0], "pwd", 3))
 	{
-		ft_pwd(msh);
+		ft_pwd();
 		return (0);
 	}
 	/*else if (!ft_strncmp(command->command[0], "export", 6))

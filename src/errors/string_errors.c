@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:05:32 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 21:19:03 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/08 21:37:28 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	process_string_marks(char *not_processed_cmd)
 	i = 0;
 	quote_nbr = 0;
 	oposite_quote_nbr = 0;
+	mark_type = 0;
 	while (not_processed_cmd[i])
 	{
 		if (not_processed_cmd[i] == 39)
