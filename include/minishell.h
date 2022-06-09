@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 17:44:46 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 18:48:04 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_command_table
 {
 	int			*pi;
 	int			*pe;
+	int 		unipipe;
 	int			cmd_count;
 	t_command	*commands;
 }	t_command_table;

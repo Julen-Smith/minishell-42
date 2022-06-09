@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 15:11:02 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 19:05:28 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,66 +24,90 @@ void close_dups(int *pi, int *pe)
 
 
 /*
-void dup_father_choose(int *pi, int *pe, int i,t_command_table *table)
+void dup_father_choose(int i,t_command_table *table)
 {
 	if (i == 0)
 	{
-		dup2(pi[1],1);
-		close(pi[0]);
+	
 	}	
 	else if (i == table->cmd_count)
 	{
-		dup2(0,pe[0]);
-		close(pe[0]);
+		
 	}
 	else
-		dup2(pe[0],pi[1]);
-	close_dups(pi,pe);
+		
 }
 */
 
-void dup_son_choose(int *pi, int *pe, int i,t_command_table *table)
+void dup_son_choose(int i,t_command_table *table)
 {
-	(void) pi;
-	printf("Entro con el numero %d\n",i);
 	if (i == 0)
 	{
 		dup2(table->pi[1],1);
 		close(table->pi[0]);
 	}	
-	else if (i == table->cmd_count)
+	else if (i == table->cmd_count - 1)
 	{
 		dup2(table->pi[0],0);
-		//close(pi[1]);
+		close(table->pi[1]);
 	}
 	else
 	{
-		dup2(table->pi[1],pe[0]);
+		dup2(table->unipipe,table->pi[0]);
+		close(table->pi[1]);
+		close(table->unipipe);
+		pipe(table->pi);
+		dup2(table->pi[1],table->unipipe);
 	}
-	
-	//close_dups(pi,pe);
 }
 
 void *execute(t_command_table *table, t_msh_var * msh)
 {	
 	
 	int  i;
-	int pi[2];
+	//int pi[2];
 	int pe[2];
 	pid_t pid;
-
+	
 	(void) pe;
 	table->pi =  malloc(sizeof(int) * 2);
 	i = 0;
 	if (gather_bin_path(table,msh))
 		return (NULL);
 	pipe(table->pi);
+	//printf("Numero de comandos %d\n",table->cmd_count);
 	while (i != table->cmd_count)
 	{
 		pid = fork();
 		if (pid == 0)
+		{
+			dup_son_choose(i,table);
+			execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",
+			table->commands[i].command[0])),
+			table->commands[i].command, msh->own_envp);
+			perror("Error");
+			exit(0);
+		}
+		else
+		{
+			close(table->pi[1]);
+			wait(0);
+		}
+		
+		i++;
+	}
+
+	return (NULL);
+	
+}
+
+
+//DEAD CODE 2
+		 /*
+		pid = fork();
+		if (pid == 0)
 		{	
-			dup2(table->pi[1],1);
+			//dup2(table->pi[1],1);
 			//close(pi[0]);
 			dup_son_choose(pi,pe,i,table);
 			//repipe(pi,pe);
@@ -100,20 +124,15 @@ void *execute(t_command_table *table, t_msh_var * msh)
 			wait(0);
 			dup_son_choose(pi,pe,i,table);
 			//dup2(pi[0],0);
-			
 			execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",
 				table->commands[i].command[0])),
 				table->commands[i].command, msh->own_envp);
 	
 		}
-		i++;
-	}
-//	close_dups(pi,pe);
-	return (NULL);
-}
-
+		*/
 
 //DEAD CODE
+
 	/*
 	//char *args[] = {"ls", NULL, "/", 0};
 	char	*ex;

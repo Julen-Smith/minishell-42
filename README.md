@@ -19,3 +19,5 @@ Necesidades:
 		Exec -
 			Falta comprobar la ejecución con ruta absoluta
 			Falta comprobar el pwd para ejecutar los ejecutables actuales.
+			To upper to lower.
+		
