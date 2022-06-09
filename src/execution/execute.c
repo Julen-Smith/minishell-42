@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 11:06:42 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/09 11:46:06 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char *reach_bin_path(t_command *command, t_msh_var *msh)
 				return (command->path[i]);
 			i++;
 		}
+		if (access(command->command[0],X_OK) == 0)
+			return (command->command[0]);
 	}
 	//if ()
 	//	;
@@ -99,9 +101,29 @@ bool gather_bin_path(t_command_table *table, t_msh_var * msh)
 	return (false);
 }
 
+void close_dups(int *pi, int *pe)
+{
+	close(pi[0]);
+	close(pi[1]);
+	close(pe[0]);
+	close(pe[1]);	
+}
+
+void dup_choose(int *pi, int *pe, int i,t_command_table *table)
+{
+	if (i == 0)
+		dup2(pi[1],1);
+	else if (i == table->cmd_count)
+		dup2(0,pe[0]);
+	else
+		dup2(pe[0],pi[1]);
+	close_dups(pi,pe);
+}
+
 
 void *execute(t_command_table *table, t_msh_var * msh)
-{		
+{	
+	
 	int  i;
 	int pi[2];
 	int pe[2];
@@ -117,12 +139,8 @@ void *execute(t_command_table *table, t_msh_var * msh)
 		pid = fork();
 		if (pid == 0)
 		{	
-			//if (i == 0)
-				//dup2();
-			
-			//else if (i == table->cmd_count)
-				
-
+			//dup_choose(pi,pe,i,table);
+		//	repipe(pi,pe);
 			execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",
 			table->commands[i].command[0])),
 			table->commands[i].command, msh->own_envp);
@@ -130,8 +148,10 @@ void *execute(t_command_table *table, t_msh_var * msh)
 		}
 		else
 			wait(0);
+		
 		i++;
 	}
+//	close_dups(pi,pe);
 	return (NULL);
 }
 
