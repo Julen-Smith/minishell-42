@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 23:30:40 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/10 11:24:26 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,56 +41,41 @@ void dup_father_choose(int i,t_command_table *table)
 
 void dup_son_choose(int i,t_command_table *table)
 {
-//	printf("Numero de cmds : %d Max : %d\n",i,table->cmd_count);
-
-	if (table->cmd_count != 1)
+	if (table->cmd_count == 0)
 	{
-		if (i == 0)
-		{
-			dup2(table->pi[1],1);
-			close(table->pi[0]);
-		}	
+		dup2(table->pi[1],1);
+		close(table->pi[0]);
+	}
 	else if (i == table->cmd_count -1)
 	{
-		dup2(table->pi[0],0);
-		close(table->pi[1]);
-		//close(table->pi[0]);
+		
+		if (table->cmd_count == 2)
+		{
+			dup2(table->pi[0],0);
+			close(table->pi[1]);
+		}
+		else
+		{
+			dup2(table->unipipe,0);
+			close(table->pi[1]);
+		}
 	}
 	else
 	{
-		dup2(0,table->pi[1]);
+		dup2(table->unipipe,0);
+		dup2(table->pi[1],1);
 		close(table->pi[0]);
 	}
-		//dup2(table->unipipe,table->pi[1]);
-		
-		//dup2(table->pi[0],1);	
-	//	printf("Unipipe %d\n",table->unipipe);
-		//printf("Unipipe %d\n",table->pi[1]);	
-	}
-
 }
 
 void father_fd_closes(t_command_table *table)
 {
 	if (table->cmd_count > 2)
 	{
-		//close(table->unipipe);
 		table->unipipe = dup(table->pi[0]); // 5
-		//printf("Pre : %d\n",table->pi[0]);
-		//printf("Pre : %d\n",table->pi[1]);
-		close(table->pi[0]);
-		close(table->pi[1]);
 		pipe(table->pi);
-		//printf("Post : %d\n",table->pi[0]);
-		//printf("Post : %d\n",table->pi[1]);
-		dup2(table->pi[1], table->unipipe);
-		close(table->unipipe);
-		close(table->pi[1]);
 	}else
 		close(table->pi[1]);
-		
-		
-	
 }
 
 void *execute(t_command_table *table, t_msh_var * msh)
@@ -113,17 +98,13 @@ void *execute(t_command_table *table, t_msh_var * msh)
 		pid = fork();
 		if (pid == 0)
 		{
-			
-				dup_son_choose(i,table);
-			execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",
-			table->commands[i].command[0])),
-			table->commands[i].command, msh->own_envp);
-			perror("Error");
-			exit(0);
-		
+			dup_son_choose(i,table);
+			execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])),table->commands[i].command, msh->own_envp);
+			//perror("Error");
 		}
 		else
 		{
+			close(table->pi[1]);
 			wait(0);
 			father_fd_closes(table);
 			/*
