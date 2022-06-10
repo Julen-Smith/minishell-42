@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_value.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:54:39 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 20:57:11 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/10 11:30:15 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref)
 	char	*tmp;
 
 	i = xref + 1;
-	if (ft_check_char(com, a_n, i, " \"\'$?"))
+	if (ft_check_char(com, a_n, i, " \"\'$?@"))
 	{
 		if (com->command[a_n][i] == '?')
 			find = ft_strdup(ft_itoa(exit_status));
@@ -61,7 +61,7 @@ char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref)
 			find = ft_strdup("$");
 		return (find);
 	}
-	while (com->command[a_n][i] && !ft_check_char(com, a_n, i, " \"\'$?"))
+	while (com->command[a_n][i] && !ft_check_char(com, a_n, i, " \"\'$?@"))
 		i++;
 	tmp = ft_substr(com->command[a_n], (xref + 1), (i - (xref + 1)));
 	find = ft_strjoin(tmp, "=");

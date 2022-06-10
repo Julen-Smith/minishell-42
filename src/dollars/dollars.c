@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:19:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 20:56:53 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/10 11:30:03 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_dollar_expansion(t_command *com, t_msh_var *msh, int a_n, int xref)
 	xref++;
 	if (com->command[a_n][xref] != '$')
 	{
-		while (com->command[a_n][xref] && !ft_check_char(com, a_n, xref, " \'$?"))
+		while (com->command[a_n][xref] && !ft_check_char(com, a_n, xref, " \'$?@"))
 			xref++;
 	}
 	else
