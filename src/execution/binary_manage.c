@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary_manage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 13:17:43 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/12 16:27:30 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,21 @@ bool return_binary_path(const char *bin_path, char *binary_check)
 
 char **get_actual_path(t_msh_var *msh)
 {
-	char **path;
-	int i;
+	char	**tmp;
+	char	**path;
+	int		i;
 
 	i = 0;
 	while(msh->own_envp[++i])
+	{
 		if (_str_contains(msh->own_envp[i],"PATH="))
 		{
-			path = ft_split(ft_split(ft_strdup(msh->own_envp[i]),'=')[1],':'); 
+			tmp = ft_split(msh->own_envp[i],'=');
+			path = ft_split(tmp[1], ':'); 
+			ft_doublefree(tmp);
 			return (path);	
 		}
+	}
 	return (NULL);
 }
 
@@ -86,17 +91,8 @@ char *reach_bin_path(t_command *command, t_msh_var *msh)
 				return (command->path[i]);
 			i++;
 		}
-		if (access(command->command[0],X_OK) == 0)
+		if (access(command->command[0], X_OK) == 0)
 			return (command->command[0]);
 	}
-	//if ()
-	//	;
-	//if (return_binary_path(SBIN,command[0]))
-	//	return ((char *)SBIN);
-	
-	//Ejecución de pwd
-	//if(return_binary_path(msh->pwd,command[0]))
-	//	return (msh->pwd);
-
 	return (NULL);
 }

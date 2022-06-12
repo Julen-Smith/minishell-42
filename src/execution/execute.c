@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/12 15:49:09 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/12 16:30:13 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,31 @@ void father_fd_closes(t_command_table *table)
 {
 	if (table->cmd_count > 2)
 	{
-		table->unipipe = dup(table->pi[0]); // 5
+		table->unipipe = dup(table->pi[0]);
 		pipe(table->pi);
-	}else
+	}
+	else if (table->cmd_count != 1)
 		close(table->pi[1]);
+}
+
+void	ft_execute_child(t_command_table *table, t_msh_var *msh, int i)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	if (table->cmd_count != 1)
+		dup_son_choose(i, table);
+	if (!ft_child_builtin(&table->commands[i], msh))
+		exit(0);
+	if (gather_bin_path(table,msh))
+		return ;
+	tmp = ft_strjoin("/",table->commands[i].command[0]);
+	tmp2 = ft_strjoin(table->commands[i].bin_path, tmp);
+	free(tmp);
+	if (!access(tmp2, X_OK))
+		execve(tmp2, table->commands[i].command, msh->own_envp);
+	free(tmp2);
+	perror("Error");
 }
 
 void *execute(t_command_table *table, t_msh_var * msh)
@@ -58,26 +79,21 @@ void *execute(t_command_table *table, t_msh_var * msh)
 	int  i;
 	pid_t pid;
 	
-	table->pi =  malloc(sizeof(int) * 2);
 	i = 0;
-	if (gather_bin_path(table,msh))
-		return (NULL);
-	pipe(table->pi);
+	if (table->cmd_count != 1)
+	{
+		table->pi = malloc(sizeof(int) * 2);
+		pipe(table->pi);
+	}
 	while (i != table->cmd_count)
 	{
 		pid = fork();
 		if (pid == 0)
-		{
-			dup_son_choose(i,table);
-			if (!ft_child_builtin(&table->commands[i], msh))
-				exit(0);
-			else if (!access(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])), X_OK))
-				execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])),table->commands[i].command, msh->own_envp);
-			perror("Error");
-		}
+			ft_execute_child(table, msh, i);
 		else
 		{
-			close(table->pi[1]);
+			if (table->cmd_count != 1)
+				close(table->pi[1]);
 			wait(0);
 			father_fd_closes(table);
 		}

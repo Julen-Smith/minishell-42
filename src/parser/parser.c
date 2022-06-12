@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 21:35:06 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/12 16:19:42 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 			u++;
 		i++;
 	}
+	ft_doublefree(split);
 }
 
 /* Cleans de str and puts in to command table*/
