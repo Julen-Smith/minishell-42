@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:50:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 20:51:31 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:02:22 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ static void	ft_create_variable(char *variable, t_msh_var *msh)
 
 static void	ft_export(char *variable, t_msh_var *msh)
 {
-	int	x;
-
-	x = -1;
 	if (ft_check_variable(variable))
 		return ;
 	ft_create_variable(variable, msh);

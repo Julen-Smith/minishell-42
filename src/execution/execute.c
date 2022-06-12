@@ -3,41 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/10 11:24:26 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/11 18:02:59 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-
-
-void close_dups(int *pi, int *pe)
-{
-	close(pi[0]);
-	close(pi[1]);
-	close(pe[0]);
-	close(pe[1]);	
-}
-
-
-/*
-void dup_father_choose(int i,t_command_table *table)
-{
-	if (i == 0)
-	{
-	
-	}	
-	else if (i == table->cmd_count)
-	{
-		
-	}
-	else
-		
-}
-*/
+#include <sys/wait.h>
 
 void dup_son_choose(int i,t_command_table *table)
 {
@@ -82,11 +56,8 @@ void *execute(t_command_table *table, t_msh_var * msh)
 {	
 	
 	int  i;
-	//int pi[2];
-	int pe[2];
 	pid_t pid;
 	
-	(void) pe;
 	table->pi =  malloc(sizeof(int) * 2);
 	i = 0;
 	if (gather_bin_path(table,msh))

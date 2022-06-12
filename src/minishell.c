@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 20:58:02 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:01:42 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,13 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 		if (manage_redir_symbols(&table->commands[i]))
 			return (ERR_REDDIR);
 	}
-	/*
-	i = -1;
-	while (++i < table->cmd_count)
-	{
-		x = -1;
-		while (table->commands[i].command[++x])
-			printf("%s\n", table->commands[i].command[x]); // checking all the commands
-	}
-	*/
 	return (1);
 }
 
 bool	ft_check_commands(t_command_table *table, t_msh_var *msh)
 {
 	int	i;
-	int	status;
 
-	status = 0;
 	i = -1;
 	while (++i < table->cmd_count)
 		if(!ft_parent_builtin(&table->commands[i], msh))

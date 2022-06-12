@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/09 08:23:33 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/11 18:02:08 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,12 @@
 bool	gather_redir_fds(t_command *command)
 {
 	int		i;
-	int		length;
-	bool	check;
 	int		fd_q; //fd quantity
 
 	i = 0;
-	check = false;
 	fd_q = command->redircnt;
 	//Si la primera redirección esta en la posicion 1 el 0 será un binario
 	command->fd_collection = malloc(sizeof(char *) * fd_q);
-	length = 0;
 	while (i != command->redircnt)
 	{
 		if (i == 0)
@@ -46,10 +42,8 @@ bool	gather_redir_fds(t_command *command)
 bool	check_and_manage_order(t_command *command)
 {
 	int	i;
-	int	u;
 
 	i = 0;
-	u = 0;
 	command->redirorder = malloc (sizeof (char *) * (command->redircnt + 1));
 	command->redirorder[command->redircnt] = NULL;
 	while (i != command->redircnt)
