@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/13 03:27:04 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/13 12:42:18 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,27 @@ void *execute(t_command_table *table, t_msh_var * msh)
 	pipe(table->pi);
 	while (i != table->cmd_count)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			dup_son_choose(i,table);
-			if (!ft_child_builtin(&table->commands[i], msh))
-				exit(0);
-			else if (!access(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])), X_OK))
-				execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])),table->commands[i].command, msh->own_envp);
-			perror("Error");
+		if (table->commands[i].redir_exist)
+			execute_reddir(table->commands[i],msh);
+		else	
+			pid = fork();
+			if (pid == 0)
+			{
+				dup_son_choose(i,table);
+				if (!ft_child_builtin(&table->commands[i], msh))
+					exit(0);
+				else if (!access(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])), X_OK))
+					execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])),table->commands[i].command, msh->own_envp);
+				perror("Error");
+			}
+			else
+			{
+				close(table->pi[1]);
+				wait(&status);
+				exit_status = WEXITSTATUS(status);
+				father_fd_closes(table);
+			}
+			i++;
 		}
-		else
-		{
-			close(table->pi[1]);
-			wait(&status);
-			exit_status = WEXITSTATUS(status);
-			father_fd_closes(table);
-		}
-		i++;
-	}
 	return (NULL);
 }

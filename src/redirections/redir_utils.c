@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:21:14 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 21:49:54 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/13 12:38:54 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,26 @@
 bool	contains_redir(t_command *command)
 {
 	if (_contains(command->command, HDC))
+	{
+		command->redir_exist = true;
 		return (1);
+	}	
 	if (_contains(command->command, APD))
+	{
+		command->redir_exist = true;
 		return (2);
+	}
 	if (_contains(command->command, REDIPT))
+	{
+		command->redir_exist = true;
 		return (3);
+	}
 	if (_contains(command->command, REDOPT))
+	{
+		command->redir_exist = true;
 		return (4);
+	}
+	command->redir_exist = false;
 	return (0);
 }
 
