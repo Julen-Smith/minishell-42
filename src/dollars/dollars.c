@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:19:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/10 11:30:03 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/12 20:46:36 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,17 @@ static void	ft_new_com(t_dollars *dollars, t_command *com, int a_n, int xref)
 	free(dollars->result);
 }
 
+void	ft_check_exceptions(t_command *com, t_dollars *d, int a_n, int xref)
+{
+	if (ft_check_char(com, a_n, xref, "$?@")
+		&& (com->command[a_n][xref - 1] == '$'))
+		d->final = ft_substr(com->command[a_n], (xref + 1),
+				(ft_strlen(com->command[a_n]) - (xref + 1)));
+	else
+		d->final = ft_substr(com->command[a_n], xref,
+				(ft_strlen(com->command[a_n]) - xref));
+}
+
 void	ft_dollar_expansion(t_command *com, t_msh_var *msh, int a_n, int xref)
 {
 	t_dollars	dollars;
@@ -83,8 +94,7 @@ void	ft_dollar_expansion(t_command *com, t_msh_var *msh, int a_n, int xref)
 		|| com->command[a_n][xref - 1] == '"')
 	{
 		if (xref < ft_strlen(com->command[a_n]))
-			dollars.final = ft_substr(com->command[a_n], xref,
-					(ft_strlen(com->command[a_n]) - xref));
+			ft_check_exceptions(com, &dollars, a_n, xref); 
 		else if (com->command[a_n][xref - 1] == '"')
 			dollars.final = ft_strdup("\"");
 	}
