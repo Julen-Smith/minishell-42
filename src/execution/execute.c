@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/12 15:49:09 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/13 03:27:04 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void father_fd_closes(t_command_table *table)
 void *execute(t_command_table *table, t_msh_var * msh)
 {	
 	
-	int  i;
-	pid_t pid;
+	int		i;
+	pid_t	pid;
+	int		status;
 	
 	table->pi =  malloc(sizeof(int) * 2);
 	i = 0;
@@ -78,7 +79,8 @@ void *execute(t_command_table *table, t_msh_var * msh)
 		else
 		{
 			close(table->pi[1]);
-			wait(0);
+			wait(&status);
+			exit_status = WEXITSTATUS(status);
 			father_fd_closes(table);
 		}
 		i++;
