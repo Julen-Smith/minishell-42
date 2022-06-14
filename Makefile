@@ -23,7 +23,8 @@ SRC		=	src/minishell.c									\
 			src/builtins/check_builtins/check_builtins.c	\
 			src/redirections/redir_utils.c					\
 			src/execution/execute.c							\
-			src/execution/binary_manage.c 
+			src/execution/binary_manage.c					\
+			src/execution/execute_reddir.c					\
 
 INCLUDE =	/include/minishell.h
 LIB		=	include/libraries/Libft/libft.a

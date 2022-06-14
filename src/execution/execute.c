@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/13 12:42:18 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/13 14:26:56 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void dup_son_choose(int i,t_command_table *table)
 		dup2(table->pi[1],1);
 		close(table->pi[0]);
 	}
-	else if (i == table->cmd_count -1)
+	else if (i == table->cmd_count - 1)
 	{
 		
 		if (table->cmd_count == 2)
@@ -46,9 +46,10 @@ void father_fd_closes(t_command_table *table)
 {
 	if (table->cmd_count > 2)
 	{
-		table->unipipe = dup(table->pi[0]); // 5
+		table->unipipe = dup(table->pi[0]);
 		pipe(table->pi);
-	}else
+	}
+	else
 		close(table->pi[1]);
 }
 
@@ -59,15 +60,15 @@ void *execute(t_command_table *table, t_msh_var * msh)
 	pid_t	pid;
 	int		status;
 	
-	table->pi =  malloc(sizeof(int) * 2);
 	i = 0;
+	table->pi =  malloc(sizeof(int) * 2);
 	if (gather_bin_path(table,msh))
 		return (NULL);
 	pipe(table->pi);
 	while (i != table->cmd_count)
 	{
 		if (table->commands[i].redir_exist)
-			execute_reddir(table->commands[i],msh);
+			execute_reddir(&table->commands[i], msh);
 		else	
 			pid = fork();
 			if (pid == 0)
@@ -75,9 +76,11 @@ void *execute(t_command_table *table, t_msh_var * msh)
 				dup_son_choose(i,table);
 				if (!ft_child_builtin(&table->commands[i], msh))
 					exit(0);
+				else if (table->commands[i].is_absolute)
+					execve(table->commands[i].bin_path, table->commands[i].command, msh->own_envp);
 				else if (!access(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])), X_OK))
 					execve(ft_strjoin(table->commands[i].bin_path, ft_strjoin("/",table->commands[i].command[0])),table->commands[i].command, msh->own_envp);
-				perror("Error");
+				perror(table->commands[i].command[0]);
 			}
 			else
 			{

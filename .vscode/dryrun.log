@@ -1,13 +1,12 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/jsmith/Documents/Proyectos/minishell-42'
-/Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libraries/libft/
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libraries/Libft/
  
 make[1]: Entering directory `/Users/jsmith/Documents/Proyectos/minishell-42/include/libraries/Libft'
 make[1]: Nothing to be done for `all'.
- 
 make[1]: Leaving directory `/Users/jsmith/Documents/Proyectos/minishell-42/include/libraries/Libft'
  
-gcc -g3 -fsanitize=address -Wall -Wextra -Werror -g src/minishell.c src/environment/environment.c src/parser/parser.c src/errors/error.c src/errors/string_errors.c src/redirections/redir.c src/utils/utils.c src/dollars/dollars.c src/dollars/dollar_value.c src/builtins/unset.c src/builtins/export.c src/builtins/export_utils.c src/builtins/echo.c src/builtins/cd.c src/builtins/pwd.c src/builtins/env.c src/builtins/exit.c src/builtins/check_builtins/check_builtins.c src/redirections/redir_utils.c src/execution/execute.c src/execution/binary_manage.c  include/libraries/Libft/libft.a -lreadline -L /Users/jsmith/.brew/opt/readline/lib -I /Users/jsmith/.brew/opt/readline/include\  -I include/minishell.h -o minishell
+gcc  src/minishell.c src/environment/environment.c src/parser/parser.c src/errors/error.c src/errors/string_errors.c src/redirections/redir.c src/utils/utils.c src/dollars/dollars.c src/dollars/dollar_value.c src/builtins/unset.c src/builtins/export.c src/builtins/export_utils.c src/builtins/echo.c src/builtins/cd.c src/builtins/pwd.c src/builtins/env.c src/builtins/exit.c src/builtins/check_builtins/check_builtins.c src/redirections/redir_utils.c src/execution/execute.c src/execution/binary_manage.c src/execution/execute_reddir.c  include/libraries/Libft/libft.a -lreadline -L /Users/jsmith/.brew/opt/readline/lib -I /Users/jsmith/.brew/opt/readline/include\  -I /include/minishell.h -o minishell
 echo "compilation OK"
 make: Leaving directory `/Users/jsmith/Documents/Proyectos/minishell-42'
  

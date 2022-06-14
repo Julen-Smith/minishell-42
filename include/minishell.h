@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/12 15:47:45 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:20:50 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_command
 	char **fd_collection;
 	char *bin_path;
 	char **path;
+	bool is_absolute;
 }	t_command;
 
 //struct only used for dollar expansion
@@ -97,7 +98,6 @@ typedef struct s_dollars
 typedef struct s_command_table
 {
 	int			*pi;
-	int			*pe;
 	int 		unipipe;
 	int			cmd_count;
 	t_command	*commands;
@@ -119,6 +119,7 @@ int		lexer(t_command_table *table, t_msh_var *msh);
 bool	char_is_redir(char command_i);
 void	ft_fill_positions_to_command(t_command *command, int *position_stack);
 bool	count_check_redirs(t_command *command);
+void	*execute_reddir(t_command *table, t_msh_var *msh);
 
 /*   Expansions    */
 int		ft_single_dollar(t_command *command, int arr_n, int xref);
@@ -146,10 +147,12 @@ char *reach_bin_path(t_command *command, t_msh_var *msh);
 void *execute(t_command_table *table, t_msh_var * msh);
 
 
+
 /* String utils */
 bool	_contains(char **command, char *str);
 bool	_str_contains(char *command, char *str);
 bool	_str_exactly_contains(char *command, char *str);
+void	string_to_lower(char *pnt);
 
 /* Binary manage */
 char *reach_bin_path(t_command *command, t_msh_var *msh);

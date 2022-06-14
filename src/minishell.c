@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/11 18:01:42 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/14 08:43:33 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ void	minishell(t_msh_var *msh, __attribute__((unused))t_process_manager *manager
 		str = readline(MSH);
 		if (ft_strlen(str) > 0)
 		{
+			if (last_chr_not_pipe(str))
+				while(last_chr_not_pipe(str))
+					if (ft_strlen(str) > 0)
+						str = ft_strjoin(str,readline("> "));
+					else
+						str = readline("> ");
 			add_history(str);
 			if (!ft_error_print(parser(str, &table)))
 				if (!ft_error_print(lexer(&table, msh)))
