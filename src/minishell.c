@@ -6,12 +6,11 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/14 08:43:33 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/14 08:45:52 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <stdio.h>
 
 int	lexer(t_command_table *table, t_msh_var *msh)
 {
