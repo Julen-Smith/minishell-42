@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/11 18:02:08 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/15 13:11:25 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	gather_redir_fds(t_command *command)
 {
 	int		i;
-	int		fd_q; //fd quantity
+	int		fd_q;
 
 	i = 0;
 	fd_q = command->redircnt;

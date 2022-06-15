@@ -6,26 +6,27 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/13 14:29:39 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/15 13:10:52 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool gather_bin_path(t_command_table *table, t_msh_var * msh)
+bool	gather_bin_path(t_command_table *table, t_msh_var * msh)
 {
-	int i;
-	char *bin_path;
+	int		i;
+	char	*bin_path;
 
 	i = 0;
 	while (i != table->cmd_count)
 	{
 		bin_path = reach_bin_path(&table->commands[i], msh);
-		if (bin_path != NULL)	
+		if (bin_path != NULL)
 			table->commands[i].bin_path = bin_path;
 		else
 		{
-			printf("%s %s %s", "Minishell :",table->commands[i].command[0],CMDNT);
+			printf("%s %s %s", "Minishell :", table->commands[i].command[0],
+				CMDNT);
 			return (true);
 		}		
 		i++;
@@ -33,11 +34,11 @@ bool gather_bin_path(t_command_table *table, t_msh_var * msh)
 	return (false);
 }
 
-bool return_binary_path(const char *bin_path, char *binary_check)
+bool	return_binary_path(const char *bin_path, char *binary_check)
 {
-	DIR *dp;
-    struct dirent *dirp;
-	
+	DIR				*dp;
+	struct dirent	*dirp;
+
 	dp = opendir(bin_path);
 	if (dp != NULL)
 	{
@@ -47,7 +48,7 @@ bool return_binary_path(const char *bin_path, char *binary_check)
 			if (_str_exactly_contains(dirp->d_name, binary_check))
 			{
 				closedir(dp);
-				return(true);
+				return (true);
 			}
 			dirp = readdir(dp);
 		}
@@ -56,25 +57,27 @@ bool return_binary_path(const char *bin_path, char *binary_check)
 	return (false);
 }
 
-char **get_actual_path(t_msh_var *msh)
+char	**get_actual_path(t_msh_var *msh)
 {
-	char **path;
-	int i;
+	char	**path;
+	int		i;
 
 	i = 0;
-	while(msh->own_envp[++i])
-		if (_str_contains(msh->own_envp[i],"PATH="))
+	while (msh->own_envp[++i])
+	{
+		if (_str_contains(msh->own_envp[i], "PATH="))
 		{
-			path = ft_split(ft_split(ft_strdup(msh->own_envp[i]),'=')[1],':'); 
-			return (path);	
-		}
+			path = ft_split(ft_split(ft_strdup(msh->own_envp[i]), '=')[1], ':');
+			return (path);
+		}	
+	}
 	return (NULL);
 }
 
 //Distribución principal de la ejecución de comandos
-char *reach_bin_path(t_command *command, t_msh_var *msh)
+char	*reach_bin_path(t_command *command, t_msh_var *msh)
 {	
-	int i;
+	int	i;
 
 	i = 0;
 	//Pasar mayuscular a minusculas en la ejecución
@@ -86,18 +89,17 @@ char *reach_bin_path(t_command *command, t_msh_var *msh)
 		while (command->path[i])
 		{
 			//Checkeo de binario corriente en las rutas del path
-			if (return_binary_path(command->path[i],command->command[0]))
+			if (return_binary_path(command->path[i], command->command[0]))
 				return (command->path[i]);
 			i++;
 		}
 		//Ejecución de binario normal
-		if (access(command->command[0],X_OK) == 0)
+		if (access(command->command[0], X_OK) == 0)
 		{
 			command->is_absolute = true;
 			return (command->command[0]);
 		}	
 		//ejecución en caso de redirección en primera posición
 	}
-
 	return (NULL);
 }
