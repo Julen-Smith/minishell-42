@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:21:14 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/13 12:38:54 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/15 10:42:25 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ bool	manage_redir_symbols(t_command *command)
 			return (true);
 		if (count_check_redirs(command))
 			return (true);
-	//	fprintf(stderr,"Manage reddir symbols");
 	}
 	return (false);
 }

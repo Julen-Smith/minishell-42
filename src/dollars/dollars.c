@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:19:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/12 20:46:36 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/15 09:52:19 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void	ft_dollar_expansion(t_command *com, t_msh_var *msh, int a_n, int xref)
 	xref++;
 	if (com->command[a_n][xref] != '$')
 	{
-		while (com->command[a_n][xref] && !ft_check_char(com, a_n, xref, " \'$?@"))
+		while (com->command[a_n][xref] &&
+				!ft_check_char(com, a_n, xref, " \'$?@"))
 			xref++;
 	}
 	else
@@ -94,7 +95,7 @@ void	ft_dollar_expansion(t_command *com, t_msh_var *msh, int a_n, int xref)
 		|| com->command[a_n][xref - 1] == '"')
 	{
 		if (xref < ft_strlen(com->command[a_n]))
-			ft_check_exceptions(com, &dollars, a_n, xref); 
+			ft_check_exceptions(com, &dollars, a_n, xref);
 		else if (com->command[a_n][xref - 1] == '"')
 			dollars.final = ft_strdup("\"");
 	}

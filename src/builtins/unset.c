@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:21:27 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 20:52:13 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/15 09:50:59 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	ft_unset(char *variable, t_msh_var *msh)
 	{
 		tmp = ft_doublestrdup(msh->own_envp);
 		ft_doublefree(msh->own_envp);
-		msh->own_envp = (char **)malloc(sizeof(char *) * (ft_doublestrlen(tmp)));
+		msh->own_envp = (char **)malloc(sizeof(char *)
+				* (ft_doublestrlen(tmp)));
 		i = -1;
 		x = -1;
 		while (tmp[++i])
@@ -63,5 +64,5 @@ void	ft_check_unset(t_command *command, t_msh_var *msh)
 				ft_unset(command->command[i], msh);
 		}
 	}
-	exit_status = 0;
+	g_exit_status = 0;
 }

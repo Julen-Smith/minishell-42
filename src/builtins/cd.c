@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/08 13:43:31 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/09 11:30:40by aalvarez         ###   ########.fr       */
+/*   Created: 2022/06/15 09:49:49 by jsmith            #+#    #+#             */
+/*   Updated: 2022/06/15 09:50:13 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	ft_create_first_oldpwd(t_msh_var *msh)
 
 	tmp = ft_doublestrdup(msh->own_envp);
 	ft_doublefree(msh->own_envp);
-	msh->own_envp = (char **)malloc(sizeof(char *) * (ft_doublestrlen(tmp) + 2));
+	msh->own_envp = (char **)malloc(sizeof(char *)
+			* (ft_doublestrlen(tmp) + 2));
 	i = 0;
 	j = -1;
 	while (tmp[++j])
@@ -107,12 +108,12 @@ void	ft_cd(t_command *command, t_msh_var *msh)
 		if (!opendir(command->command[1]))
 		{
 			printf("cd: %s: No such file or directory\n", command->command[1]);
-			exit_status = 1;
+			g_exit_status = 1;
 			return ;
 		}
 		ft_getoldpwd(msh);
 		chdir(command->command[1]);
 		ft_getnewpwd(msh);
 	}
-	exit_status = 0;
+	g_exit_status = 0;
 }

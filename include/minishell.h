@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/13 14:20:50 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/15 09:49:21 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@
 # include "libraries/Libft/libft.h"
 # include "libraries/GNL/get_next_line.h"
 
-int	exit_status;
-
+int		g_exit_status;
 struct	s_command;
 
 /* Salidas */
@@ -52,7 +51,8 @@ enum e_own_err
 	ERR_INVALIDCHR,
 	ERR_FINALPIPE,
 	ERR_COMMAND_404,
-	ERR_REDDIR
+	ERR_REDDIR,
+	ERR_PIPE
 };
 
 typedef struct s_process_manager
@@ -74,16 +74,15 @@ typedef struct s_msh_var
 , ex: "ls " should not execute to s_command*/
 typedef struct s_command
 {
-    //char *binary; //binary array for error checking, ex: "ls " should not execute
-    char **command;
-    bool redir_exist;
-    int redircnt;
-    int *redirpos;
-    char **redirorder;
-	char **fd_collection;
-	char *bin_path;
-	char **path;
-	bool is_absolute;
+	char	**command;
+	bool	redir_exist;
+	int		redircnt;
+	int		*redirpos;
+	char	**redirorder;
+	char	**fd_collection;
+	char	*bin_path;
+	char	**path;
+	bool	is_absolute;
 }	t_command;
 
 //struct only used for dollar expansion
@@ -98,7 +97,7 @@ typedef struct s_dollars
 typedef struct s_command_table
 {
 	int			*pi;
-	int 		unipipe;
+	int			unipipe;
 	int			cmd_count;
 	t_command	*commands;
 }	t_command_table;
@@ -129,25 +128,22 @@ char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
 bool	ft_check_char(t_command *com, int a_n, int i, char *refs);
 
 /* builtins */
-void			ft_echo(t_command *command);
-void			ft_pwd(void);
-void			ft_env(t_msh_var *msh, t_command *command);
-void			ft_exit(t_command *command);
-void			ft_cd(t_command *command, t_msh_var *msh);
-void			ft_check_unset(t_command *command, t_msh_var *msh);
-void			ft_export_check(t_command *command, t_msh_var *msh);
-bool			ft_check_variable(char *variable);
-bool			ft_already_in(char *variable, char **env);
-bool			ft_parent_builtin(t_command *command, t_msh_var *msh);
-bool			ft_child_builtin(t_command *command, t_msh_var *msh);
+void	ft_echo(t_command *command);
+void	ft_pwd(void);
+void	ft_env(t_msh_var *msh, t_command *command);
+void	ft_exit(t_command *command);
+void	ft_cd(t_command *command, t_msh_var *msh);
+void	ft_check_unset(t_command *command, t_msh_var *msh);
+void	ft_export_check(t_command *command, t_msh_var *msh);
+bool	ft_check_variable(char *variable);
+bool	ft_already_in(char *variable, char **env);
+bool	ft_parent_builtin(t_command *command, t_msh_var *msh);
+bool	ft_child_builtin(t_command *command, t_msh_var *msh);
 
 /* Execution */
-bool return_binary_path(const char *bin_path, char *binary_check);
-char *reach_bin_path(t_command *command, t_msh_var *msh);
-void *execute(t_command_table *table, t_msh_var * msh);
-
-
-
+bool	return_binary_path(const char *bin_path, char *binary_check);
+char	*reach_bin_path(t_command *command, t_msh_var *msh);
+void	*execute(t_command_table *table, t_msh_var *msh);
 /* String utils */
 bool	_contains(char **command, char *str);
 bool	_str_contains(char *command, char *str);
@@ -155,29 +151,10 @@ bool	_str_exactly_contains(char *command, char *str);
 void	string_to_lower(char *pnt);
 
 /* Binary manage */
-char *reach_bin_path(t_command *command, t_msh_var *msh);
-char **get_actual_path(t_msh_var *msh);
-bool return_binary_path(const char *bin_path, char *binary_check);
-bool gather_bin_path(t_command_table *table, t_msh_var * msh);
-
-/*
-bool            ft_error_print(int errnumb);
-void            duplicate_environ(char **env, t_msh_var *msh);
-
-void            store_father_pid(t_process_manager *p_manager, t_msh_var *msh);
-void            init_msh(t_msh_var *msh,
-					char **env, t_process_manager *p_manager);
-int             process_string_marks(char *not_processed_cmd);
-void            generate_command_table(char *str,
-					int cmd_count, t_command_table *table);
-int             ft_count_pipes(char *pnt);
-int             parser(char *str, t_command_table *table);
-bool            _contains(char *simple_command, char *str);
-void            ft_print_own_environ(t_msh_var *msh);
-*/
-/* 
-			-------------LITERALS -------------
-*/
+char	*reach_bin_path(t_command *command, t_msh_var *msh);
+char	**get_actual_path(t_msh_var *msh);
+bool	return_binary_path(const char *bin_path, char *binary_check);
+bool	gather_bin_path(t_command_table *table, t_msh_var *msh);
 
 /* Buff if needed */
 # define S_MAX  4096
@@ -228,22 +205,5 @@ typedef struct s_signal
 {
 	pid_t	pid;
 }	t_signal;
-
-typedef struct s_shell
-{
-	/* LAUNCH CONTROL */
-	bool			islaunched;
-	/*ENVIRON*/
-	char			**envp;
-	/*CMDS*/
-	char			*cmd;
-	char			**cmdsplit;
-	char			*pwd;
-	char			*cdhwhere;
-	/*COUNT*/
-	int				cmd_cnt;
-	int				pipe_cnt;
-	struct s_signal	sig;
-}	t_shell;
 
 #endif

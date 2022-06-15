@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:36:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 13:23:17 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/06/15 09:59:27 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,20 @@ bool	ft_error_print(int errnumb)
 	{
 		fprintf(stderr, "ERR : UNDEFINED\n");
 		return (true);
-	}	
+	}
 	else if (errnumb == ERR_UNKNOWN)
 	{
 		fprintf(stderr, "ERR : UKNOWN\n");
 		return (true);
 	}
-	else if (errnumb == ERR_QUOTATION)
+	if (ft_next_errors(errnumb))
+		return (true);
+	return (false);
+}
+
+bool	ft_next_errors(int errnumb)
+{
+	if (errnumb == ERR_QUOTATION)
 	{
 		fprintf(stderr, "ERR : QUOTATION\n");
 		return (true);
@@ -49,7 +56,14 @@ bool	ft_error_print(int errnumb)
 		fprintf(stderr, "ERR : Command not found\n");
 		return (true);
 	}
-	else if (errnumb == ERR_FINALPIPE)
+	if (ft_next_next_errors(errnumb))
+		return (true);
+	return (false);
+}
+
+bool	ft_next_next_errors(int errnumb)
+{
+	if (errnumb == ERR_FINALPIPE)
 	{
 		fprintf(stderr, "ERR : FINAL PIPE\n");
 		return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:50:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/11 18:02:22 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/06/15 09:50:35 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	ft_replace_env(char *variable, t_msh_var *msh, char **tmp)
 	int		x;
 	char	*to_search;
 
-
 	x = 0;
 	while (variable[x] != '=')
 			x++;
 	to_search = ft_substr(variable, 0, (x + 1));
-	msh->own_envp = (char **)malloc(sizeof(char *) * (ft_doublestrlen(tmp) + 1));
+	msh->own_envp = (char **)malloc(sizeof(char *)
+			* (ft_doublestrlen(tmp) + 1));
 	x = -1;
 	while (tmp[++x])
 	{
@@ -47,7 +47,8 @@ static void	ft_create_variable(char *variable, t_msh_var *msh)
 		ft_replace_env(variable, msh, tmp);
 	else
 	{
-		msh->own_envp = (char **)malloc(sizeof(char *) * (ft_doublestrlen(tmp) + 2));
+		msh->own_envp = (char **)malloc(sizeof(char *)
+				* (ft_doublestrlen(tmp) + 2));
 		while (tmp[++i])
 			msh->own_envp[i] = ft_strdup(tmp[i]);
 		msh->own_envp[i] = ft_strdup(variable);
@@ -79,5 +80,5 @@ void	ft_export_check(t_command *command, t_msh_var *msh)
 		while (msh->own_envp[++i])
 			printf("declare -x %s\n", msh->own_envp[i]);
 	}
-	exit_status = 0;
+	g_exit_status = 0;
 }
