@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 13:11:25 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 17:05:39 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ bool	gather_redir_fds(t_command *command)
 
 	i = 0;
 	fd_q = command->redircnt;
-	//Si la primera redirección esta en la posicion 1 el 0 será un binario
 	command->fd_collection = malloc(sizeof(char *) * fd_q);
 	while (i != command->redircnt)
 	{

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/07 18:22:07 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:02:35 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void	ft_signals(void);
 //#define ERROR "SIN MAS ERROR\n"
 # define BAERR "bash:"
 # define CMDNT ": command not found\n"
+# define E_TARG ": numeric argument required"
 # define ERROR -1
 
 /* BUILT */

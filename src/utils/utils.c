@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:50:08 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/13 13:12:39 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 17:07:29 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ bool	_str_exactly_contains(char *command, char *str)
 	int	i;
 	int	u;
 	int	maxlength;
-	int mlength;
+	int	mlength;
 
 	i = 0;
 	u = 0;
@@ -93,13 +93,13 @@ bool	_str_exactly_contains(char *command, char *str)
 	return (false);
 }
 
-void string_to_lower(char *pnt)
+void	string_to_lower(char *pnt)
 {
-	int i;
-	char aux;
+	int		i;
+	char	aux;
 
 	i = 0;
-	while(pnt[i])
+	while (pnt[i])
 	{
 		aux = ft_tolower(pnt[i]);
 		pnt[i] = aux;
