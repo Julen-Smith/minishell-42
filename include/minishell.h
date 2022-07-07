@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 09:49:21 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 19:11:39 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh);
 //#define ERROR "SIN MAS ERROR\n"
 # define BAERR "bash:"
 # define CMDNT ": command not found\n"
+# define E_TARG ": numeric argument required"
 # define ERROR -1
 
 /* BUILT */

@@ -6,13 +6,13 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 13:10:52 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 18:58:05 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	gather_bin_path(t_command_table *table, t_msh_var * msh)
+bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 {
 	int		i;
 	char	*bin_path;
@@ -27,6 +27,7 @@ bool	gather_bin_path(t_command_table *table, t_msh_var * msh)
 		{
 			printf("%s %s %s", "Minishell :", table->commands[i].command[0],
 				CMDNT);
+			g_exit_status = 127;
 			return (true);
 		}		
 		i++;
@@ -80,7 +81,6 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh)
 	int	i;
 
 	i = 0;
-	//Pasar mayuscular a minusculas en la ejecución
 	command->path = get_actual_path(msh);
 	command->is_absolute = false;
 	string_to_lower(command->command[0]);
@@ -88,18 +88,15 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh)
 	{
 		while (command->path[i])
 		{
-			//Checkeo de binario corriente en las rutas del path
 			if (return_binary_path(command->path[i], command->command[0]))
 				return (command->path[i]);
 			i++;
 		}
-		//Ejecución de binario normal
 		if (access(command->command[0], X_OK) == 0)
 		{
 			command->is_absolute = true;
 			return (command->command[0]);
 		}	
-		//ejecución en caso de redirección en primera posición
 	}
 	return (NULL);
 }

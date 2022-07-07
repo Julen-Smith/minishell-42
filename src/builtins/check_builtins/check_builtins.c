@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:50:10 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/15 09:51:57 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 19:44:09 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ bool	ft_parent_builtin(t_command *command, t_msh_var *msh)
 		return (false);
 	}
 	else if (!ft_strncmp(command->command[0], "export",
-			ft_strlen(command->command[0])))
+			(ft_strlen(command->command[0]) + 1)))
 	{
 		ft_export_check(command, msh);
 		return (false);
 	}
 	else if (!ft_strncmp(command->command[0], "unset",
-			ft_strlen(command->command[0])))
+			(ft_strlen(command->command[0]) + 1)))
 	{
 		ft_check_unset(command, msh);
 		return (false);
 	}
 	else if (!ft_strncmp(command->command[0], "exit",
-			ft_strlen(command->command[0])))
+			(ft_strlen(command->command[0]) + 1)))
 	{
 		ft_exit(command);
 		return (false);
@@ -43,19 +43,19 @@ bool	ft_parent_builtin(t_command *command, t_msh_var *msh)
 bool	ft_child_builtin(t_command *command, t_msh_var *msh)
 {
 	if (!ft_strncmp(command->command[0], "echo",
-			ft_strlen(command->command[0])))
+			(ft_strlen(command->command[0]) + 1)))
 	{
 		ft_echo(command);
 		return (false);
 	}
 	else if (!ft_strncmp(command->command[0], "pwd",
-			ft_strlen(command->command[0])))
+			(ft_strlen(command->command[0]) + 1)))
 	{
 		ft_pwd();
 		return (false);
 	}
 	else if (!ft_strncmp(command->command[0], "env",
-			ft_strlen(command->command[0])))
+			(ft_strlen(command->command[0]) + 1)))
 	{
 		ft_env(msh, command);
 		return (false);

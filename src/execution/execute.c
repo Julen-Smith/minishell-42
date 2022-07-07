@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 10:42:16 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 18:58:24 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	dup_son_choose(int i, t_command_table *table)
 	{
 		dup2(table->pi[1], 1);
 		close(table->pi[0]);
-		close(table->pi[1]); //
+		close(table->pi[1]);
 	}
 	else if (i == table->cmd_count - 1)
 	{		
@@ -27,13 +27,13 @@ void	dup_son_choose(int i, t_command_table *table)
 		{
 			dup2(table->pi[0], 0);
 			close(table->pi[1]);
-			close(table->pi[0]); //
+			close(table->pi[0]);
 		}
 		else
 		{
 			dup2(table->unipipe, 0);
 			close(table->pi[1]);
-			close(table->pi[0]); //
+			close(table->pi[0]);
 		}
 	}
 	else
@@ -41,7 +41,7 @@ void	dup_son_choose(int i, t_command_table *table)
 		dup2(table->unipipe, 0);
 		dup2(table->pi[1], 1);
 		close(table->pi[0]);
-		close(table->pi[1]); //
+		close(table->pi[1]);
 	}
 }
 
@@ -49,13 +49,10 @@ void	father_fd_closes(t_command_table *table)
 {
 	if (table->cmd_count > 2)
 	{
-	//	close(table->pi[1]);//
 		table->unipipe = dup(table->pi[0]);
-		close(table->pi[0]); //
+		close(table->pi[0]);
 		pipe(table->pi);
 	}
-	//else
-	//	close(table->pi[1]);
 }
 
 void	*execute(t_command_table *table, t_msh_var *msh)
@@ -65,6 +62,7 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 	int		status;
 
 	i = 0;
+	table->unipipe = 3;
 	table->pi = malloc(sizeof(int) * 2);
 	if (gather_bin_path(table, msh))
 		return (NULL);

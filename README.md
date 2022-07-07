@@ -13,11 +13,19 @@
 			echo $USER$$HOME -> aalvarezHOME ⎷
 
 	Necesidades:
-		-Funcion comprobación del binario bool isBinary(); Path + directorio actual
+		-Señales 
 		-Expansion de binarios
 		-Eliminar el OLDPWD al inicio del programa ⎷
 		
-		Exec -
-			Falta comprobar la ejecución con ruta absoluta
-			Falta comprobar el pwd para ejecutar los ejecutables actuales.
-			To upper to lower.
+		Exec :
+			Falta comprobar la ejecución con ruta absoluta ⎷
+			Falta comprobar el pwd para ejecutar los ejecutables actuales.⎷
+			To upper to lower. ⎷
+
+	Casos de error :
+		Trimear comillas para comandos "ls" -l
+		Echo trim
+		UNSET revision  además de mirar por que no lo pilla en upper
+		EXIT si tienes mas de un argumento error
+			-Si tiene un argumento sale 
+		EXPANSION DE DOLAR $USE"R" debe dar > R

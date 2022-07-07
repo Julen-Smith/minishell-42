@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 10:43:49 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 18:43:42 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	minishell(t_msh_var *msh,
 	while (true)
 	{
 		str = readline(MSH);
-		if (ft_strlen(str) > 0)
+		if (ft_strlen(str) > 0 && str[0] > 32)
 		{
 			str = added_pipe(str);
 			if (!(ft_strlen(str) > 0) || str == NULL)
