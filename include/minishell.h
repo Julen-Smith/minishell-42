@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 09:49:21 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 18:22:07 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,10 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh);
 char	**get_actual_path(t_msh_var *msh);
 bool	return_binary_path(const char *bin_path, char *binary_check);
 bool	gather_bin_path(t_command_table *table, t_msh_var *msh);
+
+/* Signals */
+int	ft_interactive(int inter);
+void	ft_signals(void);
 
 /* Buff if needed */
 # define S_MAX  4096

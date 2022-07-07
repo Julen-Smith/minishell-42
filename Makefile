@@ -25,6 +25,7 @@ SRC		=	src/minishell.c									\
 			src/execution/execute.c							\
 			src/execution/binary_manage.c					\
 			src/execution/execute_reddir.c					\
+			src/signals/signals.c
 
 INCLUDE =	/include/minishell.h
 LIB		=	include/libraries/Libft/libft.a

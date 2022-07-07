@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 10:43:49 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/07 18:21:08 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ bool	pipe_before_command(char *str)
 	return (false);
 }
 
-//if (pipe_before_command(str))
-				//	return (str);
 char	*added_pipe(char *str)
 {	
 	if (last_chr_not_pipe(str))
@@ -125,6 +123,8 @@ int	main(int argc, char *argv[], char **environ)
 
 	(void) argc;
 	(void) argv;
+	ft_interactive(1);
+	ft_signals();
 	var.own_envp = ft_duplicate_environment(environ);
 	g_exit_status = 0;
 	minishell(&var, &manager);
