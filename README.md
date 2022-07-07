@@ -31,3 +31,5 @@
 		EXPANSION DE DOLAR $USE"R" debe dar > Rº
 		Comprobar que entre pipes haya cosas
 		Comprobar que antes de cualquier comando no solo exista una pipe
+		Comprobacion cat y wc
+		
