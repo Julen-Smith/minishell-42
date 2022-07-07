@@ -1,0 +1,10 @@
+src/*.o 					\
+src/environment/*.o 		\
+src/parser/*.o 				\
+src/redirections/*.o 		\
+src/errors/*.o 				\
+src/utils/*.o 				\
+src/dollars/*.o 			\
+src/execution/*.o 			\
+src/builtins/*.o 			\
+src/signals/*.o				\
