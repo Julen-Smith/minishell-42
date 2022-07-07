@@ -28,4 +28,6 @@
 		UNSET revision  además de mirar por que no lo pilla en upper
 		EXIT si tienes mas de un argumento error
 			-Si tiene un argumento sale 
-		EXPANSION DE DOLAR $USE"R" debe dar > R
+		EXPANSION DE DOLAR $USE"R" debe dar > Rº
+		Comprobar que entre pipes haya cosas
+		Comprobar que antes de cualquier comando no solo exista una pipe
