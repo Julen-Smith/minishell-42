@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/07 20:06:52 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/08 18:40:53 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdbool.h>
 # include <sys/uio.h>
 # include <sys/types.h>
-# include <readline/history.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include "libraries/Libft/libft.h"
 # include "libraries/GNL/get_next_line.h"
 

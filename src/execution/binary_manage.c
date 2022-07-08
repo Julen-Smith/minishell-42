@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary_manage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/07 18:58:05 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/08 19:27:46 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,21 @@ char	**get_actual_path(t_msh_var *msh)
 //Distribución principal de la ejecución de comandos
 char	*reach_bin_path(t_command *command, t_msh_var *msh)
 {	
-	int	i;
+	int		i;
+	char	*tmp;
 
-	i = 0;
+	i = -1;
 	command->path = get_actual_path(msh);
 	command->is_absolute = false;
 	string_to_lower(command->command[0]);
+	while (command->command[++i])
+	{
+		tmp = ft_strtrim(command->command[i], "\"");
+		free(command->command[i]);
+		command->command[i] = ft_strdup(tmp);
+		free(tmp);
+	}
+	i = 0;
 	if (command->path)
 	{
 		while (command->path[i])
