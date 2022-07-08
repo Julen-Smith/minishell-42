@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/07 20:02:35 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:06:52 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,9 @@ bool	return_binary_path(const char *bin_path, char *binary_check);
 bool	gather_bin_path(t_command_table *table, t_msh_var *msh);
 
 /* Signals */
-int	ft_interactive(int inter);
+int		ft_interactive(int inter);
 void	ft_signals(void);
+void	ft_signal_exit(void);
 
 /* Buff if needed */
 # define S_MAX  4096

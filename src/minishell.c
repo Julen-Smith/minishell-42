@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/07 20:02:39 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:06:36 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	minishell(t_msh_var *msh,
 	while (true)
 	{
 		str = readline(MSH);
+		if (!str)
+			ft_signal_exit();
 		if (ft_strlen(str) > 0 && str[0] > 32)
 		{
 			str = added_pipe(str);
