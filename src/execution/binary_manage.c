@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/13 00:58:55 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:37:08 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh)
 	string_to_lower(command->command[0]);
 	while (command->command[++i])
 	{
-		if (command->command[i][ft_strlen(command->command[i])] == '"')
+		if (command->command[i][ft_strlen(command->command[i]) - 1] == '"')
 		{
 			tmp = ft_strtrim(command->command[i], "\"");
 			free(command->command[i]);
