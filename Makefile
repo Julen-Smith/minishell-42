@@ -2,7 +2,7 @@ SHELL = /bin/sh
 NAME = minishell
 CC		=	gcc
 RM		=	rm -rf
-FLAGS	=	-g3 #-Wall -Wextra -Werror -g
+FLAGS	=	-g3 -Wall -Wextra -Werror -g -fsanitize=address
 SRC		=	src/minishell.c									\
 			src/environment/environment.c					\
 			src/parser/parser.c								\
