@@ -23,8 +23,8 @@
 			To upper to lower. ⎷
 
 	Casos de error :
-		Trimear comillas para comandos "ls" -l⎷
-		corregir trimeo de casos como echo "'"hola"'" -> 'hola'
+		Trimear comillas para comandos "ls" -l ⎷
+		corregir trimeo de casos como echo "'"hola"'" -> 'hola' ⎷
 		Echo trim ⎷
 		UNSET revision  además de mirar por que no lo pilla en upper
 		EXIT si tienes mas de un argumento error ⎷
