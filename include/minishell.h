@@ -6,13 +6,17 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/08 18:40:53 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:19:36 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdio.h>
+# include <signal.h>
+# include <sys/time.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -22,8 +26,6 @@
 # include <stdbool.h>
 # include <sys/uio.h>
 # include <sys/types.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include "libraries/Libft/libft.h"
 # include "libraries/GNL/get_next_line.h"
 

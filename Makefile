@@ -2,7 +2,7 @@ SHELL = /bin/sh
 NAME = minishell
 CC		=	gcc
 RM		=	rm -rf
-FLAGS	=	-g3 -Wall -Wextra -Werror -g
+FLAGS	=	-g3 #-Wall -Wextra -Werror -g
 SRC		=	src/minishell.c									\
 			src/environment/environment.c					\
 			src/parser/parser.c								\
@@ -32,7 +32,11 @@ LIB		=	include/libraries/Libft/libft.a
 
 PWD = ~/.brew/opt/readline
 
-READLINE =	-lreadline -L /Users/$(USER)/.brew/opt/readline/lib\
+READLINE =	-I $(PWD)/include\
+			-lreadline\
+			-L $(PWD)/lib\
+
+#READLINE =	-lreadline -L /Users/$(USER)/.brew/opt/readline/lib\
 			-I /Users/$(USER)/.brew/opt/readline/include\ 
 
 $(NAME): all

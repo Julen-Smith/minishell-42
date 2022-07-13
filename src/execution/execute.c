@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/08 18:44:39 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:28:38 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 	int		status;
 
 	i = 0;
+	
 	table->unipipe = 3;
 	table->pi = malloc(sizeof(int) * 2);
 	if (gather_bin_path(table, msh))

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:23:16 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/08 18:42:54 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:30:17 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	ft_interactive(int inter)
 {
-	unsigned int	interactive;
+	static int	interactive;
 
-	interactive = 0;
 	if (inter == 0 || inter == 1)
 		interactive = inter;
 	return (interactive);
@@ -40,7 +39,7 @@ void	interact_signal(int signal)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		//rl_replace_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
@@ -54,6 +53,7 @@ void	signal_handler(int signal)
 		if (signal == SIGQUIT)
 		{
 			ft_interactive(1);
+			write(1, "Quit\n", 5);
 			rl_on_new_line();
 		}
 		else if (signal == SIGINT)
@@ -63,6 +63,8 @@ void	signal_handler(int signal)
 			rl_on_new_line();
 		}
 	}
+	else
+		printf("%d signal", signal);
 }
 
 void	ft_signals(void)
