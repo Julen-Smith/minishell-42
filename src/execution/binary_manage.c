@@ -22,9 +22,13 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 	{
 		bin_path = reach_bin_path(&table->commands[i], msh);
 		if (bin_path != NULL)
-			table->commands[i].bin_path = bin_path;
+		{
+			table->commands[i].bin_path = ft_strdup(bin_path);
+			free(bin_path);
+		}
 		else
 		{
+			free(bin_path);
 			printf("%s %s %s", "Minishell :", table->commands[i].command[0],
 				CMDNT);
 			g_exit_status = 127;
@@ -61,6 +65,8 @@ bool	return_binary_path(const char *bin_path, char *binary_check)
 char	**get_actual_path(t_msh_var *msh)
 {
 	char	**path;
+	char	*tmp;
+	char	**tmp2;
 	int		i;
 
 	i = 0;
@@ -68,7 +74,11 @@ char	**get_actual_path(t_msh_var *msh)
 	{
 		if (_str_contains(msh->own_envp[i], "PATH="))
 		{
-			path = ft_split(ft_split(ft_strdup(msh->own_envp[i]), '=')[1], ':');
+			tmp = ft_strdup(msh->own_envp[i]);
+			tmp2 = ft_split(tmp, '=');
+			path = ft_split(tmp2[1], ':');
+			free(tmp);
+			ft_doublefree(tmp2);
 			return (path);
 		}	
 	}

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/08 21:35:06 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:57:35 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	ft_count_pipes(char *pnt)
 void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 {
 	int		i;
-	int		u;
 	char	**split;
 
 	i = 0;
@@ -65,11 +64,9 @@ void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 	while (split[i])
 	{
 		table->commands[i].command = mini_split(split[i], ' ');
-		u = 0;
-		while (table->commands[i].command[u])
-			u++;
 		i++;
 	}
+	ft_doublefree(split);
 }
 
 /* Cleans de str and puts in to command table*/
