@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 16:04:31 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/16 16:20:15 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 		}
 	}
 	close(table->unipipe);
-	free(table->pi);
+	if (table->cmd_count > 1)
+		free(table->pi);
 	return (NULL);
 }
