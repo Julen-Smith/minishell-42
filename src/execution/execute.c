@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 13:45:13 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/16 16:04:31 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void	dup_son_choose(int i, t_command_table *table)
 
 void	father_fd_closes(t_command_table *table)
 {
-	if (table->cmd_count > 1)
-	{
-		table->unipipe = dup(table->pi[0]);
-		close(table->pi[0]);
-		pipe(table->pi);
-	}
+	table->unipipe = dup(table->pi[0]);
+	close(table->pi[0]);
+	pipe(table->pi);
 }
 
 void	ft_childexec(t_msh_var *msh, t_command_table *table, int i)
 {
+	char	*tmp;
+	char	*tmp2;
+
 	if (table->cmd_count > 1)
 		dup_son_choose(i, table);
 	if (!ft_child_builtin(&table->commands[i], msh))
@@ -64,13 +64,15 @@ void	ft_childexec(t_msh_var *msh, t_command_table *table, int i)
 	if (table->commands[i].is_absolute)
 		execve(table->commands[i].bin_path,
 			table->commands[i].command, msh->own_envp);
-	else if (!access(ft_strjoin(table->commands[i].bin_path,
-				ft_strjoin("/", table->commands[i].command[0])),
-			X_OK))
+	tmp = ft_strjoin("/", table->commands[i].command[0]);
+	tmp2 = ft_strjoin(table->commands[i].bin_path, tmp);
+	if (!access(tmp2, X_OK))
 		execve(ft_strjoin(table->commands[i].bin_path,
 				ft_strjoin("/", table->commands[i].command[0])),
 			table->commands[i].command, msh->own_envp);
 	perror(table->commands[i].command[0]);
+	free(tmp);
+	free(tmp2);
 }
 
 void	*execute(t_command_table *table, t_msh_var *msh)
@@ -109,5 +111,6 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 		}
 	}
 	close(table->unipipe);
+	free(table->pi);
 	return (NULL);
 }
