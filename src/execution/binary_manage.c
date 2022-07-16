@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ************************************************************************** */ 
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   binary_manage.c                                    :+:      :+:    :+:   */
@@ -112,7 +112,10 @@ void	ft_quotetrim(t_command *command, int i, int final, int j)
 		str[1] = ft_substr(command->command[i], (final + 1), ft_strlen(command->command[i]) - (final + 1));
 		str[2] = 0;
 		free(command->command[i]);
-		command->command[i] = ft_strjoin(str[0], str[1]);
+		if (!str[0][0] && !str[1][0])
+			command->command[i] = ft_strdup("");
+		else
+			command->command[i] = ft_strjoin(str[0], str[1]);
 	}
 	ft_doublefree(str);
 	free(pre);
@@ -146,6 +149,7 @@ void	ft_trim_algorithm(t_command *command, int i)
 char	*reach_bin_path(t_command *command, t_msh_var *msh)
 {	
 	int		i;
+	char	*result;
 
 	command->path = get_actual_path(msh);
 	command->is_absolute = false;
@@ -159,7 +163,11 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh)
 		while (command->path[i])
 		{
 			if (return_binary_path(command->path[i], command->command[0]))
-				return (command->path[i]);
+			{
+				result = ft_strdup(command->path[i]);
+				ft_doublefree(command->path);
+				return (result);
+			}
 			i++;
 		}
 		if (access(command->command[0], X_OK) == 0)
@@ -168,5 +176,6 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh)
 			return (command->command[0]);
 		}	
 	}
+	ft_doublefree(command->path);
 	return (NULL);
 }
