@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ************************************************************************** */ 
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   dollars.c                                          :+:      :+:    :+:   */
@@ -39,6 +39,8 @@ static void	ft_has_beg(t_dollars *dollars, t_command *cm, int an, int x)
 		free(dollars->final);
 		free(dollars->beg);
 	}
+	else
+		dollars->result = ft_strjoin(dollars->beg, "");
 }
 
 static void	ft_new_com(t_dollars *dollars, t_command *com, int a_n, int xref)
@@ -56,13 +58,15 @@ static void	ft_new_com(t_dollars *dollars, t_command *com, int a_n, int xref)
 			else
 				dollars->result = ft_strdup(dollars->beg);
 		}
-		else
-			dollars->result = ft_strdup("");
+		else if (dollars->final != NULL)
+			dollars->result = ft_strjoin("", dollars->final);
 	}
 	free(com->command[a_n]);
 	com->command[a_n] = ft_strdup(dollars->result);
 	free(dollars->value);
 	free(dollars->result);
+	free(dollars->final);
+	free(dollars->beg);
 }
 
 void	ft_check_exceptions(t_command *com, t_dollars *d, int a_n, int xref)
@@ -99,5 +103,7 @@ void	ft_dollar_expansion(t_command *com, t_msh_var *msh, int a_n, int xref)
 		else if (com->command[a_n][xref - 1] == '"')
 			dollars.final = ft_strdup("\"");
 	}
+	else
+		dollars.final = ft_strdup("");
 	ft_new_com(&dollars, com, a_n, xref);
 }
