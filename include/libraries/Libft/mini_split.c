@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:23:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/06 21:00:57 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/16 20:06:49 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	**ft_free(char **p, size_t count)
 	return (NULL);
 }
 
-size_t	ft_count_size(const char	*s, char c)
+size_t	ft_count_size(const char *s, char c)
 {
 	size_t	i;
 	char	quote;

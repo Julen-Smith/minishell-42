@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 16:43:51 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/16 20:20:28 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,10 @@ void	ft_signal_exit(void);
 /* Pipes managing */
 char	*added_pipe(char *str);
 bool	pipe_before_command(char *str);
+
+/* Quotes trimming */
+void	ft_trim_algorithm(t_command *command, int i);
+void	ft_quotetrim(t_command *command, int i, int final, int j);
 
 /* Buff if needed */
 # define S_MAX  4096

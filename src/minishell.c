@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 16:30:24 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/16 20:03:47y aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	int	x;
 
 	i = -1;
-	x = 0;
 	while (++i < table->cmd_count)
 	{
 		x = 0;
@@ -69,10 +68,10 @@ void	minishell(t_msh_var *msh)
 		if (ft_strlen(str) > 0 && str[0] > 32)
 		{
 			str = added_pipe(str);
-			if (!(ft_strlen(str) > 0) || str == NULL)
+			if (str == NULL || !(ft_strlen(str) > 0))
 			{
 				ft_error_print(ERR_PIPE);
-				if (str != NULL)
+				if (str)
 					free(str);
 				continue ;
 			}	
