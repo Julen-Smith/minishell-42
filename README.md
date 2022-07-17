@@ -13,8 +13,8 @@
 			echo $USER$$HOME -> aalvarezHOME ⎷
 
 	Necesidades:
-		-Señales 
-		-Expansion de binarios
+		-Señales ⎷
+		-Expansion de binarios ⎷
 		-Eliminar el OLDPWD al inicio del programa ⎷
 		
 		Exec :
@@ -32,5 +32,5 @@
 		EXPANSION DE DOLAR $USE"R" debe dar > R 
 		Comprobar que entre pipes haya cosas
 		Comprobar que antes de cualquier comando no solo exista una pipe
-		Comprobacion cat y wc
+		Comprobacion cat y wc ⎷
 		
