@@ -1,4 +1,4 @@
-/* ************************************************************************** */ 
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   binary_manage.c                                    :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/14 00:33:49by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/16 18:16:01 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 		else
 		{
 			free(bin_path);
+			table->commands[i].bin_path = NULL;
 			printf("%s %s %s", "Minishell :", table->commands[i].command[0],
 				CMDNT);
 			g_exit_status = 127;
@@ -99,7 +100,8 @@ void	ft_quotetrim(t_command *command, int i, int final, int j)
 		str[0] = ft_strdup(pre);
 		str[1] = ft_strdup(tmp);
 		free(tmp);
-		str[2] = ft_substr(command->command[i], (final + 1), ft_strlen(command->command[i]) - (final + 1));
+		str[2] = ft_substr(command->command[i], (final + 1),
+					ft_strlen(command->command[i]) - (final + 1));
 		str[3] = 0;
 		tmp = ft_strjoin(str[0], str[1]);
 		free(command->command[i]);
@@ -109,7 +111,8 @@ void	ft_quotetrim(t_command *command, int i, int final, int j)
 	{
 		str = (char **)malloc(sizeof(char *) * 3);
 		str[0] = ft_strdup(tmp);
-		str[1] = ft_substr(command->command[i], (final + 1), ft_strlen(command->command[i]) - (final + 1));
+		str[1] = ft_substr(command->command[i], (final + 1),
+					ft_strlen(command->command[i]) - (final + 1));
 		str[2] = 0;
 		free(command->command[i]);
 		if (!str[0][0] && !str[1][0])
@@ -133,7 +136,8 @@ void	ft_trim_algorithm(t_command *command, int i)
 		if (command->command[i][j] == '"' || command->command[i][j] == '\'')
 		{
 			final = j + 1;
-			while (command->command[i][final] && command->command[i][final] != command->command[i][j])
+			while (command->command[i][final] && command->command[i][final]
+					!= command->command[i][j])
 				final++;
 			ft_quotetrim(command, i, final, j);
 			if (final >= ft_strlen(command->command[i]))

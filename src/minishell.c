@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/07 20:06:36 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/16 16:30:24 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,8 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 		x = 0;
 		while (table->commands[i].command[x])
 		{
-			if (ft_strchr_pos(table->commands[i].command[x], '$') >= 0
-				&& table->commands[i].command[x][0] != '\''
-					&& !ft_single_dollar(&table->commands[i], x,
-						ft_strchr_pos(table->commands[i].command[x], '$')))
+			if (ft_check_dollars(table, i, x, msh))
 			{
-				ft_dollar_expansion(&table->commands[i], msh,
-					x, ft_strchr_pos(table->commands[i].command[x], '$'));
 				x = 0;
 				continue ;
 			}
@@ -53,41 +48,15 @@ bool	ft_check_commands(t_command_table *table, t_msh_var *msh)
 	return (false);
 }
 
-bool	pipe_before_command(char *str)
+void	ft_start_program(char *str, t_command_table *table, t_msh_var *msh)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		while (str[i] < 32)
-		i++;
-		if (str[i] && str[i] == '|')
-			return (true);
-	}
-	return (false);
+	if (!ft_error_print(parser(str, table)))
+		if (!ft_error_print(lexer(table, msh)))
+			if (!ft_check_commands(table, msh))
+				execute(table, msh);
 }
 
-char	*added_pipe(char *str)
-{	
-	if (last_chr_not_pipe(str))
-	{
-		while (last_chr_not_pipe(str))
-		{
-			if (ft_strlen(str) > 0)
-			{
-				str = ft_strjoin(str, readline("> "));
-			}
-			else
-				str = readline("> ");
-		}
-	}
-	return (str);
-}
-
-// __attribute__((__unused))t_process_manager *manager
-void	minishell(t_msh_var *msh,
-	__attribute__((unused))t_process_manager *manager)
+void	minishell(t_msh_var *msh)
 {	
 	char			*str;
 	t_command_table	table;
@@ -108,10 +77,7 @@ void	minishell(t_msh_var *msh,
 				continue ;
 			}	
 			add_history(str);
-			if (!ft_error_print(parser(str, &table)))
-				if (!ft_error_print(lexer(&table, msh)))
-					if (!ft_check_commands(&table, msh))
-						execute(&table, msh);
+			ft_start_program(str, &table, msh);
 		}
 		if (str != NULL)
 			free(str);
@@ -121,7 +87,6 @@ void	minishell(t_msh_var *msh,
 int	main(int argc, char *argv[], char **environ)
 {
 	t_msh_var			var;
-	t_process_manager	manager;
 
 	(void) argc;
 	(void) argv;
@@ -129,6 +94,6 @@ int	main(int argc, char *argv[], char **environ)
 	ft_signals();
 	var.own_envp = ft_duplicate_environment(environ);
 	g_exit_status = 0;
-	minishell(&var, &manager);
+	minishell(&var);
 	return (0);
 }

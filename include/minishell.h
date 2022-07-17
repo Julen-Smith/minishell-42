@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/13 23:19:36 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/16 16:43:51 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,12 @@ bool	count_check_redirs(t_command *command);
 void	*execute_reddir(t_command *table, t_msh_var *msh);
 
 /*   Expansions    */
+bool	ft_check_dollars(t_command_table *table, int i, int x, t_msh_var *msh);
 int		ft_single_dollar(t_command *command, int arr_n, int xref);
 void	ft_dollar_expansion(t_command *command,
 			t_msh_var *msh, int arr_n, int xref);
 char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref);
+void	ft_valuebeg(t_dollars *dollars, t_command *cm, int an, int x);
 bool	ft_check_char(t_command *com, int a_n, int i, char *refs);
 
 /* builtins */
@@ -146,11 +148,13 @@ bool	ft_child_builtin(t_command *command, t_msh_var *msh);
 bool	return_binary_path(const char *bin_path, char *binary_check);
 char	*reach_bin_path(t_command *command, t_msh_var *msh);
 void	*execute(t_command_table *table, t_msh_var *msh);
+
 /* String utils */
 bool	_contains(char **command, char *str);
 bool	_str_contains(char *command, char *str);
 bool	_str_exactly_contains(char *command, char *str);
 void	string_to_lower(char *pnt);
+void	ft_freedollar_struct(t_dollars *dollars);
 
 /* Binary manage */
 char	*reach_bin_path(t_command *command, t_msh_var *msh);
@@ -162,6 +166,10 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh);
 int		ft_interactive(int inter);
 void	ft_signals(void);
 void	ft_signal_exit(void);
+
+/* Pipes managing */
+char	*added_pipe(char *str);
+bool	pipe_before_command(char *str);
 
 /* Buff if needed */
 # define S_MAX  4096

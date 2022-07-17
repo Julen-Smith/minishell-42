@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/07 17:05:39 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/16 16:48:38 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ bool	gather_redir_fds(t_command *command)
 	return (true);
 }
 
+void	ft_check_redirs(t_command *command, int i)
+{
+	if (_str_contains(command->command[command->redirpos[i]], HDC))
+		command->redirorder[i] = ft_strdup("<<");
+	else if (_str_contains(command->command[command->redirpos[i]], APD))
+		command->redirorder[i] = ft_strdup(">>");
+	else if (command->command[command->redirpos[i]][0] == '<')
+		command->redirorder[i] = ft_strdup("<");
+	else if (command->command[command->redirpos[i]][0] == '>')
+		command->redirorder[i] = ft_strdup(">");
+}
+
 bool	check_and_manage_order(t_command *command)
 {
 	int	i;
@@ -57,16 +69,7 @@ bool	check_and_manage_order(t_command *command)
 		if (ft_strlen(command->command[command->redirpos[i]]) > 2)
 			return (true);
 		else
-		{
-			if (_str_contains(command->command[command->redirpos[i]], HDC))
-				command->redirorder[i] = ft_strdup("<<");
-			else if (_str_contains(command->command[command->redirpos[i]], APD))
-				command->redirorder[i] = ft_strdup(">>");
-			else if (command->command[command->redirpos[i]][0] == '<')
-				command->redirorder[i] = ft_strdup("<");
-			else if (command->command[command->redirpos[i]][0] == '>')
-				command->redirorder[i] = ft_strdup(">");
-		}	
+			ft_check_redirs(command, i);
 		i++;
 	}
 	gather_redir_fds(command);

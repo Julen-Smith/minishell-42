@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_value.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:54:39 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/15 09:46:29 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/16 16:44:08 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,20 @@ int	ft_single_dollar(t_command *com, int a_n, int x)
 	if (!com->command[a_n][x + 1] && !ft_check_char(com, a_n, x + 1, " \"\'"))
 		return (1);
 	return (0);
+}
+
+void	ft_valuebeg(t_dollars *dollars, t_command *cm, int an, int x)
+{
+	dollars->result = ft_strjoin(dollars->beg, dollars->value);
+	if (x < ft_strlen(cm->command[an])
+		|| cm->command[an][x - 1] == '"')
+	{
+		free(dollars->beg);
+		if (cm->command[an][x - 1] == '"')
+			dollars->beg = ft_strjoin(dollars->result, "\"");
+		else
+			dollars->beg = ft_strjoin(dollars->result, dollars->final);
+		free(dollars->result);
+		dollars->result = ft_strdup(dollars->beg);
+	}
 }

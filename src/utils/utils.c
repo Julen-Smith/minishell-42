@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:50:08 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/07 17:07:29 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/16 17:20:46 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ bool	_contains(char **command, char *str)
 	int	e;
 	int	maxlength;
 
-	i = 0;
-	u = 0;
+	i = -1;
 	e = 0;
 	maxlength = ft_strlen(str);
-	while (command[i])
+	while (command[++i])
 	{
-		u = 0;
-		while (command[i][u])
+		u = -1;
+		while (command[i][++u])
 		{
 			if (command[i][u] == str[e])
 			{
@@ -36,9 +35,7 @@ bool	_contains(char **command, char *str)
 			}
 			else
 				e = 0;
-			u++;
 		}		
-		i++;
 	}
 	return (false);
 }
@@ -105,4 +102,12 @@ void	string_to_lower(char *pnt)
 		pnt[i] = aux;
 		i++;
 	}
+}
+
+void	ft_freedollar_struct(t_dollars *dollars)
+{
+	free(dollars->beg);
+	free(dollars->final);
+	free(dollars->value);
+	free(dollars->result);
 }
