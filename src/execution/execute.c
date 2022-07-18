@@ -114,7 +114,6 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 {	
 	int		i;
 
-	i = -1;
 	if (gather_bin_path(table, msh))
 		return (NULL);
 	if (table->cmd_count > 1)
