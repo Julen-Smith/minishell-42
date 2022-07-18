@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 04:07:35 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:00:54 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,23 @@
 bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 {
 	int		i;
-	char	*bin_path;
 
 	i = -1;
 	while (++i != table->cmd_count)
 	{
+		table->commands[i].bin_path = reach_bin_path(&table->commands[i], msh);
 		if (!ft_checkparent(&table->commands[i]))
 		{
-			table->commands[i].bin_path = NULL;
 			if (i == table->cmd_count - 1)
 			{
-				ft_parent_builtin(&table->commands[i], msh, i, table->cmd_count);
+				ft_parent_builtin(&table->commands[i],
+					msh, i, table->cmd_count);
 				return (true);
 			}
 			continue ;
 		}
-		bin_path = reach_bin_path(&table->commands[i], msh);
-		if (bin_path != NULL)
+		if (table->commands[i].bin_path == NULL)
 		{
-			table->commands[i].bin_path = ft_strdup(bin_path);
-			free(bin_path);
-		}
-		else
-		{
-			free(bin_path);
-			table->commands[i].bin_path = NULL;
 			printf("%s %s %s", "Minishell :", table->commands[i].command[0],
 				CMDNT);
 			g_exit_status = 127;

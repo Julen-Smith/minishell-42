@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 20:03:47y aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:05:46 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_start_program(char *str, t_command_table *table, t_msh_var *msh)
 {
 	if (!ft_error_print(parser(str, table)))
 		if (!ft_error_print(lexer(table, msh)))
-				execute(table, msh);
+			execute(table, msh);
 }
 
 void	minishell(t_msh_var *msh)

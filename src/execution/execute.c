@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 02:43:39by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:04:13 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,22 +92,6 @@ void	ft_exec_proccess(t_command_table *table, t_msh_var *msh, int i)
 			pipe(table->pi);
 		}
 	}
-}
-
-int	ft_checkparent(t_command *command)
-{
-	if (!ft_strncmp(command->command[0], "cd", ft_strlen(command->command[0])))
-		return (false);
-	else if (!ft_strncmp(command->command[0], "export",
-			(ft_strlen(command->command[0]) + 1)))
-		return (false);
-	else if (!ft_strncmp(command->command[0], "unset",
-			(ft_strlen(command->command[0]) + 1)))
-		return (false);
-	else if (!ft_strncmp(command->command[0], "exit",
-			(ft_strlen(command->command[0]) + 1)))
-		return (false);
-	return (true);
 }
 
 void	*execute(t_command_table *table, t_msh_var *msh)

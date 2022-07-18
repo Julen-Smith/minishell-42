@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 09:49:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 09:50:13by ajsmith          ###   ########.fr       */
+/*   Updated: 2022/07/18 05:05:18 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_create_first_oldpwd(t_msh_var *msh)
 	ft_doublefree(tmp);
 }
 
-//need to unset oldpwd at start of minishell exec
+//need to unset oldpwd at start of minishell exec for linux environment
 static void	ft_getoldpwd(t_msh_var *msh)
 {
 	int		i;
@@ -49,6 +49,7 @@ static void	ft_getoldpwd(t_msh_var *msh)
 			old = ft_substr(msh->own_envp[i], 3, ft_strlen(msh->own_envp[i]));
 			if (!ft_strncmp(old, msh->own_envp[i - 1], ft_strlen(old)))
 				msh->own_envp[i] = ft_strjoin("OLDPWD=", msh->oldpwd);
+			free(old);
 			return ;
 		}
 	}
