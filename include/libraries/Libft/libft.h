@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 12:07:09 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/08 21:38:27 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:49:00 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
-char	**mini_split(char const *s, char c);
+char	**mini_split(char *s, char c);
+char	*ft_skipquotes(char *s, char c, char quote);
+char	*ft_skip_quotes_size(char *s, char quote);
+char	*ft_create_pnt(char *s, char quote, char *pnt, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_putchar_fd(char c, int fd);

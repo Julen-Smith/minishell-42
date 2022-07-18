@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:23:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 20:06:49 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:48:26 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	**ft_free(char **p, size_t count)
 	return (NULL);
 }
 
-size_t	ft_count_size(const char *s, char c)
+size_t	ft_count_size(char *s, char c)
 {
 	size_t	i;
 	char	quote;
@@ -45,15 +45,7 @@ size_t	ft_count_size(const char *s, char c)
 		if (*s && *s != c)
 		{
 			if (*s && *s == 34 || *s == 39)
-			{
-				quote = *s;
-				if (s + 1)
-					s++;
-				while (*s && *s != quote)
-					s++;
-				if (s + 1)
-				s++;
-			}	
+				s = ft_skip_quotes_size(s, quote);
 			i++;
 			while (*s && *s != c)
 				s++;
@@ -62,7 +54,7 @@ size_t	ft_count_size(const char *s, char c)
 	return (i);
 }
 
-static char	*ft_fill_each_pointer(char const *s, char c)
+static char	*ft_fill_each_pointer(char *s, char c)
 {
 	char	*pnt;
 	int		i;
@@ -85,28 +77,11 @@ static char	*ft_fill_each_pointer(char const *s, char c)
 	if (!pnt)
 		return (NULL);
 	i = 0;
-	while (s[i] && s[i] != c)
-	{
-		if (s[i] && s[i] == 34 || s[i] == 39)
-		{
-			pnt[i] = s[i];
-			quote = s[i];
-			if (s[i + 1])
-				i++;
-			while (s[i] && s[i] != quote)
-			{
-				pnt[i] = s[i];
-				i++;
-			}	
-		}
-		pnt[i] = s[i];
-		i++;
-	}
-	pnt[i] = '\0';
+	pnt = ft_create_pnt(s, quote, pnt, c);
 	return (pnt);
 }
 
-static char	**ft_fill_pointers(char const *s, char c, char **tab)
+static char	**ft_fill_pointers(char *s, char c, char **tab)
 {
 	int		i;
 	char	quote;
@@ -122,25 +97,14 @@ static char	**ft_fill_pointers(char const *s, char c, char **tab)
 			if (!tab[i])
 				return (ft_free(tab, i));
 			i++;
-			while (*s && *s != c)
-			{
-				if (*s && *s == 34 || *s == 39)
-				{
-					quote = *s;
-					if (s + 1)
-						s++;
-					while (*s && *s != quote)
-						s++;
-				}
-				s++;
-			}
+			s = ft_skipquotes(s, c, quote);
 		}
 	}
 	tab[i] = NULL;
 	return (tab);
 }
 
-char	**mini_split(char const *s, char c)
+char	**mini_split(char *s, char c)
 {
 	int		size;
 	char	**tab;

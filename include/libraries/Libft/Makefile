@@ -6,7 +6,7 @@
 #    By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:12:22 by aalvarez          #+#    #+#              #
-#    Updated: 2022/06/06 11:14:36 by aalvarez         ###   ########.fr        #
+#    Updated: 2022/07/18 05:39:58 by aalvarez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC = ft_isalpha.c			\
 	  ft_strtrim.c			\
 	  ft_split.c			\
 	  mini_split.c			\
+	  mini_split_utils.c	\
 	  ft_itoa.c				\
 	  ft_putchar_fd.c		\
 	  ft_putstr_fd.c		\
