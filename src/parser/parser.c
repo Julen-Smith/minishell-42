@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 04:03:09 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:11:32 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	parser(char *str, t_command_table *table)
 
 	if (last_chr_not_pipe(str))
 		return (ERR_FINALPIPE);
-	if (process_string_marks(str))
+	if (process_string_quotes(str))
 		return (ERR_QUOTATION);
 	cmd_nbr = ft_count_pipes(str) + 1;
 	generate_command_table(str, cmd_nbr, table);

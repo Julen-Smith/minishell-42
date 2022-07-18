@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:03:32 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:12:45 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int		ft_count_pipes(char *pnt);
 int		parser(char *str, t_command_table *table);
 void	generate_command_table(char *str, int cmd_count,
 			t_command_table *table);
-int		process_string_marks(char *not_processed_cmd);
+int		process_string_quotes(char *not_processed_cmd);
 bool	ft_error_print(int errnumb);
 
 /*  Redirections */
