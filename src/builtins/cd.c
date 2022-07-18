@@ -85,6 +85,7 @@ static void	ft_last_dir(t_msh_var *msh)
 		{
 			tmp = ft_substr(msh->own_envp[i], 7,
 					ft_strlen(msh->own_envp[i]) - 7);
+			printf("%s\n", tmp);
 			chdir(tmp);
 			free(tmp);
 		}

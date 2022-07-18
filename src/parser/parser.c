@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 20:18:14 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 03:59:31 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_free_commands(t_command_table *table)
 	while (++i < table->cmd_count)
 	{
 		ft_doublefree(table->commands[i].command);
-		free(table->commands[i].bin_path);
+		free(table->commands[i].bin_path); //hay que rellenarlo con NULL si no encuentra nada
 	}
 	free(table->commands);
 }
