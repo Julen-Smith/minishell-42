@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:05:32 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:24:35 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:31:25 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	process_string_quotes(char *not_processed_cmd)
 			{
 				if (not_processed_cmd[x] == not_processed_cmd[i])
 				{
-					i = x + 1;
+					i = x;
 					break ;
 				}
 				x++;
 			}
-			if (i == x + 1)
+			if (i == x)
 				continue ;
 			return (true);
 		}

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:11:32 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 05:30:07 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	ft_count_pipes(char *pnt)
 
 	i = 0;
 	pipecount = 0;
-	while (pnt[i])
+	while (i < ft_strlen(pnt) && pnt[i])
 	{
 		if (pnt[i] == 34 || pnt[i] == 39)
 		{
 			quote = pnt[i];
 			i++;
-			while (pnt[i] != quote)
+			while (pnt[i] && pnt[i] != quote)
 				i++;
 		}	
 		if (pnt[i] == 124)
