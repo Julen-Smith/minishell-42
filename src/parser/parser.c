@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:30:07 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:05:27 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	last_chr_not_pipe(char *str)
 	char	last_chr;
 
 	i = 0;
+	last_chr = 0;
 	if (str != NULL)
 	{
 		while (str[i])
