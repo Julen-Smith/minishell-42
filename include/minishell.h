@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 03:43:18 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 04:36:52 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	ft_echo(t_command *command);
 void	ft_pwd(void);
 void	ft_env(t_msh_var *msh, t_command *command);
 int		ft_exit(t_command *command, int c_num, int count);
-void	ft_cd(t_command *command, t_msh_var *msh);
+bool	ft_cd(t_command *command, t_msh_var *msh, int count);
 void	ft_check_unset(t_command *command, t_msh_var *msh);
 void	ft_export_check(t_command *command, t_msh_var *msh);
 bool	ft_check_variable(char *variable);
