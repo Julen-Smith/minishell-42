@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:05:46 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 18:02:11 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,18 @@ void	ft_start_program(char *str, t_command_table *table, t_msh_var *msh)
 void	minishell(t_msh_var *msh)
 {	
 	char			*str;
+	char			*tmp;
 	t_command_table	table;
 
 	while (true)
 	{
-		str = readline(MSH);
-		if (!str)
+		tmp = readline(MSH);
+		if (!tmp)
 			ft_signal_exit();
-		if (ft_strlen(str) > 0 && str[0] > 32)
+		str = ft_strtrim(tmp, " ");
+		free(tmp);
+		add_history(str);
+		if (ft_strlen(str) > 0)
 		{
 			str = added_pipe(str);
 			if (str == NULL || !(ft_strlen(str) > 0))
@@ -63,7 +67,6 @@ void	minishell(t_msh_var *msh)
 					free(str);
 				continue ;
 			}	
-			add_history(str);
 			ft_start_program(str, &table, msh);
 		}
 		if (str != NULL)
