@@ -36,22 +36,10 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	return (1);
 }
 
-bool	ft_check_commands(t_command_table *table, t_msh_var *msh)
-{
-	int	i;
-
-	i = -1;
-	while (++i < table->cmd_count)
-		if (!ft_parent_builtin(&table->commands[i], msh))
-			return (true);
-	return (false);
-}
-
 void	ft_start_program(char *str, t_command_table *table, t_msh_var *msh)
 {
 	if (!ft_error_print(parser(str, table)))
 		if (!ft_error_print(lexer(table, msh)))
-			if (!ft_check_commands(table, msh))
 				execute(table, msh);
 }
 

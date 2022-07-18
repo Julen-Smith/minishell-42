@@ -6,13 +6,13 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:50:10 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/16 20:19:57 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 03:25:59 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-bool	ft_parent_builtin(t_command *command, t_msh_var *msh)
+int	ft_parent_builtin(t_command *command, t_msh_var *msh, int c_num, int count)
 {
 	if (!ft_strncmp(command->command[0], "cd", ft_strlen(command->command[0])))
 	{
@@ -21,23 +21,14 @@ bool	ft_parent_builtin(t_command *command, t_msh_var *msh)
 	}
 	else if (!ft_strncmp(command->command[0], "export",
 			(ft_strlen(command->command[0]) + 1)))
-	{
 		ft_export_check(command, msh);
-		return (false);
-	}
 	else if (!ft_strncmp(command->command[0], "unset",
 			(ft_strlen(command->command[0]) + 1)))
-	{
 		ft_check_unset(command, msh);
-		return (false);
-	}
 	else if (!ft_strncmp(command->command[0], "exit",
 			(ft_strlen(command->command[0]) + 1)))
-	{
-		ft_exit(command);
-		return (false);
-	}
-	return (true);
+		return (ft_exit(command, c_num, count));
+	return (0);
 }
 
 bool	ft_child_builtin(t_command *command, t_msh_var *msh)

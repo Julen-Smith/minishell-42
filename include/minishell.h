@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 20:20:28 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 03:43:18 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,14 @@ bool	ft_check_char(t_command *com, int a_n, int i, char *refs);
 void	ft_echo(t_command *command);
 void	ft_pwd(void);
 void	ft_env(t_msh_var *msh, t_command *command);
-void	ft_exit(t_command *command);
+int		ft_exit(t_command *command, int c_num, int count);
 void	ft_cd(t_command *command, t_msh_var *msh);
 void	ft_check_unset(t_command *command, t_msh_var *msh);
 void	ft_export_check(t_command *command, t_msh_var *msh);
 bool	ft_check_variable(char *variable);
 bool	ft_already_in(char *variable, char **env);
-bool	ft_parent_builtin(t_command *command, t_msh_var *msh);
+int		ft_parent_builtin(t_command *command, t_msh_var *msh, int c_num, int count);
+int		ft_checkparent(t_command *command);
 bool	ft_child_builtin(t_command *command, t_msh_var *msh);
 
 /* Execution */

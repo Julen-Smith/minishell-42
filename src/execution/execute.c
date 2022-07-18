@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 18:10:18 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 02:43:39by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,26 +94,43 @@ void	ft_exec_proccess(t_command_table *table, t_msh_var *msh, int i)
 	}
 }
 
+int	ft_checkparent(t_command *command)
+{
+	if (!ft_strncmp(command->command[0], "cd", ft_strlen(command->command[0])))
+		return (false);
+	else if (!ft_strncmp(command->command[0], "export",
+			(ft_strlen(command->command[0]) + 1)))
+		return (false);
+	else if (!ft_strncmp(command->command[0], "unset",
+			(ft_strlen(command->command[0]) + 1)))
+		return (false);
+	else if (!ft_strncmp(command->command[0], "exit",
+			(ft_strlen(command->command[0]) + 1)))
+		return (false);
+	return (true);
+}
+
 void	*execute(t_command_table *table, t_msh_var *msh)
 {	
 	int		i;
 
-	i = 0;
-	table->unipipe = 3;
-	if (table->cmd_count > 1)
-		table->pi = malloc(sizeof(int) * 2);
+	i = -1;
 	if (gather_bin_path(table, msh))
 		return (NULL);
+	if (table->cmd_count > 1)
+		table->pi = malloc(sizeof(int) * 2);
+	table->unipipe = 3;
 	pipe(table->pi);
-	while (i != table->cmd_count)
+	i = -1;
+	while (++i != table->cmd_count)
 	{
+		if (ft_parent_builtin(&table->commands[i],
+				msh, i, table->cmd_count))
+			continue ;
 		if (table->commands[i].redir_exist)
 			execute_reddir(&table->commands[i], msh);
 		else
-		{
 			ft_exec_proccess(table, msh, i);
-			i++;
-		}
 	}
 	close(table->unipipe);
 	if (table->cmd_count > 1)

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 19:09:07 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 03:50:19 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,18 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 	int		i;
 	char	*bin_path;
 
-	i = 0;
-	while (i != table->cmd_count)
+	i = -1;
+	while (++i != table->cmd_count)
 	{
+		if (!ft_checkparent(&table->commands[i]))
+		{
+			if (i == table->cmd_count - 1)
+			{
+				ft_parent_builtin(&table->commands[i], msh, i, table->cmd_count);
+				return (true);
+			}
+			continue ;
+		}
 		bin_path = reach_bin_path(&table->commands[i], msh);
 		if (bin_path != NULL)
 		{
@@ -35,7 +44,6 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 			g_exit_status = 127;
 			return (true);
 		}		
-		i++;
 	}
 	return (false);
 }
