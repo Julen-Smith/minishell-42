@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:30:07 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 19:15:51 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	last_chr_not_pipe(char *str)
 	char	last_chr;
 
 	i = 0;
+	last_chr = ' ';
 	if (str != NULL)
 	{
 		while (str[i])
@@ -69,7 +70,7 @@ void	ft_free_commands(t_command_table *table)
 	free(table->commands);
 }
 
-void	generate_command_table(char *str, int cmd_count, t_command_table *table)
+bool	generate_command_table(char *str, int cmd_count, t_command_table *table)
 {
 	int			i;
 	static int	check;
@@ -83,10 +84,16 @@ void	generate_command_table(char *str, int cmd_count, t_command_table *table)
 	split = mini_split(str, '|');
 	while (split[i])
 	{
+		if (check_if_empty_command(split[i]))
+		{
+			//print err ?
+			return (true);
+		}
 		table->commands[i].command = mini_split(split[i], ' ');
 		i++;
 	}
 	ft_doublefree(split);
+	return (false);
 }
 
 /* Cleans de str and puts in to command table */
@@ -97,6 +104,8 @@ int	parser(char *str, t_command_table *table)
 	if (last_chr_not_pipe(str))
 		return (ERR_FINALPIPE);
 	if (process_string_quotes(str))
+		return (ERR_QUOTATION);
+	if(clean_double_pipes(str))
 		return (ERR_QUOTATION);
 	cmd_nbr = ft_count_pipes(str) + 1;
 	generate_command_table(str, cmd_nbr, table);

@@ -33,3 +33,9 @@
 		Comprobar que antes de cualquier comando no solo exista una pipe
 		Comprobacion cat y wc ⎷
 		
+		Tareas
+		SHLEVEL comprobar
+		Double pipe  ⎷
+		Pipe entre medias
+		Doble comando pasar información entre pipes
+		

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:50:08 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 17:20:46 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 18:33:48 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	string_to_lower(char *pnt)
 	char	aux;
 
 	i = 0;
-	while (pnt[i])
+	while (pnt && pnt[i])
 	{
 		aux = ft_tolower(pnt[i]);
 		pnt[i] = aux;

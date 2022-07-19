@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:04:13 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:29:31 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 static void	ft_last_command(t_command_table *table)
 {
+	//Modificado previo sin el -1
 	if (table->cmd_count == 2)
 	{
 		dup2(table->pi[0], 0);
 		close(table->pi[1]);
 		close(table->pi[0]);
-	}
+	} 
 	else
 	{
 		dup2(table->unipipe, 0);
@@ -31,11 +32,12 @@ static void	ft_last_command(t_command_table *table)
 
 static void	dup_son_choose(int i, t_command_table *table)
 {
+	//Modificado previo 0
 	if (table->cmd_count == 0)
 	{
 		dup2(table->pi[1], 1);
 		close(table->pi[0]);
-		close(table->pi[1]);
+		close(table->pi[1]); 
 	}
 	else if (i == table->cmd_count - 1)
 		ft_last_command(table);

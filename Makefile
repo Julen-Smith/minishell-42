@@ -27,7 +27,8 @@ SRC		=	src/minishell.c									\
 			src/execution/execute_reddir.c					\
 			src/signals/signals.c							\
 			src/pipes/pipes.c								\
-			src/quotes/quotes.c
+			src/quotes/quotes.c								\
+			src/parser/parser_utils.c
 
 INCLUDE =	/include/minishell.h
 LIB		=	include/libraries/Libft/libft.a

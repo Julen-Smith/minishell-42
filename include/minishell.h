@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:12:45 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/18 19:09:23 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ enum e_own_err
 	ERR_FINALPIPE,
 	ERR_COMMAND_404,
 	ERR_REDDIR,
-	ERR_PIPE
+	ERR_PIPE,
+	ERR_EMPTY_PIPE
 };
 
 typedef struct s_process_manager
@@ -108,7 +109,7 @@ char	**ft_duplicate_environment(char **str);
 bool	last_chr_not_pipe(char *str);
 int		ft_count_pipes(char *pnt);
 int		parser(char *str, t_command_table *table);
-void	generate_command_table(char *str, int cmd_count,
+bool	generate_command_table(char *str, int cmd_count,
 			t_command_table *table);
 int		process_string_quotes(char *not_processed_cmd);
 bool	ft_error_print(int errnumb);
@@ -156,6 +157,7 @@ bool	_str_contains(char *command, char *str);
 bool	_str_exactly_contains(char *command, char *str);
 void	string_to_lower(char *pnt);
 void	ft_freedollar_struct(t_dollars *dollars);
+bool	check_if_empty_command();
 
 /* Binary manage */
 char	*reach_bin_path(t_command *command, t_msh_var *msh);
@@ -171,6 +173,8 @@ void	ft_signal_exit(void);
 /* Pipes managing */
 char	*added_pipe(char *str);
 bool	pipe_before_command(char *str);
+bool	clean_double_pipes(char *str);
+
 
 /* Quotes trimming */
 void	ft_trim_algorithm(t_command *command, int i);
