@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 16:05:31 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 17:17:54 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,22 @@ void	ft_exec_proccess(t_command_table *table, t_msh_var *msh, int i)
 	}
 }
 
+void	ft_free_commands(t_command_table *table)
+{
+	int	i;
+
+	i = -1;
+	
+	while (++i < table->cmd_count)
+	{
+		ft_doublefree(table->commands[i].command);
+		table->commands[i].command = NULL;
+		free(table->commands[i].bin_path);
+		table->commands[i].bin_path = NULL; 
+	}
+	free(table->commands);
+}
+
 void	*execute(t_command_table *table, t_msh_var *msh)
 {	
 	int		i;
@@ -118,5 +134,6 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 	close(table->unipipe);
 	if (table->cmd_count > 1)
 		free(table->pi);
+	ft_free_commands(table);
 	return (NULL);
 }

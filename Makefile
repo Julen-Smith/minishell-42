@@ -42,6 +42,9 @@ READLINE =	-I $(PWD)/include\
 #READLINE =	-lreadline -L /Users/$(USER)/.brew/opt/readline/lib\
 			-I /Users/$(USER)/.brew/opt/readline/include\ 
 
+.c.o: $(SRC)
+	@ $(CC) $(FLAGS) -o $@ -c $^ 
+
 $(NAME): all
 
 all: $(SRC)

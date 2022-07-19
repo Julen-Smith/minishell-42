@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 14:44:22 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 17:16:08 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,12 @@ int	ft_count_pipes(char *pnt)
 	return (pipecount);
 }
 
-void	ft_free_commands(t_command_table *table)
-{
-	int	i;
-
-	i = -1;
-	while (++i < table->cmd_count)
-	{
-		ft_doublefree(table->commands[i].command);
-		free(table->commands[i].bin_path);
-	}
-	free(table->commands);
-}
-
 bool	generate_command_table(char *str, int cmd_count, t_command_table *table)
 {
 	int			i;
-	static int	check;
 	char		**split;
 
 	i = 0;
-	check += 1;
-	if (check > 1)
-		ft_free_commands(table);
 	table->commands = (t_command *) malloc(sizeof(t_command) * cmd_count);
 	split = mini_split(str, '|');
 	while (split[i])

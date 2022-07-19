@@ -37,5 +37,5 @@
 		SHLEVEL comprobar
 		Double pipe  ⎷
 		Pipe entre medias
-		Doble comando pasar información entre pipes
+		Doble comando pasar información entre pipes⎷
 		

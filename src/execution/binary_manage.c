@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary_manage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:00:54 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:17:36 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 	int		i;
 
 	i = -1;
+	//printf("%d\n",ft_strlen(table->commands[0].bin_path));
 	while (++i != table->cmd_count)
 	{
 		table->commands[i].bin_path = reach_bin_path(&table->commands[i], msh);
@@ -122,9 +123,10 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh)
 		}
 		if (access(command->command[0], X_OK) == 0)
 		{
+			result = ft_strdup(command->command[0]);
 			command->is_absolute = true;
-			return (command->command[0]);
-		}	
+			return (result);
+		}
 	}
 	ft_doublefree(command->path);
 	return (NULL);
