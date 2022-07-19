@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:36:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/06/15 13:12:30 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 19:15:25 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ bool	ft_next_next_errors(int errnumb)
 	else if (errnumb == ERR_REDDIR)
 	{
 		fprintf(stderr, "ERR : REDDIRECTION ERROR\n");
+		return (true);
+	}
+	else if (errnumb == ERR_EMPTY_PIPE)
+	{
+		fprintf(stderr, "ERR : EMPTY PIPE\n");
 		return (true);
 	}
 	return (false);

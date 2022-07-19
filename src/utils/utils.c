@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:50:08 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 18:33:48 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 19:50:03 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ bool	_str_exactly_contains(char *command, char *str)
 
 	i = 0;
 	u = 0;
+	if (!str || !command)
+		return (false);
 	maxlength = ft_strlen(str);
 	mlength = ft_strlen(command);
 	while (command[i])

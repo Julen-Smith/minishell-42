@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 18:36:41 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 19:55:17 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ bool	generate_command_table(char *str, int cmd_count, t_command_table *table)
 	while (split[i])
 	{	
 		if (check_if_empty_command(split[i]))
-		{
-			printf("Empty pipe");
 			return (true);
-		}
 		table->commands[i].command = mini_split(split[i], ' ');
 		i++;
 	}
@@ -92,7 +89,7 @@ int	parser(char *str, t_command_table *table)
 		return (ERR_QUOTATION);
 	cmd_nbr = ft_count_pipes(str) + 1;
 	if(generate_command_table(str, cmd_nbr, table))
-		return (false);
+		return (ERR_EMPTY_PIPE);
 	table->cmd_count = cmd_nbr;
 	return (SUCCESS);
 }

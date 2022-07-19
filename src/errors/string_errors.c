@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:05:32 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 18:56:07 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 20:03:09 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@ bool	check_if_empty_command(char *str)
 {
 	int i;
 	int length;
-	//int u;
+	int u;
 	
 	i = 0;
+	u = 0;
 	if (!str)
-		return (false);
+		return (true);
 	length = ft_strlen(str);
 	while (str[i])
 	{
-		if(ft_isalnum(str[i]))
-			return (false);
+		if(str[i] <= 32)
+			u++;
 		i++;	
 	}
-	return (true);
+	if (u == length)
+		return (true);
+	return (false); 
 }
 
 int	process_string_quotes(char *not_processed_cmd)
