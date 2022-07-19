@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 06:18:56 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 14:44:22 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ bool	generate_command_table(char *str, int cmd_count, t_command_table *table)
 	table->commands = (t_command *) malloc(sizeof(t_command) * cmd_count);
 	split = mini_split(str, '|');
 	while (split[i])
-	{
+	{	
+		/*
 		if (check_if_empty_command(split[i]))
 		{
 			//print err ?
 			return (true);
 		}
+		*/
 		table->commands[i].command = mini_split(split[i], ' ');
 		i++;
 	}

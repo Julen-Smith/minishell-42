@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 17:29:31 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 16:03:51 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 
 static void	ft_last_command(t_command_table *table)
 {
-	//Modificado previo sin el -1
 	if (table->cmd_count == 2)
 	{
 		dup2(table->pi[0], 0);
 		close(table->pi[1]);
 		close(table->pi[0]);
-	} 
+	}
 	else
 	{
 		dup2(table->unipipe, 0);
@@ -35,6 +34,7 @@ static void	dup_son_choose(int i, t_command_table *table)
 	//Modificado previo 0
 	if (table->cmd_count == 0)
 	{
+		printf("Escribo aqui en el primer comando");
 		dup2(table->pi[1], 1);
 		close(table->pi[0]);
 		close(table->pi[1]); 
@@ -87,7 +87,7 @@ void	ft_exec_proccess(t_command_table *table, t_msh_var *msh, int i)
 			close(table->pi[1]);
 		wait(&status);
 		g_exit_status = WEXITSTATUS(status);
-		if (table->cmd_count > 1)
+		if (table->cmd_count > 2)
 		{
 			table->unipipe = dup(table->pi[0]);
 			close(table->pi[0]);
