@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   string_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:05:32 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 16:21:38 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/19 18:56:07 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+bool	check_if_empty_command(char *str)
+{
+	int i;
+	int length;
+	//int u;
+	
+	i = 0;
+	if (!str)
+		return (false);
+	length = ft_strlen(str);
+	while (str[i])
+	{
+		if(ft_isalnum(str[i]))
+			return (false);
+		i++;	
+	}
+	return (true);
+}
 
 int	process_string_quotes(char *not_processed_cmd)
 {	
