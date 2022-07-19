@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 17:19:03 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/19 19:40:07 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,11 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 	if (gather_bin_path(table, msh))
 		return (NULL);
 	if (table->cmd_count > 1)
+	{
 		table->pi = malloc(sizeof(int) * 2);
+		pipe(table->pi);
+	}
 	table->unipipe = 3;
-	pipe(table->pi);
 	i = -1;
 	while (++i != table->cmd_count)
 	{
