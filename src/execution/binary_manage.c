@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/20 17:50:12 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/20 20:15:09 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 				ft_isexit(table, i, table->cmd_count);
 				ft_parent_builtin(&table->commands[i],
 					msh, table->cmd_count);
+				ft_free_commands(table);
 				return (true);
 			}
 			continue ;
@@ -36,6 +37,7 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 			printf("%s %s %s", "Minishell :", table->commands[i].command[0],
 				CMDNT);
 			g_exit_status = 127;
+			ft_free_commands(table);
 			return (true);
 		}		
 	}
