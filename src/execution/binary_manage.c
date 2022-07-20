@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary_manage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 17:30:56 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/20 08:35:49 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh)
 			return (result);
 		}
 	}
-	ft_doublefree(command->path);
+	if (command->path)
+		ft_doublefree(command->path);
 	return (NULL);
 }
