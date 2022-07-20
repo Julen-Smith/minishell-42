@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 18:58:08 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/20 17:37:40 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,9 @@ bool	clean_double_pipes(char *str);
 /* Quotes trimming */
 void	ft_trim_algorithm(t_command *command, int i);
 void	ft_quotetrim(t_command *command, int i, int final, int j);
+
+/* Free memory */
+void	ft_free_commands(t_command_table *table);
 
 /* Buff if needed */
 # define S_MAX  4096
