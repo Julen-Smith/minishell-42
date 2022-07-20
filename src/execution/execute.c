@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 19:40:07 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:59:11 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 	while (++i != table->cmd_count)
 	{
 		if (ft_parent_builtin(&table->commands[i],
-				msh, i, table->cmd_count))
+				msh, table->cmd_count) || ft_isexit(table, i, table->cmd_count))
 			continue ;
 		if (table->commands[i].redir_exist)
 			execute_reddir(&table->commands[i], msh);

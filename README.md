@@ -41,8 +41,8 @@
 		
 		Overflow on trim minishell
 		Split on get_actual_path()
-		Exit licazos
-		Dolar value linea 57 echo $?
+		Exit licazos⎷ 
+		Dolar value linea 57 echo $?⎷
 		Preguntar que hace cntrol \
 		Control d debería salirse (exit)
 		No detectar redirecciones entre comillas

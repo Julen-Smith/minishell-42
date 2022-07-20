@@ -13,7 +13,15 @@
 
 #include "../../../include/minishell.h"
 
-int	ft_parent_builtin(t_command *command, t_msh_var *msh, int c_num, int count)
+int	ft_isexit(t_command_table *table, int c_num, int count)
+{
+	if (!ft_strncmp(table->commands[c_num].command[0], "exit",
+			(ft_strlen(table->commands[c_num].command[0]) + 1)))
+		return (ft_exit(table, c_num, count));
+	return (0);
+}
+
+int	ft_parent_builtin(t_command *command, t_msh_var *msh, int count)
 {
 	if (!ft_strncmp(command->command[0], "cd", ft_strlen(command->command[0])))
 		return (ft_cd(command, msh, count));
@@ -23,9 +31,6 @@ int	ft_parent_builtin(t_command *command, t_msh_var *msh, int c_num, int count)
 	else if (!ft_strncmp(command->command[0], "unset",
 			(ft_strlen(command->command[0]) + 1)))
 		ft_check_unset(command, msh);
-	else if (!ft_strncmp(command->command[0], "exit",
-			(ft_strlen(command->command[0]) + 1)))
-		return (ft_exit(command, c_num, count));
 	return (0);
 }
 

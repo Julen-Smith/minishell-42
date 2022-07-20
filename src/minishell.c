@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/20 17:35:49 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/20 18:02:41 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	minishell(t_msh_var *msh)
 		tmp = readline(MSH);
 		if (!tmp)
 			ft_signal_exit();
+		if (!tmp[0])
+			continue ;
 		str = ft_strtrim(tmp, " ");
 		free(tmp);
 		add_history(str);
