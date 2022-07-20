@@ -46,7 +46,7 @@
 		Preguntar que hace cntrol \
 		Control d debería salirse (exit)
 		No detectar redirecciones entre comillas
-		leak cd -
+		leak cd -⎷
 		cd ~
 		Objetos
 		

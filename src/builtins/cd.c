@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 09:49:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/18 05:05:18 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/20 18:40:42by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_create_first_oldpwd(t_msh_var *msh)
 	tmp = ft_doublestrdup(msh->own_envp);
 	ft_doublefree(msh->own_envp);
 	msh->own_envp = (char **)malloc(sizeof(char *)
-			* (ft_doublestrlen(tmp) + 2));
+			* (ft_doublestrlen(tmp) + 3));
 	i = 0;
 	j = -1;
 	while (tmp[++j])
@@ -46,7 +46,7 @@ static void	ft_getoldpwd(t_msh_var *msh)
 	{
 		if (!ft_strncmp(msh->own_envp[i], "OLDPWD=", 7))
 		{
-			old = ft_substr(msh->own_envp[i], 3, ft_strlen(msh->own_envp[i]));
+			old = ft_substr(msh->own_envp[i], 3, (ft_strlen(msh->own_envp[i]) - 3));
 			if (!ft_strncmp(old, msh->own_envp[i - 1], ft_strlen(old)))
 				msh->own_envp[i] = ft_strjoin("OLDPWD=", msh->oldpwd);
 			free(old);
@@ -60,6 +60,7 @@ static void	ft_getnewpwd(t_msh_var *msh)
 {
 	int		i;
 
+	free(msh->pwd);
 	msh->pwd = getcwd(NULL, 0);
 	i = -1;
 	while (msh->own_envp[++i])
@@ -79,10 +80,12 @@ static void	ft_last_dir(t_msh_var *msh)
 	char	*tmp;
 
 	i = -1;
+	tmp = NULL;
 	while (msh->own_envp[++i])
 	{
 		if (!ft_strncmp(msh->own_envp[i], "OLDPWD=", 7))
 		{
+			free(tmp);
 			ft_getoldpwd(msh);
 			tmp = ft_substr(msh->own_envp[i], 7,
 					ft_strlen(msh->own_envp[i]) - 7);
@@ -115,12 +118,16 @@ bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 		{
 			printf("cd: %s: No such file or directory\n", command->command[1]);
 			g_exit_status = 1;
+			free(msh->pwd);
+			free(msh->oldpwd);
 			return (false);
 		}
 		ft_getoldpwd(msh);
 		chdir(command->command[1]);
 		ft_getnewpwd(msh);
 	}
+	free(msh->pwd);
+	free(msh->oldpwd);
 	g_exit_status = 0;
 	return (false);
 }

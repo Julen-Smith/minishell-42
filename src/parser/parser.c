@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 19:55:17 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/20 18:46:39 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	generate_command_table(char *str, int cmd_count, t_command_table *table)
 	char		**split;
 
 	i = 0;
-	table->commands = (t_command *) malloc(sizeof(t_command) * cmd_count);
+	table->commands = (t_command *)malloc(sizeof(t_command) * cmd_count);
 	split = mini_split(str, '|');
 	while (split[i])
 	{	
