@@ -25,7 +25,7 @@
 		Trimear comillas para comandos "ls" -l ⎷
 		corregir trimeo de casos como echo "'"hola"'" -> 'hola' ⎷
 		Echo trim ⎷
-		UNSET revision  además de mirar por que no lo pilla en upper
+		UNSET revision  además de mirar por que no lo pilla en upper ⎷
 		EXIT si tienes mas de un argumento error ⎷
 			-Si tiene un argumento sale ⎷
 		EXPANSION DE DOLAR $USE"R" debe dar > R 
@@ -38,4 +38,19 @@
 		Double pipe  ⎷
 		Pipe entre medias
 		Doble comando pasar información entre pipes⎷
+		
+		Overflow on trim minishell
+		Split on get_actual_path()
+		Exit licazos
+		Dolar value linea 57 echo $?
+		Preguntar que hace cntrol \
+		Control d debería salirse (exit)
+		No detectar redirecciones entre comillas
+		leak cd -
+		cd ~
+		Objetos
+		
+
+
+
 		
