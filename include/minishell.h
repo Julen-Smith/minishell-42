@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/20 18:48:49 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:00:49 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ void	ft_signal_exit(void);
 char	*added_pipe(char *str);
 bool	pipe_before_command(char *str);
 bool	clean_double_pipes(char *str);
-
 
 /* Quotes trimming */
 void	ft_trim_algorithm(t_command *command, int i);

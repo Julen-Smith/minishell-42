@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:36:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 19:15:25 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/21 17:11:40 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,19 @@ bool	ft_error_print(int errnumb)
 	if (ft_next_errors(errnumb))
 		return (true);
 	return (false);
+}
+
+void	ft_free_commands(t_command_table *table)
+{
+	int	i;
+
+	i = -1;
+	while (++i < table->cmd_count)
+	{
+		ft_doublefree(table->commands[i].command);
+		table->commands[i].command = NULL;
+		free(table->commands[i].bin_path);
+		table->commands[i].bin_path = NULL;
+	}
+	free(table->commands);
 }

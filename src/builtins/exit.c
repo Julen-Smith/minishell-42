@@ -21,7 +21,8 @@ static void	ft_exit_arg(t_command_table *table, int c_num, int count)
 	{
 		if (ft_isalpha(table->commands[c_num].command[1][i]))
 		{
-			printf("Minishell : %s %s\n", table->commands[c_num].command[1], E_TARG);
+			printf("Minishell : %s %s\n",
+				table->commands[c_num].command[1], E_TARG);
 			g_exit_status = 1;
 			if (count == 1)
 			{

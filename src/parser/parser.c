@@ -85,10 +85,10 @@ int	parser(char *str, t_command_table *table)
 		return (ERR_FINALPIPE);
 	if (process_string_quotes(str))
 		return (ERR_QUOTATION);
-	if(clean_double_pipes(str))
+	if (clean_double_pipes(str))
 		return (ERR_QUOTATION);
 	cmd_nbr = ft_count_pipes(str) + 1;
-	if(generate_command_table(str, cmd_nbr, table))
+	if (generate_command_table(str, cmd_nbr, table))
 		return (ERR_EMPTY_PIPE);
 	table->cmd_count = cmd_nbr;
 	return (SUCCESS);

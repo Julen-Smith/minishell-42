@@ -14,10 +14,10 @@
 
 bool	check_if_empty_command(char *str)
 {
-	int i;
-	int length;
-	int u;
-	
+	int	i;
+	int	length;
+	int	u;
+
 	i = 0;
 	u = 0;
 	if (!str)
@@ -25,13 +25,13 @@ bool	check_if_empty_command(char *str)
 	length = ft_strlen(str);
 	while (str[i])
 	{
-		if(str[i] <= 32)
+		if (str[i] <= 32)
 			u++;
-		i++;	
+		i++;
 	}
 	if (u == length)
 		return (true);
-	return (false); 
+	return (false);
 }
 
 int	process_string_quotes(char *not_processed_cmd)

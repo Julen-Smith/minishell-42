@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../../include/minishell.h"
 
 static void	ft_create_first_oldpwd(t_msh_var *msh)
@@ -46,9 +47,13 @@ static void	ft_getoldpwd(t_msh_var *msh)
 	{
 		if (!ft_strncmp(msh->own_envp[i], "OLDPWD=", 7))
 		{
-			old = ft_substr(msh->own_envp[i], 3, (ft_strlen(msh->own_envp[i]) - 3));
+			old = ft_substr(msh->own_envp[i], 3,
+					(ft_strlen(msh->own_envp[i]) - 3));
 			if (!ft_strncmp(old, msh->own_envp[i - 1], ft_strlen(old)))
+			{
+				free(msh->own_envp[i]);
 				msh->own_envp[i] = ft_strjoin("OLDPWD=", msh->oldpwd);
+			}
 			free(old);
 			return ;
 		}
@@ -89,13 +94,15 @@ static void	ft_last_dir(t_msh_var *msh)
 			ft_getoldpwd(msh);
 			tmp = ft_substr(msh->own_envp[i], 7,
 					ft_strlen(msh->own_envp[i]) - 7);
-			printf("%s\n", tmp);
 			chdir(tmp);
 			free(tmp);
 		}
 	}
 	if (!tmp)
+	{
+		free(tmp);
 		printf("Minishell: cd: OLDPWD not set\n");
+	}
 	ft_getnewpwd(msh);
 }
 
@@ -114,12 +121,11 @@ bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 		ft_last_dir(msh);
 	else
 	{
-		if (!opendir(command->command[1]))
+		if (chdir(command->command[1]) == -1)
 		{
 			printf("cd: %s: No such file or directory\n", command->command[1]);
 			g_exit_status = 1;
 			free(msh->pwd);
-			free(msh->oldpwd);
 			return (false);
 		}
 		ft_getoldpwd(msh);

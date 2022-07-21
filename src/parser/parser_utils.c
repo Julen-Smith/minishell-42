@@ -12,19 +12,19 @@
 
 #include "../../include/minishell.h"
 
-bool clean_double_pipes(char *str)
+bool	clean_double_pipes(char *str)
 {
-    int i;
-    int bef_char;
+	int	i;
+	int	bef_char;
 
-    i = 1;
-    bef_char = 0;
-    while (str[i])
-    {
-        if (str[i] == '|' && str[bef_char] == '|')
-            return (true);
-        i++;
-        bef_char++;
-    }
-    return (false);
+	i = 1;
+	bef_char = 0;
+	while (str[i])
+	{
+		if (str[i] == '|' && str[bef_char] == '|')
+			return (true);
+		i++;
+		bef_char++;
+	}
+	return (false);
 }

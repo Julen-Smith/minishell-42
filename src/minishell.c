@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/20 18:48:38 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:36:33 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ void	ft_start_program(char *str, t_command_table *table, t_msh_var *msh)
 			execute(table, msh);
 }
 
+bool	ft_check_errors(char *str)
+{
+	str = added_pipe(str);
+	if (str == NULL || !(ft_strlen(str) > 0))
+	{
+		ft_error_print(ERR_PIPE);
+		if (str)
+			free(str);
+		return (1);
+	}	
+	return (0);
+}
+
 void	minishell(t_msh_var *msh)
 {	
 	char			*str;
@@ -55,20 +68,17 @@ void	minishell(t_msh_var *msh)
 		if (!tmp)
 			ft_signal_exit();
 		if (!tmp[0])
+		{
+			free(tmp);
 			continue ;
+		}
 		str = ft_strtrim(tmp, " ");
 		free(tmp);
 		add_history(str);
 		if (ft_strlen(str) > 0)
 		{
-			str = added_pipe(str);
-			if (str == NULL || !(ft_strlen(str) > 0))
-			{
-				ft_error_print(ERR_PIPE);
-				if (str)
-					free(str);
+			if (ft_check_errors(str))
 				continue ;
-			}	
 			ft_start_program(str, &table, msh);
 		}
 		if (str != NULL)

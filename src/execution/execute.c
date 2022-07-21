@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/20 17:59:11 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:15:38 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	dup_son_choose(int i, t_command_table *table)
 	{
 		dup2(table->pi[1], 1);
 		close(table->pi[0]);
-		close(table->pi[1]); 
+		close(table->pi[1]);
 	}
 	else if (i == table->cmd_count - 1)
 		ft_last_command(table);
@@ -78,7 +78,9 @@ void	ft_exec_proccess(t_command_table *table, t_msh_var *msh, int i)
 
 	pid = fork();
 	if (pid == 0)
+	{
 		ft_childexec(msh, table, i);
+	}
 	else
 	{
 		if (table->cmd_count > 1)
@@ -92,22 +94,6 @@ void	ft_exec_proccess(t_command_table *table, t_msh_var *msh, int i)
 			pipe(table->pi);
 		}
 	}
-}
-
-void	ft_free_commands(t_command_table *table)
-{
-	int	i;
-
-	i = -1;
-	
-	while (++i < table->cmd_count)
-	{
-		ft_doublefree(table->commands[i].command);
-		table->commands[i].command = NULL;
-		free(table->commands[i].bin_path);
-		table->commands[i].bin_path = NULL; 
-	}
-	free(table->commands);
 }
 
 void	*execute(t_command_table *table, t_msh_var *msh)
@@ -136,6 +122,12 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 	close(table->unipipe);
 	if (table->cmd_count > 1)
 		free(table->pi);
+	i = -1;
+	while (++i < table->cmd_count)
+	{
+		if (table->commands[i].is_absolute)
+			ft_doublefree(table->commands[i].path);
+	}
 	ft_free_commands(table);
 	return (NULL);
 }
