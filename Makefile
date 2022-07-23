@@ -25,6 +25,7 @@ SRC		=	src/minishell.c									\
 			src/redirections/redir_utils.c					\
 			src/execution/execute.c							\
 			src/execution/binary_manage.c					\
+			src/execution/binary_manage_utils.c				\
 			src/execution/execute_reddir.c					\
 			src/signals/signals.c							\
 			src/pipes/pipes.c								\
