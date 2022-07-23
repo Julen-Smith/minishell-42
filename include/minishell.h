@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/23 19:19:18 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:54:37 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int		ft_checkparent(t_command *command);
 bool	ft_child_builtin(t_command *command, t_msh_var *msh);
 
 /* Execution */
+char	*ft_get_result(t_command *command, int i);
 bool	ft_isfinal(t_command_table *table, int i, int count, t_msh_var *msh);
 bool	return_binary_path(const char *bin_path, char *binary_check);
 char	*reach_bin_path(t_command *command, t_msh_var *msh);

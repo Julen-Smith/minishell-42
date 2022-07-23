@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/23 19:18:42 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:54:23 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,7 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh)
 		while (command->path[i])
 		{
 			if (return_binary_path(command->path[i], command->command[0]))
-			{
-				result = ft_strdup(command->path[i]);
-				ft_doublefree(command->path);
-				return (result);
-			}
+				return (ft_get_result(command, i));
 			i++;
 		}
 		if (access(command->command[0], X_OK) == 0)
