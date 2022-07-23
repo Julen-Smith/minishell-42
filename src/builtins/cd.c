@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 09:49:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/20 18:40:42by aalvarez         ###   ########.fr       */
+/*   Created: 2022/07/23 18:32:43 by aalvarez          #+#    #+#             */
+/*   Updated: 2022/07/23 19:01:52 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/minishell.h"
 
@@ -106,6 +105,21 @@ static void	ft_last_dir(t_msh_var *msh)
 	ft_getnewpwd(msh);
 }
 
+bool	ft_cd_with_arguments(t_command *command, t_msh_var *msh)
+{
+	if (chdir(command->command[1]) == -1)
+	{
+		printf("cd: %s: No such file or directory\n", command->command[1]);
+		g_exit_status = 1;
+		free(msh->pwd);
+		return (true);
+	}
+	ft_getoldpwd(msh);
+	chdir(command->command[1]);
+	ft_getnewpwd(msh);
+	return (false);
+}
+
 bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 {
 	if (count != 1)
@@ -121,16 +135,8 @@ bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 		ft_last_dir(msh);
 	else
 	{
-		if (chdir(command->command[1]) == -1)
-		{
-			printf("cd: %s: No such file or directory\n", command->command[1]);
-			g_exit_status = 1;
-			free(msh->pwd);
+		if (ft_cd_with_arguments(command, msh))
 			return (false);
-		}
-		ft_getoldpwd(msh);
-		chdir(command->command[1]);
-		ft_getnewpwd(msh);
 	}
 	free(msh->pwd);
 	free(msh->oldpwd);

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/21 16:00:49 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/23 18:36:01 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,8 @@ void	ft_quotetrim(t_command *command, int i, int final, int j);
 
 /* Free memory */
 void	ft_free_commands(t_command_table *table);
+
+bool	ft_check_errors(char *str);
 
 /* Buff if needed */
 # define S_MAX  4096

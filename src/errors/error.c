@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:36:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/21 17:11:40 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/23 18:42:18 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,17 @@ void	ft_free_commands(t_command_table *table)
 		table->commands[i].bin_path = NULL;
 	}
 	free(table->commands);
+}
+
+bool	ft_check_errors(char *str)
+{
+	str = added_pipe(str);
+	if (str == NULL || !(ft_strlen(str) > 0))
+	{
+		ft_error_print(ERR_PIPE);
+		if (str)
+			free(str);
+		return (1);
+	}	
+	return (0);
 }

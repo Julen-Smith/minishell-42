@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/21 16:36:33 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/23 18:40:58 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,19 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 	return (1);
 }
 
-void	ft_start_program(char *str, t_command_table *table, t_msh_var *msh)
+bool	ft_start_program(char *str, t_command_table *table, t_msh_var *msh)
 {
-	if (!ft_error_print(parser(str, table)))
-		if (!ft_error_print(lexer(table, msh)))
-			execute(table, msh);
-}
-
-bool	ft_check_errors(char *str)
-{
-	str = added_pipe(str);
-	if (str == NULL || !(ft_strlen(str) > 0))
-	{
-		ft_error_print(ERR_PIPE);
-		if (str)
-			free(str);
+	if (ft_check_errors(str))
 		return (1);
-	}	
-	return (0);
+	if (!ft_error_print(parser(str, table)))
+	{
+		if (!ft_error_print(lexer(table, msh)))
+		{
+			execute(table, msh);
+			return (0);
+		}
+	}
+	return (1);
 }
 
 void	minishell(t_msh_var *msh)
@@ -77,9 +72,8 @@ void	minishell(t_msh_var *msh)
 		add_history(str);
 		if (ft_strlen(str) > 0)
 		{
-			if (ft_check_errors(str))
+			if (ft_start_program(str, &table, msh))
 				continue ;
-			ft_start_program(str, &table, msh);
 		}
 		if (str != NULL)
 			free(str);
