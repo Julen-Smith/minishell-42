@@ -34,10 +34,7 @@ static void	ft_exit_arg(t_command_table *table, int c_num, int count)
 	}
 	g_exit_status = ft_atoi(table->commands[c_num].command[1]);
 	if (count == 1)
-	{
-		ft_free_commands(table);
 		exit(ft_atoi(table->commands[c_num].command[1]));
-	}
 }
 
 int	ft_exit(t_command_table *table, int c_num, int count)
