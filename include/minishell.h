@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/23 18:36:01 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:09:29 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ bool	generate_command_table(char *str, int cmd_count,
 			t_command_table *table);
 int		process_string_quotes(char *not_processed_cmd);
 bool	ft_error_print(int errnumb);
+void	ft_create_first_oldpwd(t_msh_var *msh);
 
 /*  Redirections */
 bool	contains_redir(t_command *command);
@@ -182,7 +183,9 @@ void	ft_quotetrim(t_command *command, int i, int final, int j);
 
 /* Free memory */
 void	ft_free_commands(t_command_table *table);
+void	ft_freedollar_struct(t_dollars *dollars);
 
+/* Error checking */
 bool	ft_check_errors(char *str);
 
 /* Buff if needed */

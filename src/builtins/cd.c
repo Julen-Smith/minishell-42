@@ -6,33 +6,11 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:32:43 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/23 19:01:52 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:10:43 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static void	ft_create_first_oldpwd(t_msh_var *msh)
-{
-	char	**tmp;
-	int		i;
-	int		j;
-
-	tmp = ft_doublestrdup(msh->own_envp);
-	ft_doublefree(msh->own_envp);
-	msh->own_envp = (char **)malloc(sizeof(char *)
-			* (ft_doublestrlen(tmp) + 3));
-	i = 0;
-	j = -1;
-	while (tmp[++j])
-	{
-		msh->own_envp[i++] = ft_strdup(tmp[j]);
-		if (!ft_strncmp(tmp[j], "PWD=", 4))
-			msh->own_envp[i++] = ft_strjoin("OLDPWD=", msh->oldpwd);
-	}
-	msh->own_envp[i] = 0;
-	ft_doublefree(tmp);
-}
 
 //need to unset oldpwd at start of minishell exec for linux environment
 static void	ft_getoldpwd(t_msh_var *msh)
@@ -93,6 +71,7 @@ static void	ft_last_dir(t_msh_var *msh)
 			ft_getoldpwd(msh);
 			tmp = ft_substr(msh->own_envp[i], 7,
 					ft_strlen(msh->own_envp[i]) - 7);
+			printf("%s\n", tmp);
 			chdir(tmp);
 			free(tmp);
 		}

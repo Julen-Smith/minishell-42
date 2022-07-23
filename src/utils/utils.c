@@ -6,11 +6,33 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:50:08 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/23 19:01:47 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:09:53 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	ft_create_first_oldpwd(t_msh_var *msh)
+{
+	char	**tmp;
+	int		i;
+	int		j;
+
+	tmp = ft_doublestrdup(msh->own_envp);
+	ft_doublefree(msh->own_envp);
+	msh->own_envp = (char **)malloc(sizeof(char *)
+			* (ft_doublestrlen(tmp) + 3));
+	i = 0;
+	j = -1;
+	while (tmp[++j])
+	{
+		msh->own_envp[i++] = ft_strdup(tmp[j]);
+		if (!ft_strncmp(tmp[j], "PWD=", 4))
+			msh->own_envp[i++] = ft_strjoin("OLDPWD=", msh->oldpwd);
+	}
+	msh->own_envp[i] = 0;
+	ft_doublefree(tmp);
+}
 
 bool	_contains(char **command, char *str)
 {
@@ -104,12 +126,4 @@ void	string_to_lower(char *pnt)
 		pnt[i] = aux;
 		i++;
 	}
-}
-
-void	ft_freedollar_struct(t_dollars *dollars)
-{
-	free(dollars->beg);
-	free(dollars->final);
-	free(dollars->value);
-	free(dollars->result);
 }
