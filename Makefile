@@ -5,6 +5,7 @@ SRC				= $(addsuffix .c, $(SRCS))
 LIBFT			= include/libraries/Libft/.
 INCLUDE			= /include/minishell.h
 LIB				= include/libraries/Libft/libft.a
+LIB_SRC			= include/libraries/Libft/*.c 
 LIB_HEADER		= include/libraries/Libft/libft.h	
 READLINE_PATH	= /opt/homebrew/opt/readline
 READLINE		= -I $(READLINE_PATH)/include -lreadline -L $(READLINE_PATH)/lib 
@@ -43,23 +44,25 @@ SRCS			= src/minishell.c								\
 
 all: $(NAME)
 
-$(LIB) : include/libraries/Libft/*.c 
-	 @make -C $(LIBFT)
+.SILENT:
+$(LIB) : $(LIB_SRC) $(LIB_HEADER)
+	 $(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS) $(LIB)
-	@$(CC) $(CFLAGS) $(READLINE) $^ $(LIB) -I$(INCLUDE) -o $(NAME)
+	$(CC) $(CFLAGS) $(READLINE) $^ $(LIB) -I$(INCLUDE) -o $(NAME)
 
 clean:
-	@make fclean -C $(LIBFT)
+	make fclean -C $(LIBFT)
 	$(RM) ./*/*/*.o
-	@echo "clean done"
+	echo "clean done"
 
 fclean: clean
-	@$(MAKE) fclean -C include/libraries/Libft/
-	@$(RM) minishell.dSYM
-	@$(RM) $(OBJ)
-	@ echo "fclean done"
+	$(MAKE) fclean -C include/libraries/Libft/
+	$(RM) minishell.dSYM
+	$(RM) $(OBJ)
+	echo "fclean done"
 
 re: clean all
 
 .PHONY: all clean fclean re
+
