@@ -8,3 +8,5 @@ src/dollars/*.o 			\
 src/execution/*.o 			\
 src/builtins/*.o 			\
 src/signals/*.o				\
+.vscode
+.DS_STORE

@@ -60,6 +60,7 @@ fclean: clean
 	$(MAKE) fclean -C include/libraries/Libft/
 	$(RM) minishell.dSYM
 	$(RM) $(OBJ)
+	rm -rf .DS_Store .vscode
 	echo "fclean done"
 
 re: clean all
