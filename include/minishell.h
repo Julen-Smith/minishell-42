@@ -29,6 +29,7 @@
 # include "libraries/Libft/libft.h"
 # include "libraries/GNL/get_next_line.h"
 
+
 int		g_exit_status;
 struct	s_command;
 
@@ -147,6 +148,7 @@ bool	ft_already_in(char *variable, char **env);
 int		ft_parent_builtin(t_command *command, t_msh_var *msh, int count);
 int		ft_checkparent(t_command *command);
 bool	ft_child_builtin(t_command *command, t_msh_var *msh);
+void	rl_replace_line (const char *text, int clear_undo);
 
 /* Execution */
 char	*ft_get_result(t_command *command, int i);
