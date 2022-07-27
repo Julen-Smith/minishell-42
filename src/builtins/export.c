@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:50:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/15 09:50:35 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/27 18:23:15 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,12 @@ static void	ft_export(char *variable, t_msh_var *msh)
 	ft_create_variable(variable, msh);
 }
 
-void	ft_export_check(t_command *command, t_msh_var *msh)
+void	ft_export_check(t_command *command, t_msh_var *msh, int c_num, int count)
 {
 	int	i;
 
+	if (c_num != count)
+		return ;
 	if (command->command[1])
 	{
 		i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/27 16:48:11 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/27 18:25:27 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 	while (++i != table->cmd_count)
 	{
 		if (ft_parent_builtin(&table->commands[i],
-				msh, table->cmd_count) || ft_isexit(table, i, table->cmd_count))
+				msh, table->cmd_count, i) || ft_isexit(table, i, table->cmd_count))
 			continue ;
 		ft_exec_proccess(table, msh, i);
 	}

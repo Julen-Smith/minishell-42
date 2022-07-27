@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 19:15:11 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/23 19:54:30 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:25:35 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	ft_isfinal(t_command_table *table, int i, int count, t_msh_var *msh)
 {
 	ft_isexit(table, i, count);
 	ft_parent_builtin(&table->commands[i],
-		msh, count);
+		msh, count, i);
 	ft_free_commands(table);
 	return (true);
 }
