@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:05:32 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/19 20:03:09 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/27 16:41:18 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,10 @@ bool	check_if_empty_command(char *str)
 	return (false);
 }
 
-int	process_string_quotes(char *not_processed_cmd)
-{	
-	int		i;
-	int		x;
+static int	get_position(int i, char *not_processed_cmd)
+{
+	int	x;
 
-	i = -1;
-	if (!not_processed_cmd)
-		not_processed_cmd = NULL;
 	while (++i < ft_strlen(not_processed_cmd))
 	{
 		if (not_processed_cmd[i] == '\'' || not_processed_cmd[i] == '"')
@@ -61,5 +57,17 @@ int	process_string_quotes(char *not_processed_cmd)
 			return (true);
 		}
 	}
+	return (false);
+}
+
+int	process_string_quotes(char *not_processed_cmd)
+{	
+	int		i;
+
+	i = -1;
+	if (!not_processed_cmd)
+		not_processed_cmd = NULL;
+	if (get_position(i, not_processed_cmd))
+		return (true);
 	return (false);
 }

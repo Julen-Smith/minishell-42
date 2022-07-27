@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/21 17:15:38 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:48:11 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,20 +114,8 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 		if (ft_parent_builtin(&table->commands[i],
 				msh, table->cmd_count) || ft_isexit(table, i, table->cmd_count))
 			continue ;
-		if (table->commands[i].redir_exist)
-			execute_reddir(&table->commands[i], msh);
-		else
-			ft_exec_proccess(table, msh, i);
+		ft_exec_proccess(table, msh, i);
 	}
-	close(table->unipipe);
-	if (table->cmd_count > 1)
-		free(table->pi);
-	i = -1;
-	while (++i < table->cmd_count)
-	{
-		if (table->commands[i].is_absolute)
-			ft_doublefree(table->commands[i].path);
-	}
-	ft_free_commands(table);
+	close_and_liberate_execution(table, msh);
 	return (NULL);
 }

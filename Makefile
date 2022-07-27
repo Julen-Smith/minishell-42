@@ -7,9 +7,9 @@ INCLUDE			= /include/minishell.h
 LIB				= include/libraries/Libft/libft.a
 LIB_SRC			= include/libraries/Libft/*.c 
 LIB_HEADER		= include/libraries/Libft/libft.h	
-READLINE_PATH	= /opt/homebrew/opt/readline
+READLINE_PATH	= ~/.brew/opt/readline
 READLINE		= -I $(READLINE_PATH)/include -lreadline -L $(READLINE_PATH)/lib 
-FLAGS			= -g3 -Wall -Wextra -Werror -g -fsanitize=address 
+FLAGS			= -g3 -Wall -Wextra -Werror -g #-fsanitize=address 
 FILE_NAME		= minishell environment parser error string_errors redir utils free_things dollars dollar_value unset export export_utils echo cd pwd env \
 					exit check_builtins redir_utils execute binary_manage binary_manage_utils execute_reddir signals pipes quotes parser_utils
 
@@ -42,6 +42,35 @@ SRCS			= src/minishell.c								\
 				src/quotes/quotes.c								\
 				src/parser/parser_utils.c						\
 
+RM_OBJ			= src/minishell.o								\
+				src/environment/environment.o					\
+				src/parser/parser.o								\
+				src/errors/error.o								\
+				src/errors/string_errors.o						\
+				src/redirections/redir.o						\
+				src/utils/utils.o								\
+				src/utils/free_things.o							\
+				src/dollars/dollars.o							\
+				src/dollars/dollar_value.o						\
+				src/builtins/unset.o							\
+				src/builtins/export.o							\
+				src/builtins/export_utils.o						\
+				src/builtins/echo.o								\
+				src/builtins/cd.o								\
+				src/builtins/pwd.o								\
+				src/builtins/env.o								\
+				src/builtins/exit.o								\
+				src/builtins/check_builtins/check_builtins.o	\
+				src/redirections/redir_utils.o					\
+				src/execution/execute.o							\
+				src/execution/binary_manage.o					\
+				src/execution/binary_manage_utils.o				\
+				src/execution/execute_reddir.o					\
+				src/signals/signals.o							\
+				src/pipes/pipes.o								\
+				src/quotes/quotes.o								\
+				src/parser/parser_utils.o						\
+
 all: $(NAME)
 
 .SILENT:
@@ -54,13 +83,16 @@ $(NAME): $(OBJS) $(LIB)
 clean:
 	make fclean -C $(LIBFT)
 	$(RM) ./*/*/*.o
+	$(RM) $(RM_OBJ)
 	echo "clean done"
 
 fclean: clean
 	$(MAKE) fclean -C include/libraries/Libft/
-	$(RM) minishell.dSYM
-	$(RM) $(OBJ)
-	rm -rf .DS_Store .vscode
+	$(RM) $(RM_OBJ)
+	rm -rf .DS_Store
+	rm -rf .vscode
+	rm -rf minishell.dSYM
+
 	echo "fclean done"
 
 re: clean all

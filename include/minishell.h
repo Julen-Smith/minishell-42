@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/23 19:54:37 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:45:37 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # include <sys/types.h>
 # include "libraries/Libft/libft.h"
 # include "libraries/GNL/get_next_line.h"
-
 
 int		g_exit_status;
 struct	s_command;
@@ -148,7 +147,7 @@ bool	ft_already_in(char *variable, char **env);
 int		ft_parent_builtin(t_command *command, t_msh_var *msh, int count);
 int		ft_checkparent(t_command *command);
 bool	ft_child_builtin(t_command *command, t_msh_var *msh);
-void	rl_replace_line (const char *text, int clear_undo);
+void	rl_replace_line(const char *text, int clear_undo);
 
 /* Execution */
 char	*ft_get_result(t_command *command, int i);
@@ -156,6 +155,7 @@ bool	ft_isfinal(t_command_table *table, int i, int count, t_msh_var *msh);
 bool	return_binary_path(const char *bin_path, char *binary_check);
 char	*reach_bin_path(t_command *command, t_msh_var *msh);
 void	*execute(t_command_table *table, t_msh_var *msh);
+void	close_and_liberate_execution(t_command_table *table, t_msh_var *msh);
 
 /* String utils */
 bool	_contains(char **command, char *str);
