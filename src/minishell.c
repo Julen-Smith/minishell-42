@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/27 17:04:12 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/27 18:16:44 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ int	lexer(t_command_table *table, t_msh_var *msh)
 			}
 			x++;
 		}
-		if (manage_redir_symbols(&table->commands[i]))
-			return (ERR_REDDIR);
-		if (table->commands[i].redir_exist)
-			return (ERR_REDDIR);
+		if (contains_redire(table->commands[i].command[x]))
+				return (ERR_REDDIR);
 	}
 	return (1);
 }

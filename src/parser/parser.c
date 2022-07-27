@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:21:11 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/20 18:46:39 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:14:02 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ bool	generate_command_table(char *str, int cmd_count, t_command_table *table)
 	while (split[i])
 	{	
 		if (check_if_empty_command(split[i]))
+			return (true);
+		if (contains_redire(split[i]))
 			return (true);
 		table->commands[i].command = mini_split(split[i], ' ');
 		i++;

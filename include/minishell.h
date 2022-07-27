@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/27 16:45:37 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/27 18:01:45 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ bool	char_is_redir(char command_i);
 void	ft_fill_positions_to_command(t_command *command, int *position_stack);
 bool	count_check_redirs(t_command *command);
 void	*execute_reddir(t_command *table, t_msh_var *msh);
+bool	contains_redire(char *command);
 
 /*   Expansions    */
 bool	ft_check_dollars(t_command_table *table, int i, int x, t_msh_var *msh);

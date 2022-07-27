@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:40:06 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/16 16:48:38 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:13:42 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+bool	contains_redire(char *command)
+{
+	if (_str_exactly_contains(command, HDC))
+		return (true);
+	if (_str_exactly_contains(command, APD))
+		return (true);
+	if (_str_exactly_contains(command, REDIPT))
+		return (true);
+	if (_str_exactly_contains(command, REDOPT))
+		return (true);
+	return (false);
+}
 
 bool	gather_redir_fds(t_command *command)
 {
