@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:50:10 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/27 18:24:13 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:29:44 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_parent_builtin(t_command *command, t_msh_var *msh, int count, int c_num)
 		return (ft_cd(command, msh, count));
 	else if (!ft_strncmp(command->command[0], "export",
 			(ft_strlen(command->command[0]) + 1)))
-		ft_export_check(command, msh, c_num, count);
+		return (ft_export_check(command, msh, c_num, count));
 	else if (!ft_strncmp(command->command[0], "unset",
 			(ft_strlen(command->command[0]) + 1)))
 		ft_check_unset(command, msh);

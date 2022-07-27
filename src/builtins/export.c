@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:50:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/27 18:23:15 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:29:58 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ static void	ft_export(char *variable, t_msh_var *msh)
 	ft_create_variable(variable, msh);
 }
 
-void	ft_export_check(t_command *command, t_msh_var *msh, int c_num, int count)
+int	ft_export_check(t_command *command, t_msh_var *msh, int c_num, int count)
 {
 	int	i;
 
-	if (c_num != count)
-		return ;
+	if (c_num != count - 1)
+		return (1);
 	if (command->command[1])
 	{
 		i = 0;
@@ -83,4 +83,5 @@ void	ft_export_check(t_command *command, t_msh_var *msh, int c_num, int count)
 			printf("declare -x %s\n", msh->own_envp[i]);
 	}
 	g_exit_status = 0;
+	return (0);
 }
