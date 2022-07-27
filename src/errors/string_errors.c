@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:05:32 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/27 16:41:18 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/27 17:23:29 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	get_position(int i, char *not_processed_cmd)
 {
 	int	x;
 
+	x = 0;
 	while (++i < ft_strlen(not_processed_cmd))
 	{
 		if (not_processed_cmd[i] == '\'' || not_processed_cmd[i] == '"')
