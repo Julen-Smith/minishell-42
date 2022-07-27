@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_split_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 05:38:45 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/18 05:48:36 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:29:37 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_skip_quotes_size(char *s, char quote)
 	while (*s && *s != quote)
 		s++;
 	if (s + 1)
-	s++;
+		s++;
 	return (s);
 }
 
