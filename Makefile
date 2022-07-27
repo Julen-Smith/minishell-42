@@ -78,7 +78,7 @@ $(LIB) : $(LIB_SRC) $(LIB_HEADER)
 	 $(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) $(READLINE) $^ $(LIB) -I$(INCLUDE) -o $(NAME)
+	$(CC) $(FLAGS) $(READLINE) $^ $(LIB) -I$(INCLUDE) -o $(NAME)
 
 clean:
 	make fclean -C $(LIBFT)
