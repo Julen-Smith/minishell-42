@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	close_and_liberate_execution(t_command_table *table, t_msh_var *msh)
+void	close_and_liberate_execution(t_command_table *table)
 {
 	int	i;
 
