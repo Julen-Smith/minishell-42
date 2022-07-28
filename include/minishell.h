@@ -156,7 +156,7 @@ bool	ft_isfinal(t_command_table *table, int i, int count, t_msh_var *msh);
 bool	return_binary_path(const char *bin_path, char *binary_check);
 char	*reach_bin_path(t_command *command, t_msh_var *msh);
 void	*execute(t_command_table *table, t_msh_var *msh);
-void	close_and_liberate_execution(t_command_table *table, t_msh_var *msh);
+void	close_and_liberate_execution(t_command_table *table);
 
 /* String utils */
 bool	_contains(char **command, char *str);

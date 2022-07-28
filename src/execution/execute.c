@@ -115,6 +115,6 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 			continue ;
 		ft_exec_proccess(table, msh, i);
 	}
-	close_and_liberate_execution(table, msh);
+	close_and_liberate_execution(table);
 	return (NULL);
 }
