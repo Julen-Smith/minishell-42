@@ -6,20 +6,11 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:23:16 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/27 19:00:41 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:48:07 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	ft_interactive(int inter)
-{
-	static int	interactive;
-
-	if (inter == 0 || inter == 1)
-		interactive = inter;
-	return (interactive);
-}
 
 void	ft_signal_exit(void)
 {
@@ -27,48 +18,34 @@ void	ft_signal_exit(void)
 	exit(0);
 }
 
-void	interact_signal(int signal)
+void	ft_interactive(int signal)
 {
 	if (signal == SIGQUIT)
-	{
-		printf("\33[2K\r");
-		rl_on_new_line();
-		rl_redisplay();
-	}
+		printf ("^\\Quit: 3\n");
 	else if (signal == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+		printf("^C\n");
 }
 
-void	signal_handler(int signal)
+void	ft_check_signal(void)
 {
-	if (ft_interactive(-1) == 1)
-		interact_signal(signal);
-	else if (ft_interactive(-1) == 0)
+	signal(SIGINT, ft_interactive);
+	signal(SIGQUIT, ft_interactive);
+}
+
+void	signal_manager(int signal)
+{
+	if (rl_on_new_line() == -1)
+		exit (-1);
+	if (SIGINT == signal)
 	{
-		if (signal == SIGQUIT)
-		{
-			ft_interactive(1);
-			write(1, "Quit\n", 5);
-			rl_on_new_line();
-		}
-		else if (signal == SIGINT)
-		{
-			ft_interactive(1);
-			write(1, "\n", 1);
-			rl_on_new_line();
-		}
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+		rl_redisplay();
 	}
-	else
-		printf("%d signal", signal);
 }
 
 void	ft_signals(void)
 {
-	signal(SIGINT, signal_handler);
+	signal(SIGINT, signal_manager);
 	signal(SIGQUIT, SIG_IGN);
 }

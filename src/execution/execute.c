@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/27 18:59:38 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:48:38 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_exec_proccess(t_command_table *table, t_msh_var *msh, int i)
 	pid_t	pid;
 	int		status;
 
-	ft_interactive(1);
+	ft_check_signal();
 	pid = fork();
 	if (pid == 0)
 		ft_childexec(msh, table, i);

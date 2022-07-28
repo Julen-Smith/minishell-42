@@ -6,11 +6,12 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/27 18:59:09 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:59:46 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <termios.h>
 
 int	lexer(t_command_table *table, t_msh_var *msh)
 {
@@ -55,10 +56,16 @@ void	minishell(t_msh_var *msh)
 {	
 	char			*str;
 	char			*tmp;
+	struct termios	ter;
+	struct termios	prev;
 	t_command_table	table;
 
 	while (true)
 	{
+		tcgetattr(STDIN_FILENO, &prev);
+		tcgetattr(STDIN_FILENO, &ter);
+		ter.c_lflag &= ~(ECHOCTL | ICANON);
+		tcsetattr(STDIN_FILENO, TCSANOW, &ter);
 		ft_signals();
 		tmp = readline(MSH);
 		if (!tmp)
@@ -76,6 +83,7 @@ void	minishell(t_msh_var *msh)
 			if (ft_start_program(str, &table, msh))
 				continue ;
 		}
+		tcsetattr(STDIN_FILENO, TCSANOW, &prev);
 		if (str != NULL)
 			free(str);
 	}

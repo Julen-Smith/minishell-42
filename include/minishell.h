@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/27 18:30:21 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:48:47 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ bool	return_binary_path(const char *bin_path, char *binary_check);
 bool	gather_bin_path(t_command_table *table, t_msh_var *msh);
 
 /* Signals */
-int		ft_interactive(int inter);
+void	ft_check_signal(void);
 void	ft_signals(void);
 void	ft_signal_exit(void);
 
