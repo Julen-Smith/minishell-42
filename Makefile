@@ -59,12 +59,13 @@ $(NAME) : $(OBJS)
 clean:
 	make fclean -C $(LIBFT)
 	$(RM) ./*/*/*.o
-	$(RM) $(RM_OBJ)
+	$(RM) $(OBJS)
 	echo "clean done"
 
 fclean: clean
 	$(MAKE) fclean -C include/libraries/Libft/
-	$(RM) $(RM_OBJ)
+	$(RM) $(OBJS)
+	$(RM) $(NAME)
 	rm -rf .DS_Store
 	rm -rf .vscode
 	rm -rf minishell.dSYM

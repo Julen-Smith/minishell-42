@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/28 13:48:38 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/29 13:04:52 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ void	*execute(t_command_table *table, t_msh_var *msh)
 	while (++i != table->cmd_count)
 	{
 		if (ft_parent_builtin(&table->commands[i],
-				msh, table->cmd_count, i) || ft_isexit(table, i, table->cmd_count))
+				msh, table->cmd_count, i)
+			|| ft_isexit(table, i, table->cmd_count))
 			continue ;
 		ft_exec_proccess(table, msh, i);
 	}

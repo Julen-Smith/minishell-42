@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:23:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/27 17:39:04 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/29 13:12:29 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	*ft_fill_each_pointer(char *s, char c)
 		}
 		i++;
 	}
-	pnt = (char *) malloc( sizeof(char) * (i + 1));
+	pnt = (char *)malloc(sizeof(char) * (i + 1));
 	if (!pnt)
 		return (NULL);
 	i = 0;
