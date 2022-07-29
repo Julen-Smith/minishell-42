@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/29 15:59:32 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:19:39 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	ft_env(t_msh_var *msh, t_command *command);
 int		ft_exit(t_command_table *table, int c_num, int count);
 int		ft_isexit(t_command_table *table, int c_num, int count);
 bool	ft_cd(t_command *command, t_msh_var *msh, int count);
-void	ft_check_unset(t_command *command, t_msh_var *msh);
+bool	ft_check_unset(t_command *command, t_msh_var *msh, int c_num, int count);
 int		ft_export_check(t_command *command,
 			t_msh_var *msh, int c_num, int count);
 bool	ft_check_variable(char *variable);

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:32:43 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/23 19:10:43 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:47:07 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 	if (count != 1)
 		return (true);
 	msh->pwd = getcwd(NULL, 0);
-	if (!command->command[1])
+	if (!command->command[1] || command->command[1][0] == '~')
 	{
 		ft_getoldpwd(msh);
-		chdir("/");
+		chdir("/aalvarez"); //home
 		ft_getnewpwd(msh);
 	}
 	else if (command->command[1][0] == '-' && !command->command[1][1])

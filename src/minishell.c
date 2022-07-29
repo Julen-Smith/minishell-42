@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/29 15:40:59 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:10:57 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	ft_start_program(char *str, t_command_table *table, t_msh_var *msh)
 	return (1);
 }
 
-bool	ft_elvis(t_msh_var *msh, t_command_table *table, char *str)
+bool	ft_readline(t_msh_var *msh, t_command_table *table, char *str)
 {
 	struct termios	ter;
 	struct termios	prev;
@@ -91,7 +91,7 @@ void	minishell(t_msh_var *msh)
 		str = ft_strtrim(tmp, " ");
 		free(tmp);
 		add_history(str);
-		if (ft_elvis(msh, &table, str))
+		if (ft_readline(msh, &table, str))
 			continue ;
 	}
 }

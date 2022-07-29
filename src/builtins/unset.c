@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:21:27 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/06/15 09:50:59 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/07/29 17:19:55 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ static void	ft_unset(char *variable, t_msh_var *msh)
 	ft_doublefree(tmp);
 }
 
-void	ft_check_unset(t_command *command, t_msh_var *msh)
+bool	ft_check_unset(t_command *command, t_msh_var *msh, int c_num, int count)
 {
 	int	i;
-
+	
+	if (c_num != count - 1)
+		return (1);
 	if (command->command[1])
 	{
 		i = 0;
@@ -65,4 +67,5 @@ void	ft_check_unset(t_command *command, t_msh_var *msh)
 		}
 	}
 	g_exit_status = 0;
+	return (0);
 }
