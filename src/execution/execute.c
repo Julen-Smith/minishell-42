@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:41:25 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/29 13:04:52 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:53:58 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ void	ft_exec_proccess(t_command_table *table, t_msh_var *msh, int i)
 			close(table->pi[1]);
 		wait(&status);
 		g_exit_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+		{
+			if (WTERMSIG(status))
+				g_exit_status = 128 + WTERMSIG(status);
+		}
 		if (table->cmd_count > 2)
 		{
 			table->unipipe = dup(table->pi[0]);
