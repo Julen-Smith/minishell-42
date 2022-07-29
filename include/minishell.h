@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/29 13:03:41 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:59:32 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <sys/uio.h>
 # include <sys/types.h>
 # include "libraries/Libft/libft.h"
-# include "libraries/GNL/get_next_line.h"
 
 int		g_exit_status;
 struct	s_command;

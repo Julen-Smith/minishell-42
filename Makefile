@@ -50,6 +50,7 @@ all: $(NAME)
 .SILENT:
 
 $(NAME) : $(OBJS)
+	echo "Compilating"
 	make -C $(LIBFT)
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIB) $(READLINE)
 
