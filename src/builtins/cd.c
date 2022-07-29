@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:32:43 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/29 16:47:07 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:38:05 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,33 @@ bool	ft_cd_with_arguments(t_command *command, t_msh_var *msh)
 	return (false);
 }
 
+char	*ft_get_home(t_msh_var *msh)
+{
+	int	i;
+
+	i = -1;
+	while (msh->own_envp[++i])
+	{
+		if (!ft_strncmp(msh->own_envp[i], "HOME=", 5))
+			return (ft_substr(msh->own_envp[i], 5, ft_strlen(msh->own_envp[i]) - 5));
+	}
+	printf("HOME not set\n");
+	return (NULL);
+}
+
 bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 {
+	char	*home;
+
 	if (count != 1)
 		return (true);
 	msh->pwd = getcwd(NULL, 0);
 	if (!command->command[1] || command->command[1][0] == '~')
 	{
+		home = ft_get_home(msh);
 		ft_getoldpwd(msh);
-		chdir("/aalvarez"); //home
+		chdir(home);
+		free(home);
 		ft_getnewpwd(msh);
 	}
 	else if (command->command[1][0] == '-' && !command->command[1][1])
