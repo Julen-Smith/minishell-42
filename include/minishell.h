@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/29 17:19:39 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/01 18:52:18 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,8 @@ void	ft_env(t_msh_var *msh, t_command *command);
 int		ft_exit(t_command_table *table, int c_num, int count);
 int		ft_isexit(t_command_table *table, int c_num, int count);
 bool	ft_cd(t_command *command, t_msh_var *msh, int count);
-bool	ft_check_unset(t_command *command, t_msh_var *msh, int c_num, int count);
+bool	ft_check_unset(t_command *command, t_msh_var *msh,
+			int c_num, int count);
 int		ft_export_check(t_command *command,
 			t_msh_var *msh, int c_num, int count);
 bool	ft_check_variable(char *variable);
@@ -150,6 +151,13 @@ int		ft_parent_builtin(t_command *command,
 int		ft_checkparent(t_command *command);
 bool	ft_child_builtin(t_command *command, t_msh_var *msh);
 void	rl_replace_line(const char *text, int clear_undo);
+bool	cd_extension(t_command *command, t_msh_var *msh);
+void	ft_getoldpwd(t_msh_var *msh, char *route);
+void	ft_getnewpwd(t_msh_var *msh);
+void	ft_previous_dir(t_msh_var *msh);
+bool	cd_extension(t_command *command, t_msh_var *msh);
+void	ft_firstoldpwd(t_msh_var *msh);
+char	*ft_get_home(t_msh_var *msh);
 
 /* Execution */
 char	*ft_get_result(t_command *command, int i);

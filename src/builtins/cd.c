@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/23 18:32:43 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/31 13:23:51by aalvarez         ###   ########.fr       */
+/*   Created: 2022/08/01 18:41:23 by jsmith            #+#    #+#             */
+/*   Updated: 2022/08/01 18:50:11 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_get_home(t_msh_var *msh)
 	while (msh->own_envp[++i])
 	{
 		if (!ft_strncmp(msh->own_envp[i], "HOME=", 5))
-			return (ft_substr(msh->own_envp[i], 5, ft_strlen(msh->own_envp[i]) - 5));
+			return (ft_substr(msh->own_envp[i], 5,
+					ft_strlen(msh->own_envp[i]) - 5));
 	}
 	printf("HOME not set\n");
 	return (NULL);
@@ -36,7 +37,8 @@ void	ft_firstoldpwd(t_msh_var *msh)
 	j = 0;
 	tmp = ft_doublestrdup(msh->own_envp);
 	ft_doublefree(msh->own_envp);
-	msh->own_envp = (char **)malloc(sizeof(char *) * (ft_doublestrlen(tmp) + 2));
+	msh->own_envp = (char **)malloc(sizeof(char *)
+			*(ft_doublestrlen(tmp) + 2));
 	while (tmp[++i])
 	{
 		if (!ft_strncmp(tmp[i], "PWD=", 4))
@@ -50,68 +52,18 @@ void	ft_firstoldpwd(t_msh_var *msh)
 	ft_doublefree(tmp);
 }
 
-void	ft_getoldpwd(t_msh_var *msh, char *route)
+bool	cd_extension(t_command *command, t_msh_var *msh)
 {
-	int		i;
-	char	*tmp;
-
-	i = -1;
-	msh->oldpwd = getcwd(NULL, 0);
-	while (msh->own_envp[++i])
+	ft_getoldpwd(msh, command->command[1]);
+	if (chdir(command->command[1]) == -1)
 	{
-		if (!ft_strncmp(msh->own_envp[i], "OLDPWD=", 7))
-		{
-			tmp = ft_strjoin("PWD=", route);
-			if (ft_strncmp(msh->own_envp[i + 1], tmp, ft_strlen(tmp)))
-			{
-				free(msh->own_envp[i]);
-				msh->own_envp[i] = ft_strjoin("OLDPWD=", msh->oldpwd);
-			}
-			free(tmp);
-			return ;
-		}
+		printf("cd: %s: No such file or directory\n", command->command[1]);
+		g_exit_status = 1;
+		free(msh->oldpwd);
+		return (true);
 	}
-	ft_firstoldpwd(msh);
-}
-
-void	ft_getnewpwd(t_msh_var *msh)
-{
-	int	i;
-
-	i = -1;
-	msh->pwd = getcwd(NULL, 0);
-	while (msh->own_envp[++i])
-	{
-		if (!ft_strncmp(msh->own_envp[i], "PWD=", 4))
-		{
-			free(msh->own_envp[i]);
-			msh->own_envp[i] = ft_strjoin("PWD=", msh->pwd);
-		}
-	}
-}
-
-void	ft_previous_dir(t_msh_var *msh)
-{
-	int		i;
-
-	i = -1;
-	while (msh->own_envp[++i])
-	{
-		if (!ft_strncmp(msh->own_envp[i], "OLDPWD=", 7))
-		{
-			msh->oldpwd = ft_substr(msh->own_envp[i + 1], 4, (ft_strlen(msh->own_envp[i + 1]) - 4));
-			free(msh->own_envp[i + 1]);
-			msh->pwd = ft_substr(msh->own_envp[i], 7, (ft_strlen(msh->own_envp[i]) - 7));
-			chdir(msh->pwd);
-			msh->own_envp[i + 1] = ft_strjoin("PWD=", msh->pwd);
-			free(msh->own_envp[i]);
-			msh->own_envp[i] = ft_strjoin("OLDPWD=", msh->oldpwd);
-			return ;
-		}
-	}
-	printf("Minishell: cd: OLDPWD not set\n");
-	msh->oldpwd = NULL;
-	msh->pwd = NULL;
+	ft_getnewpwd(msh);
+	return (false);
 }
 
 bool	ft_cd(t_command *command, t_msh_var *msh, int count)
@@ -132,16 +84,8 @@ bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 		ft_previous_dir(msh);
 	else
 	{
-		
-		ft_getoldpwd(msh, command->command[1]);
-		if (chdir(command->command[1]) == -1)
-		{
-			printf("cd: %s: No such file or directory\n", command->command[1]);
-			g_exit_status = 1;
-			free(msh->oldpwd);
+		if (cd_extension(command, msh))
 			return (false);
-		}
-		ft_getnewpwd(msh);
 	}
 	free(msh->oldpwd);
 	free(msh->pwd);
