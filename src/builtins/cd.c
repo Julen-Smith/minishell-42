@@ -132,6 +132,7 @@ bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 		ft_previous_dir(msh);
 	else
 	{
+		
 		ft_getoldpwd(msh, command->command[1]);
 		if (chdir(command->command[1]) == -1)
 		{
@@ -140,7 +141,6 @@ bool	ft_cd(t_command *command, t_msh_var *msh, int count)
 			free(msh->oldpwd);
 			return (false);
 		}
-		chdir(command->command[1]);
 		ft_getnewpwd(msh);
 	}
 	free(msh->oldpwd);
