@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_doublefree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 16:06:47 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/21 16:00:39 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:17:00 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void	ft_doublefree(char **str)
 	int	i;
 
 	i = -1;
-	while (str[++i])
-		free(str[i]);
-	free(str);
+	while (str && str[++i])
+	{
+		if (str && str[i])
+			free(str[i]);
+	}
+	if (str)
+		free(str);
 }

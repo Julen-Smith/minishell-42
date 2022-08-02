@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:36:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/23 18:42:18 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/02 18:26:10 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,17 @@ void	ft_free_commands(t_command_table *table)
 	int	i;
 
 	i = -1;
-	while (++i < table->cmd_count)
+	while (++i < table->cmd_count && table->cmd_count)
 	{
-		ft_doublefree(table->commands[i].command);
+		if (table->commands[i].command)
+			ft_doublefree(table->commands[i].command);
 		table->commands[i].command = NULL;
-		free(table->commands[i].bin_path);
+		if (table->commands[i].bin_path)
+			free(table->commands[i].bin_path);
 		table->commands[i].bin_path = NULL;
 	}
+	if (!table->commands)
+		return ;
 	free(table->commands);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 05:50:51 by jsmith            #+#    #+#             */
-/*   Updated: 2022/08/01 18:52:18 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/08/02 18:23:19 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ char	*reach_bin_path(t_command *command, t_msh_var *msh);
 char	**get_actual_path(t_msh_var *msh);
 bool	return_binary_path(const char *bin_path, char *binary_check);
 bool	gather_bin_path(t_command_table *table, t_msh_var *msh);
+bool	ft_check_if_is_accesible(t_command_table *table, int iterate);
 
 /* Signals */
 void	ft_check_signal(void);

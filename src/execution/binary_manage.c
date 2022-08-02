@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary_manage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:16:49 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/23 19:54:23 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/02 18:24:48 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ bool	gather_bin_path(t_command_table *table, t_msh_var *msh)
 		}
 		if (table->commands[i].bin_path == NULL)
 		{
+			if (ft_check_if_is_accesible(table, i))
+				continue ;
 			printf("%s %s %s", "Minishell :", table->commands[i].command[0],
 				CMDNT);
 			g_exit_status = 127;
@@ -69,9 +71,9 @@ char	**get_actual_path(t_msh_var *msh)
 	int		i;
 
 	i = 0;
-	while (msh->own_envp[++i])
+	while (msh->own_envp && msh->own_envp[++i])
 	{
-		if (_str_contains(msh->own_envp[i], "PATH="))
+		if (msh->own_envp[i] && _str_contains(msh->own_envp[i], "PATH="))
 		{
 			tmp = ft_strdup(msh->own_envp[i]);
 			tmp2 = ft_split(tmp, '=');

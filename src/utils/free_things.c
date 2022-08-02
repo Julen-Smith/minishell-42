@@ -6,7 +6,7 @@
 /*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:38:16 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/27 16:44:29 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/08/02 18:22:52 by jsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	close_and_liberate_execution(t_command_table *table)
 		free(table->pi);
 	while (++i < table->cmd_count)
 	{
-		if (table->commands[i].is_absolute)
+		if (table->commands[i].is_absolute && table->commands[i].path)
 			ft_doublefree(table->commands[i].path);
 	}
 	ft_free_commands(table);
@@ -34,4 +34,16 @@ void	ft_freedollar_struct(t_dollars *dollars)
 	free(dollars->final);
 	free(dollars->value);
 	free(dollars->result);
+}
+
+bool	ft_check_if_is_accesible(t_command_table *table, int iterate)
+{
+	if (access(table->commands[iterate].command[0], X_OK) == 0)
+	{
+		table->commands[iterate].bin_path
+			= ft_strdup(table->commands[iterate].command[0]);
+		table->commands[iterate].is_absolute = true;
+		return (true);
+	}
+	return (false);
 }
