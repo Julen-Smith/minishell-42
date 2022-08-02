@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 08:40:36 by jsmith            #+#    #+#             */
-/*   Updated: 2022/07/29 17:10:57 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/02 21:03:11 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	minishell(t_msh_var *msh)
 			free(tmp);
 			continue ;
 		}
+		//aqui hay error con espacio raro + ls
 		str = ft_strtrim(tmp, " ");
 		free(tmp);
 		add_history(str);
