@@ -8,7 +8,7 @@ LIB_SRC			= include/libraries/Libft/*.c
 LIB_HEADER		= include/libraries/Libft/libft.h	
 READLINE_PATH	= ~/.brew/opt/readline
 READLINE		= -I$(READLINE_PATH)/include -lreadline -L $(READLINE_PATH)/lib 
-FLAGS			=  -Wall -Wextra -Werror -g #-fsanitize=address -g3
+FLAGS			=  -Wall -Wextra -Werror -g -fsanitize=address -g3
 FILE_NAME		= minishell environment parser error string_errors redir utils free_things dollars dollar_value unset export export_utils echo cd  cd_utils pwd env \
 					exit check_builtins redir_utils execute binary_manage binary_manage_utils execute_reddir signals pipes quotes parser_utils
 

@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:17 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/20 18:01:17 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/02 20:29:07 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	ft_exit_arg(t_command_table *table, int c_num, int count)
 			if (count == 1)
 			{
 				ft_free_commands(table);
-				exit(0);
+				exit(255);
 			}
 		}
 		i++;
@@ -56,10 +56,10 @@ int	ft_exit(t_command_table *table, int c_num, int count)
 	}
 	if (table->commands[c_num].command[1])
 		ft_exit_arg(table, c_num, count);
-	g_exit_status = 0;
 	if (count == 1)
 	{
 		ft_free_commands(table);
+		g_exit_status = 0;
 		exit(0);
 	}
 	return (0);
