@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:19:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/16 16:42:42 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/02 20:53:27 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_new_com(t_dollars *dollars, t_command *com, int a_n, int xref)
 
 void	ft_check_exceptions(t_command *com, t_dollars *d, int a_n, int xref)
 {
-	if (ft_check_char(com, a_n, xref, "$?@")
+	if (ft_check_char(com, a_n, xref, "$?@/:")
 		&& (com->command[a_n][xref - 1] == '$'))
 		d->final = ft_substr(com->command[a_n], (xref + 1),
 				(ft_strlen(com->command[a_n]) - (xref + 1)));
@@ -65,7 +65,7 @@ void	ft_dollar_expansion(t_command *com, t_msh_var *msh, int a_n, int xref)
 	if (com->command[a_n][xref] != '$')
 	{
 		while (com->command[a_n][xref] &&
-				!ft_check_char(com, a_n, xref, " \'$?@"))
+				!ft_check_char(com, a_n, xref, " \'$?@/:"))
 			xref++;
 	}
 	else

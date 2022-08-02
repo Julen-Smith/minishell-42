@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 21:54:39 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/20 17:39:58 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/02 20:53:17 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref)
 	char	*tmp;
 
 	i = xref + 1;
-	if (ft_check_char(com, a_n, i, " \"\'$?@"))
+	if (ft_check_char(com, a_n, i, " \"\'$?@/:"))
 	{
 		if (com->command[a_n][i] == '?')
 		{
@@ -65,7 +65,7 @@ char	*ft_dollar_value(t_command *com, t_msh_var *msh, int a_n, int xref)
 			find = ft_strdup("$");
 		return (find);
 	}
-	while (com->command[a_n][i] && !ft_check_char(com, a_n, i, " \"\'$?@"))
+	while (com->command[a_n][i] && !ft_check_char(com, a_n, i, " \"\'$?@/:"))
 		i++;
 	tmp = ft_substr(com->command[a_n], (xref + 1), (i - (xref + 1)));
 	find = ft_strjoin(tmp, "=");

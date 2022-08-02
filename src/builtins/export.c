@@ -6,7 +6,7 @@
 /*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:50:51 by aalvarez          #+#    #+#             */
-/*   Updated: 2022/07/27 18:29:58 by aalvarez         ###   ########.fr       */
+/*   Updated: 2022/08/02 20:53:50 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ static void	ft_replace_env(char *variable, t_msh_var *msh, char **tmp)
 		if (!ft_strncmp(tmp[x], to_search, ft_strlen(to_search)))
 			msh->own_envp[x] = ft_strdup(variable);
 		else
+		{
 			msh->own_envp[x] = ft_strdup(tmp[x]);
+		}
 	}
 	free(to_search);
 	msh->own_envp[x] = 0;
