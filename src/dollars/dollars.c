@@ -86,11 +86,16 @@ void	ft_dollar_expansion(t_command *com, t_msh_var *msh, int a_n, int xref)
 
 bool	ft_check_dollars(t_command_table *table, int i, int x, t_msh_var *msh)
 {
+	int	len;
+
+	len = ft_strlen(table->commands[i].command[x]) - 1;
 	if (ft_strchr_pos(table->commands[i].command[x], '$') >= 0
-		&& table->commands[i].command[x][0] != '\''
 			&& !ft_single_dollar(&table->commands[i], x,
 				ft_strchr_pos(table->commands[i].command[x], '$')))
 	{
+		if (table->commands[i].command[x][0] == '\''
+			&& table->commands[i].command[x][len] == '\'')
+			return (false);
 		ft_dollar_expansion(&table->commands[i], msh,
 			x, ft_strchr_pos(table->commands[i].command[x], '$'));
 		return (true);
