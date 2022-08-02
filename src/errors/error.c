@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsmith <jsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalvarez <aalvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:36:39 by jsmith            #+#    #+#             */
-/*   Updated: 2022/08/02 18:26:10 by jsmith           ###   ########.fr       */
+/*   Updated: 2022/08/02 21:07:06 by aalvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ void	ft_free_commands(t_command_table *table)
 			ft_doublefree(table->commands[i].command);
 		table->commands[i].command = NULL;
 		if (table->commands[i].bin_path)
+		{
+			//si metes el espacio raro lo que peta es esto de aqui
 			free(table->commands[i].bin_path);
+		}
 		table->commands[i].bin_path = NULL;
 	}
 	if (!table->commands)
